@@ -2,8 +2,7 @@ import string
 import spacy
 
 class headline_preprocessing:
-    def __init__(self, text):
-        self.text = text
+    def __init__(self):
         self.nlp_de = spacy.load('de_core_news_sm')
 
     def preprocess_text(self, text):
