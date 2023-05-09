@@ -58,19 +58,10 @@ class HeadlineAnalyser:
         plt.show()
 
 if __name__ == "__main__":
-    import pandas as pd
-    headlines = [
-    "Bundesregierung plant neue Klimaschutzmaßnahmen",
-    "Zahlreiche Demonstrationen gegen Pandemie-Maßnahmen",
-    "Start-up revolutioniert Energiegewinnung mit neuem Verfahren",
-    "Deutschland gewinnt im Elfmeterschießen gegen Frankreich",
-    "Künstliche Intelligenz eröffnet neue Perspektiven in der Medizin",
-    "Rekordverdächtiger Sturm verwüstet Teile von Norddeutschland",
-    "Impfstoff-Hersteller kündigt Verbesserung bei Impfstoffproduktion an",
-    "Weltweite Proteste gegen Klimawandel zeigen Wirkung",
-    "Neue Studie zeigt: Gesunde Ernährung ist einfacher als gedacht",
-    "Hitzewelle in Südeuropa führt zu steigenden Touristenzahlen"]
+
+    headlines = pd.read_csv("C:/Users/linus/Downloads/daten_aijan_filtered.csv")
+    headlines = headlines['titel'].head(100)
     analyser = HeadlineAnalyser(headlines)
-    words = analyser.get_most_common_entities(50)
+    words = analyser.get_most_common_entities(20)
     words = [tupel[0] for tupel in words]
     analyser.get_word_cluster(words)

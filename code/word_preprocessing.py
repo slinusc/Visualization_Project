@@ -39,12 +39,13 @@ if __name__ == "__main__":
 
     headlines = pd.read_csv("C:/Users/linus/Downloads/daten_aijan_filtered.csv")
 
-    # Verwenden Sie die Klasse headline_preprocessing, um eine einzelne Schlagzeile zu bereinigen
+    # einzelne Schlagzeile bereinigen
     single_headline = headlines['titel'][0]
     preprocessor = headline_preprocessing(single_headline)
     preprocessed_single_headline = preprocessor.preprocess_text(single_headline)
     print("Einzelne bereinigte Schlagzeile:", preprocessed_single_headline)
 
-    # Verwenden Sie die Klasse headline_preprocessing, um eine Liste von Schlagzeilen zu bereinigen
+    print(headlines.head(10))
+    # Liste von Schlagzeilen bereinigen
     all_preprocessed_headlines = [preprocessor.preprocess_text(headline) for headline in headlines['titel']]
     print("Alle bereinigten Schlagzeilen:", all_preprocessed_headlines)
