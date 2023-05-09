@@ -65,3 +65,4 @@ if __name__ == "__main__":
     words = analyser.get_most_common_entities(20)
     words = [tupel[0] for tupel in words]
     analyser.get_word_cluster(words)
+    print(analyser.get_categorized_headlines())

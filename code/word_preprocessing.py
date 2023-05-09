@@ -1,5 +1,4 @@
 import string
-from nltk.stem.snowball import SnowballStemmer
 import spacy
 
 class headline_preprocessing:
