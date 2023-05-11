@@ -2,7 +2,7 @@ import string
 import spacy
 import re
 
-class headline_preprocessing:
+class headlinePreprocessing:
     def __init__(self):
         self.nlp_de = spacy.load('de_core_news_sm')
 
@@ -16,7 +16,6 @@ class headline_preprocessing:
         no_tags_text = re.sub(r'<.*?>', ' ', text)
         cleaned_text = re.sub(r'\W+', ' ', no_tags_text)
         return cleaned_text
-
 
     def remove_stopwords(self, text):
         doc = self.nlp_de(text)

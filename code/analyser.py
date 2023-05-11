@@ -11,7 +11,7 @@ class HeadlineAnalyser:
     def __init__(self, headlines: list):
         self.headlines = headlines
         self.nlp_de = spacy.load('de_core_news_sm')
-        self.topics = ["Politik", "Wirtschaft", "Sport", "Kultur", "Wissenschaft", "Technik", "Gesundheit", "Lifestyle"]
+        self.topics = ["Politik", "Wirtschaft", "Sport", "Kultur", "Wissenschaft", "Technik"]
 
     def get_most_common_entities(self, n=10):
         entities = Counter()
