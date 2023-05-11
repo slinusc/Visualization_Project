@@ -1,23 +1,22 @@
 import string
 import spacy
+import re
 
 class headline_preprocessing:
     def __init__(self):
         self.nlp_de = spacy.load('de_core_news_sm')
 
     def preprocess_text(self, text):
-        text = self.remove_punctuation(text)
+        text = self.remove_special_chars(text)
         text = self.remove_stopwords(text)
         text = self.lemmatize_words(text)
         return text
 
-    def preprocess_headlines(self, headlines):
-        preprocessed_headlines = [self.preprocess_text(headline) for headline in headlines]
-        return preprocessed_headlines
+    def remove_special_chars(self, text):
+        no_tags_text = re.sub(r'<.*?>', ' ', text)
+        cleaned_text = re.sub(r'\W+', ' ', no_tags_text)
+        return cleaned_text
 
-    def remove_punctuation(self, text):
-        translator = str.maketrans("", "", string.punctuation)
-        return text.translate(translator)
 
     def remove_stopwords(self, text):
         doc = self.nlp_de(text)
@@ -33,17 +32,7 @@ class headline_preprocessing:
 
 
 if __name__ == "__main__":
-    import pandas as pd
+    text = '<tx><ld><p>Die schwedische Notenbank stemmt sich mit einer kräftigen Zinsanhebung gegen die hohe Inflation im Land. Der Leitzins steigt um einen ganzen Prozentpunkt auf 1,75 Prozent, wie die Reichsbank am Dienstag in Stockholm mitteilte.</p></ld><p><au>SDA Import</au></p><p>Es ist die dritte Zinsanhebung in diesem Jahr. Analysten hatten zwar mit einer weiteren Straffung der Geldpolitik gerechnet, mehrheitlich allerdings einen Schritt um 0,75 Prozentpunkte erwartet. Schon eine solche Anhebung wäre eine sehr deutliche Straffung gewesen.</p><p>Die Inflation sei zu hoch, begründete die Notenbank ihren Zinsentscheid. Die Teuerung schwäche die Kaufkraft der Haushalte und erschwere den Konsumenten und Unternehmen die Finanzplanung. Zuletzt war die Teuerung in Schweden auf knapp zehn Prozent gestiegen. Das liegt deutlich über dem Zielwert der Reichsbank von etwa zwei Prozent. Die Währungshüter kündigten für den Jahresverlauf weitere Zinsanhebungen an.</p><p>(SDA)</p></tx>'
+    test = headline_preprocessing()
+    print(test.remove_special_chars(text))
 
-    headlines = pd.read_csv("C:/Users/linus/Downloads/daten_aijan_filtered.csv")
-
-    # einzelne Schlagzeile bereinigen
-    single_headline = headlines['titel'][0]
-    preprocessor = headline_preprocessing(single_headline)
-    preprocessed_single_headline = preprocessor.preprocess_text(single_headline)
-    print("Einzelne bereinigte Schlagzeile:", preprocessed_single_headline)
-
-    print(headlines.head(10))
-    # Liste von Schlagzeilen bereinigen
-    all_preprocessed_headlines = [preprocessor.preprocess_text(headline) for headline in headlines['titel']]
-    print("Alle bereinigten Schlagzeilen:", all_preprocessed_headlines)
