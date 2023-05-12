@@ -3,6 +3,7 @@ import plotly.express as px
 import geopandas as gpd
 import warnings
 warnings.filterwarnings('ignore')
+from fuzzywuzzy import process
 
 # TODO: percentage Bar anpassen
 
@@ -10,18 +11,14 @@ def laender_aufbereitung():
     # Liste mit Ländern auf Deutsch
     with open("C:/Users/andre/Git_ripository/visualization_project/data/de_laender.csv",
               encoding="UTF-8") as laender_de:
-        laender_namen_de = [line.strip() for line in
+        # deutsch_list söllen länder sein, die übergeben werden
+        deutsch_list = [line.strip() for line in
                             laender_de.readlines()]  # Inhalt der Datei zeilenweise in Liste speichern
 
     # Länderliste auf englisch, alle Länder die in Grafik erkannt werden könnten.
     world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
-    world_names_en = world["name"].tolist()  # Spalte "name" als Liste ausgeben
+    english_list = world["name"].tolist()  # Spalte "name" als Liste ausgeben
 
-    # Vergleich der Ländernamen mithilfe von fuzzywuzzy
-    from fuzzywuzzy import process
-
-    deutsch_list = laender_namen_de  # Ihre erste Liste hier
-    english_list = world_names_en  # Ihre zweite Liste hier
 
     result_dict = {}
 
