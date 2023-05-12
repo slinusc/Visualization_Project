@@ -2,8 +2,10 @@ import pandas as pd
 import plotly.express as px
 import geopandas as gpd
 import warnings
+
 warnings.filterwarnings('ignore')
 from fuzzywuzzy import process
+
 
 # TODO: percentage Bar anpassen
 
@@ -13,12 +15,11 @@ def laender_aufbereitung():
               encoding="UTF-8") as laender_de:
         # deutsch_list söllen länder sein, die übergeben werden
         deutsch_list = [line.strip() for line in
-                            laender_de.readlines()]  # Inhalt der Datei zeilenweise in Liste speichern
+                        laender_de.readlines()]  # Inhalt der Datei zeilenweise in Liste speichern
 
     # Länderliste auf englisch, alle Länder die in Grafik erkannt werden könnten.
     world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
     english_list = world["name"].tolist()  # Spalte "name" als Liste ausgeben
-
 
     result_dict = {}
 
@@ -32,7 +33,11 @@ def laender_aufbereitung():
                           'Spanien': 'Spain', 'Deutschland': 'Germany', 'Italien': 'Italy', 'Österreich': 'Austria',
                           'England': 'United Kingdom', 'Kroatien': 'Croatia', 'Süd Afrika': 'South Africa',
                           'Dominikanische Republik': 'Dominican Rep.', 'Griechenland': 'Greece',
-                          'Weissrussland': 'Belarus'}
+                          'Weissrussland': 'Belarus', 'Süd Sudan': 'S. Sudan',
+                          'Demokratische Republik Kongo': 'Dem. Rep. Congo', 'Kongo': 'Congo', 'Birma': 'Myanmar',
+                          'Kolumbien': 'Colombia', 'Tschechische Republik': 'Czechia', 'Rumänien': 'Romania',
+                          'Norwegen': 'Norway', 'Tunesien': 'Tunisia', 'Kambodscha': 'Cambodia',
+                          'Island': 'Iceland', 'Litauen': 'Lithuania', 'Estland': 'Estonia', 'lettland': 'Latvia'}
     result_dict.update(dict_nicht_erkannt)
 
     # Daten, die so der Weltkartengrafik übergeben werden können.
