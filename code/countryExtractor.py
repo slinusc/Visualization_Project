@@ -1,32 +1,23 @@
-import spacy
 import csv
 
-
-class countryExtractor:
-
+class CountryExtractor:
     def __init__(self):
-        self.nlp_de = spacy.load('de_core_news_sm')
-        countries = []
+        self.countries = set()
         with open('../data/de_laender.csv', 'r', encoding='UTF-8') as file:
             csv_reader = csv.reader(file)
             next(csv_reader)
             for row in csv_reader:
-                countries.append(row[0])
-        self.countries = countries
+                self.countries.add(row[0])
 
     def get_country(self, text):
-        country = []
-        for i in self.countries:
-            if i in text:
-                country.append(i)
-        return set(country)
+        found_countries = []
+        for word in text:
+            if word in self.countries:
+                found_countries.append(word)
+        return list(set(found_countries))
 
 
 if __name__ == "__main__":
-    text = "Deutschland du Spasst, Adrian ist blöd USA, Schweiz ist schön"
-    test = countryExtractor()
+    text = ["Schweden", "du", "Haus", "adrian", "USA", "Schweiz"]
+    test = CountryExtractor()
     print(test.get_country(text))
-
-
-
-
