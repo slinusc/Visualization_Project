@@ -1,6 +1,6 @@
 from textblob_de import TextBlobDE as TextBlob
 
-class sentimentAnalyser:
+class SentimentAnalyser:
 
     """
     Polarität: TextBlob berechnet die Polarität eines Textes,
@@ -30,6 +30,6 @@ class sentimentAnalyser:
         return headline_blob.subjectivity
 
 if __name__ == "__main__":
-    test = sentimentAnalyser()
+    test = SentimentAnalyser()
     text = ["Schweden", "du", "Haus", "adrian", "USA", "Schweiz", "schlecht", "schön", "relativ", "ich", "wir"]
     print(test.get_topic_sentiments_polarity(text))
