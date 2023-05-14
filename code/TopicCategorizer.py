@@ -13,8 +13,8 @@ class TopicCategorizer:
     ähnliche Vektoren haben sollten.
 
     Attribute:
-        nlp_de (Language): Ein Spacy-Sprachmodell für Deutsch.
-        topics (dict): Ein Wörterbuch, das jede Kategorie ihren Schlüsselwörtern zuordnet.
+    - nlp_de (Language): Ein Spacy-Sprachmodell für Deutsch.
+    - topics (dict): Ein Wörterbuch, das jede Kategorie ihren Schlüsselwörtern zuordnet.
     """
 
     def __init__(self):
@@ -44,10 +44,10 @@ class TopicCategorizer:
         Die Kategorie, die die höchste Ähnlichkeit aufweist, wird als die Kategorie des Textes angenommen.
 
         Args:
-            text (str): Der zu kategorisierende Text als String oder Liste
+        - text (str): Der zu kategorisierende Text als String oder Liste
 
         Returns:
-            str: Die Kategorie des Textes. Wenn keine Kategorie gefunden wurde, wird der String "Keine Kategorie gefunden" zurückgegeben.
+        - str: Die Kategorie des Textes. Wenn keine Kategorie gefunden wurde, wird der String "Keine Kategorie gefunden" zurückgegeben.
         """
 
         if isinstance(text, list):
