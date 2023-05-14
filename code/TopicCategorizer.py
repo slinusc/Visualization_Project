@@ -22,7 +22,7 @@ class TopicCategorizer:
         self.nlp_de = spacy.load('de_core_news_lg')
         self.topics = {
             'Politik': self.nlp_de('Regierung Politiker Wahl Gesetz Bundesrat Parlament Partei Politik Diplomatie'),
-            'Lokales': self.nlp_de('Stadt Kanton Gemeinde Bürger Stadtteil Einwohner Dorf Viertel'),
+            'Lokales': self.nlp_de('Stadt Kanton Gemeinde Bürger Stadtteil Einwohner Dorf Viertel Strasse'),
             'Internationales': self.nlp_de('International UNO NATO EU Brexit Vertrag Frieden Krieg Sanktionen '
                                            'Globalisierung Menschenrechte Krieg'),
             'Wirtschaft': self.nlp_de('Wirtschaft Bank Unternehmen Aktien Börse Business BIP Umsatz Investitionen '
@@ -53,7 +53,7 @@ class TopicCategorizer:
 
 if __name__ == "__main__":
     categorizer = TopicCategorizer()
-    """
+
     print(categorizer.categorize("Apple stellt neues iPhone-Modell vor: Technische Innovationen begeistern Fans."))
     print(categorizer.categorize("Bundeskanzlerin trifft sich mit US-Präsidenten zur Diskussion über Klimapolitik."))
     print(
@@ -66,9 +66,4 @@ if __name__ == "__main__":
     print(categorizer.categorize("Finanzminister warnt vor Inflation: Wirtschaftliche Auswirkungen der Pandemie."))
     print(categorizer.categorize("Kunstausstellung im Louvre bricht Besucherrekord: Kulturelles Highlight des Jahres."))
     print(categorizer.categorize("Formel 1: Lewis Hamilton siegt beim Großen Preis von Monaco."))
-    """
-    doc = categorizer.nlp_de("Tesla stellt neue Batterietechnologie vor: Revolution in der Elektromobilität?")
 
-    for token in doc:
-        print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_,
-              token.shape_, token.is_alpha)
