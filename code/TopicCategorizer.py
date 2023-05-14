@@ -29,26 +29,12 @@ class TopicCategorizer:
                                       'Handel'),
             'Sport': self.nlp_de('Spiel Sport Turnier Spieler Trainer Wettkampf Meisterschaft Stadion Sieg Niederlage '
                                  'WM Handball Fussball'),
-            'Kultur': self.nlp_de('Kunst Literatur Film Musik Theater Tanz Bildhauerei Fotografie Roman Gedicht Kino '),
+            'Kultur': self.nlp_de('Kunst Literatur Film Musik Theater Tanz Mode Fotografie Roman Gedicht Kino'),
             'Wissenschaft & Technik': self.nlp_de('Forschung Wissenschaft Studie Entdeckung Technologie Software '
-                                                  'Hardware Internet Ökologie Nachhaltigkeit Energie  Umweltschutz'),
+                                                  'Hardware Internet Ökologie Nachhaltigkeit Energie Umweltschutz Ingeniuer'),
             }
 
     def categorize(self, text):
-
-        """
-        Kategorisiert einen gegebenen Text.
-
-        Der Text wird zuerst in eine Dokumentdarstellung umgewandelt, die vom Spacy-Sprachmodell bereitgestellt wird.
-        Danach wird die Ähnlichkeit zwischen dem Text und den Schlüsselwörtern jeder Kategorie berechnet.
-        Die Kategorie, die die höchste Ähnlichkeit aufweist, wird als die Kategorie des Textes angenommen.
-
-        Args:
-        - text (str): Der zu kategorisierende Text als String oder Liste
-
-        Returns:
-        - str: Die Kategorie des Textes. Wenn keine Kategorie gefunden wurde, wird der String "Keine Kategorie gefunden" zurückgegeben.
-        """
 
         if isinstance(text, list):
             text = " ".join(text)
@@ -67,6 +53,7 @@ class TopicCategorizer:
 
 if __name__ == "__main__":
     categorizer = TopicCategorizer()
+    """
     print(categorizer.categorize("Apple stellt neues iPhone-Modell vor: Technische Innovationen begeistern Fans."))
     print(categorizer.categorize("Bundeskanzlerin trifft sich mit US-Präsidenten zur Diskussion über Klimapolitik."))
     print(
@@ -79,3 +66,9 @@ if __name__ == "__main__":
     print(categorizer.categorize("Finanzminister warnt vor Inflation: Wirtschaftliche Auswirkungen der Pandemie."))
     print(categorizer.categorize("Kunstausstellung im Louvre bricht Besucherrekord: Kulturelles Highlight des Jahres."))
     print(categorizer.categorize("Formel 1: Lewis Hamilton siegt beim Großen Preis von Monaco."))
+    """
+    doc = categorizer.nlp_de("Tesla stellt neue Batterietechnologie vor: Revolution in der Elektromobilität?")
+
+    for token in doc:
+        print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_,
+              token.shape_, token.is_alpha)

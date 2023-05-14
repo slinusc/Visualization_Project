@@ -4,6 +4,14 @@ from nltk.tokenize import word_tokenize
 
 
 class TextPreprocessing:
+
+    """
+    Diese Klasse dient der Vorverarbeitung von Texten.
+    Sie entfernt alle Sonderzeichen und Stopwords.
+    Auf Stemming wurde wegen der Grösse des Datensatzes und
+    Performancegründen verzichtet.
+    """
+
     def __init__(self):
         self.stops = set(stopwords.words('german'))
 
