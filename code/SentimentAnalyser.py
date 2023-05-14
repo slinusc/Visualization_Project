@@ -20,16 +20,19 @@ class SentimentAnalyser:
         pass
 
     def get_topic_sentiments_polarity(self, text):
-        joined_txt = " ".join(text)
-        headline_blob = TextBlob(joined_txt)
+        if isinstance(text, list):
+            text = " ".join(text)
+        headline_blob = TextBlob(text)
         return headline_blob.polarity
 
     def get_topic_subjectivity(self, text):
-        joined_txt = " ".join(text)
-        headline_blob = TextBlob(joined_txt)
+        if isinstance(text, list):
+            text = " ".join(text)
+        headline_blob = TextBlob(text)
         return headline_blob.subjectivity
 
 if __name__ == "__main__":
     test = SentimentAnalyser()
-    text = ["Schweden", "du", "Haus", "adrian", "USA", "Schweiz", "schlecht", "schön", "relativ", "ich", "wir"]
-    print(test.get_topic_sentiments_polarity(text))
+    print(test.get_topic_sentiments_polarity("Finanzminister warnt vor Inflation: Wirtschaftliche Auswirkungen der Pandemie."))
+    print(test.get_topic_sentiments_polarity("Die strahlende Sonne und der klare, blaue Himmel machen diesen Tag zu "
+                                             "einem perfekten Moment für einen erholsamen Spaziergang im Park."))

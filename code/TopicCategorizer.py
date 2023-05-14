@@ -67,7 +67,6 @@ class TopicCategorizer:
 
 if __name__ == "__main__":
     categorizer = TopicCategorizer()
-    print(categorizer.categorize("Zins ist ein wichtiges Thema in der Börse."))
     print(categorizer.categorize("Apple stellt neues iPhone-Modell vor: Technische Innovationen begeistern Fans."))
     print(categorizer.categorize("Bundeskanzlerin trifft sich mit US-Präsidenten zur Diskussion über Klimapolitik."))
     print(
