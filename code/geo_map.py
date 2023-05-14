@@ -3,8 +3,9 @@ import plotly.express as px
 import time
 import ast
 
-# TODO: percentage Bar anpassen
+
 def get_countries(date):
+    # mit dieser Funktion werden alle Länder des jeweiligen Datums zurückgegeben.
     start_time_countries = time.time()
     selected_string = data_country.loc[data_country['datum'] == date, 'Country'].values[0]
     selected_dict = ast.literal_eval(selected_string)  # Umwandlung des String in ein Dictionary
@@ -14,6 +15,7 @@ def get_countries(date):
 
 
 def weltkarte(data):
+    # Ausgabe der interaktiven Weltkarte.
     start_time_weltkarte = time.time()
     df = pd.DataFrame(data)
 
@@ -32,7 +34,7 @@ def weltkarte(data):
                     showland=True, landcolor="white", showframe=False)
 
     fig.update_layout(
-        title_text='Anzahl der Auflistungen pro Land',
+        title_text='Ländernennungen',
         showlegend=False,
         geo=dict(
             scope='world',
@@ -48,7 +50,7 @@ def weltkarte(data):
     fig.update_layout(coloraxis_colorbar_title='Anzahl')
 
     # Karte anzeigen
-    print("weltkarte", time.time() - start_time_weltkarte)
+    print("Weltkarte", time.time() - start_time_weltkarte)
     fig.show()
 
 
