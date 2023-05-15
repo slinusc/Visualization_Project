@@ -14,8 +14,7 @@ class EntityAndSubjectExtractor:
         if isinstance(text, list):
             text = " ".join(text)
         doc = self.nlp_de(text)
-        # nouns_and_persons = [(token.text) for token in doc if token.pos_ == 'NOUN' or token.ent_type_ == 'PER']
-        nouns_and_persons = [(token.lemma_) for token in doc if token.pos_ == 'NOUN' or token.ent_type_ == 'PER']
+        nouns_and_persons = [token.lemma_ for token in doc if token.pos_ == 'NOUN' or token.ent_type_ == 'PER']
         return nouns_and_persons
 
     def get_subjects(self, text):

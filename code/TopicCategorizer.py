@@ -21,18 +21,21 @@ class TopicCategorizer:
 
         self.nlp_de = spacy.load('de_core_news_lg')
         self.topics = {
-            'Politik': self.nlp_de('Regierung Politiker Wahl Gesetz Bundesrat Parlament Partei Politik Diplomatie'),
-            'Lokales': self.nlp_de('Stadt Kanton Gemeinde Bürger Stadtteil Einwohner Dorf Viertel Strasse'),
-            'Internationales': self.nlp_de('International UNO NATO EU Brexit Vertrag Frieden Krieg Sanktionen '
-                                           'Globalisierung Menschenrechte Krieg'),
-            'Wirtschaft': self.nlp_de('Wirtschaft Bank Unternehmen Aktien Börse Business BIP Umsatz Investitionen '
-                                      'Handel'),
+            'Politik': self.nlp_de('Regierung Politiker Wahl Gesetz Bundesrat Parlament Partei Politik Diplomatie '
+                                   'International UNO NATO EU Brexit Vertrag Frieden Krieg Sanktionen'
+                                   'Staat Globalisierung Menschenrechte Krieg'),
+            'Regional': self.nlp_de('Stadt Kanton Gemeinde Bürger Stadtteil Einwohner Dorf Viertel Strasse Region'),
+            'Wirtschaft': self.nlp_de('Wirtschaft Bank Unternehmen Aktien Börse Business BIP Umsatz '
+                                      'Investitionen Industrie Handel Finanzen'),
             'Sport': self.nlp_de('Spiel Sport Turnier Spieler Trainer Wettkampf Meisterschaft Stadion Sieg Niederlage '
                                  'WM Handball Fussball'),
-            'Kultur': self.nlp_de('Kunst Literatur Film Musik Theater Tanz Mode Fotografie Roman Gedicht Kino'),
+            'Kultur': self.nlp_de('Kunst Literatur Film Musik Theater Tanz Mode '
+                                  'Fotografie Roman Gedicht Kino Contest Star'),
             'Wissenschaft & Technik': self.nlp_de('Forschung Wissenschaft Studie Entdeckung Technologie Software '
-                                                  'Hardware Internet Ökologie Nachhaltigkeit Energie Umweltschutz Ingeniuer'),
-            }
+                                                  'Hardware Internet Ökologie Nachhaltigkeit Energie '
+                                                  'Umweltschutz Ingenieur Informatik Medizin '
+                                                  'Chemie Physik Künstliche Intelligenz'),
+        }
 
     def categorize(self, text):
 
@@ -66,4 +69,3 @@ if __name__ == "__main__":
     print(categorizer.categorize("Finanzminister warnt vor Inflation: Wirtschaftliche Auswirkungen der Pandemie."))
     print(categorizer.categorize("Kunstausstellung im Louvre bricht Besucherrekord: Kulturelles Highlight des Jahres."))
     print(categorizer.categorize("Formel 1: Lewis Hamilton siegt beim Großen Preis von Monaco."))
-
