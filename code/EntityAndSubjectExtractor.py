@@ -35,3 +35,4 @@ if __name__ == "__main__":
     entities = analyser.extract_entities(text)
     subjects = analyser.get_subjects(text)
     print(f'entities: {entities}, Subjekt: {subjects}')
+

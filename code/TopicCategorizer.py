@@ -28,7 +28,7 @@ class TopicCategorizer:
             'Wirtschaft': self.nlp_de('Wirtschaft Bank Unternehmen Aktien Börse Business BIP Umsatz '
                                       'Investitionen Industrie Handel Finanzen'),
             'Sport': self.nlp_de('Spiel Sport Turnier Spieler Trainer Wettkampf Meisterschaft Stadion Sieg Niederlage '
-                                 'WM Handball Fussball'),
+                                 'WM Handball Fussball Tennis Basketball Eishockey Formel1'),
             'Kultur': self.nlp_de('Kunst Literatur Film Musik Theater Tanz Mode '
                                   'Fotografie Roman Gedicht Kino Contest Star'),
             'Wissenschaft & Technik': self.nlp_de('Forschung Wissenschaft Studie Entdeckung Technologie Software '
@@ -55,6 +55,7 @@ class TopicCategorizer:
 
 
 if __name__ == "__main__":
+
     categorizer = TopicCategorizer()
 
     print(categorizer.categorize("Apple stellt neues iPhone-Modell vor: Technische Innovationen begeistern Fans."))
@@ -69,3 +70,5 @@ if __name__ == "__main__":
     print(categorizer.categorize("Finanzminister warnt vor Inflation: Wirtschaftliche Auswirkungen der Pandemie."))
     print(categorizer.categorize("Kunstausstellung im Louvre bricht Besucherrekord: Kulturelles Highlight des Jahres."))
     print(categorizer.categorize("Formel 1: Lewis Hamilton siegt beim Großen Preis von Monaco."))
+
+
