@@ -1,33 +1,25 @@
 import pandas as pd
-import plotly.express as px
+import plotly.graph_objects as go
 import time
-import ast
-
-
-def get_countries(date):
-    # mit dieser Funktion werden alle Länder des jeweiligen Datums zurückgegeben.
-    start_time_countries = time.time()
-    selected_string = data_country.loc[data_country['datum'] == date, 'Country'].values[0]
-    selected_dict = ast.literal_eval(selected_string)  # Umwandlung des String in ein Dictionary
-    df = pd.DataFrame(selected_dict)
-    print("get_countries", time.time() - start_time_countries)
-    return df
 
 
 def weltkarte(data):
     # Ausgabe der interaktiven Weltkarte.
     start_time_weltkarte = time.time()
-    df = pd.DataFrame(data)
-
-    # Duplikate zusammenfassen und 'Count'-Werte summieren
-    df = df.groupby('Country').sum().reset_index()
+    # Flatten the data and count occurrences
+    flat_list = [item for sublist in data for item in sublist]
+    df = pd.DataFrame(flat_list, columns=['Country'])
+    df = df['Country'].value_counts().reset_index()
+    df.columns = ['Country', 'Count']
 
     # Daten für die Kartenvisualisierung vorbereiten
-    fig = px.choropleth(df, locations='Country',
-                        locationmode='country names',
-                        color='Count',
-                        title='Count by Country',
-                        color_continuous_scale=px.colors.sequential.Greens)
+    fig = go.Figure(data=go.Choropleth(
+        locations=df['Country'],
+        z=df['Count'],
+        locationmode='country names',
+        colorscale='Greens',
+        colorbar_title="Count",
+    ))
 
     # Kartenlayout
     fig.update_geos(showcountries=True, countrycolor="darkgrey", showocean=True, oceancolor="lightblue",
@@ -35,7 +27,6 @@ def weltkarte(data):
 
     fig.update_layout(
         title_text='Ländernennungen',
-        showlegend=False,
         geo=dict(
             scope='world',
             projection_type='natural earth'
@@ -44,34 +35,35 @@ def weltkarte(data):
         height=700
     )
 
-    # Formatierung anpassen Kacheln
-    fig.update_traces(hovertemplate='<b>Land</b>: %{location}<br><b>Anzahl</b>: %{z}')
-    # Beschriftung ändern des Farbbalkens
-    fig.update_layout(coloraxis_colorbar_title='Anzahl')
-
     # Karte anzeigen
     print("Weltkarte", time.time() - start_time_weltkarte)
     fig.show()
 
 
-    # TODO evtl das integrieren???????
-    """
-    # Barplot für Verteilung
-    bar_df = df.sort_values(by='Count', ascending=False).head(10)  # Nur die 10 größten Werte
-    fig_bar = px.bar(bar_df, x='Country', y='Count', title='Verteilung des Counts pro Land',
-                     color='Count', color_continuous_scale=px.colors.sequential.Greens)
-    fig_bar.update_layout(xaxis_title='Land', yaxis_title='Count')
-    fig_bar.update_traces(marker=dict(color='green', width=1),
-                          selector=dict(type='bar'))
-    fig_bar.show()
-    """
-
-
 if __name__ == '__main__':
     start_time = time.time()
-    data_country = pd.read_csv(
-        'C:/Users/andre/Desktop/ZHAW Unterricht (Nicht Cloud)/Semester 2/Visualisation and Data Science Storytelling/Semestertask/data_country.csv')
-    weltkarte(get_countries("2022-01-12"))
+    data_country = [['Switzerland', 'Germany'],
+                    ['Germany'],
+                    ['France', 'Germany', 'Germany'],
+                    ['Austria', 'Australia'],
+                    ['Netherlands', 'Iraq', 'Iran', 'United States of America', 'Switzerland', 'Russia', 'Israel',
+                     'Croatia', 'Syria',
+                     'Congo', 'Lebanon', 'Sweden', 'France', 'Argentina', 'Finland', 'India', 'Australia', 'Egypt',
+                     'China', 'Germany',
+                     'Spain', 'Ukraine', 'Libya', 'Turkey', 'Canada', 'Zambia', 'Burundi', 'Tanzania', 'Vietnam',
+                     'Botswana', 'Poland',
+                     'Antarctica', 'Pakistan', 'Denmark', 'Italy', 'Belize', 'Japan', 'Guatemala', 'Iceland',
+                     'Luxembourg', 'Estonia',
+                     'Austria', 'Brazil', 'Bulgaria', 'Morocco', 'Belarus', 'Portugal', 'Taiwan', 'Philippines',
+                     'Colombia', 'Ecuador',
+                     'Panama', 'Mexico', 'Greece', 'Romania', 'Hungary', 'Kenya', 'Somalia'],
+                    ['Qatar', 'Qatar'],
+                    ['Qatar'],
+                    ['Switzerland'],
+                    ['Switzerland'],
+                    ['Switzerland']]
+
+    weltkarte(data_country)
     completed_time = time.time()
     final_tile = completed_time - start_time
     print("Ladezeit für Weltkarte:", final_tile, "Sekunden")
