@@ -22,9 +22,10 @@ class TopicCategorizer:
         self.nlp_de = spacy.load('de_core_news_lg')
         self.topics = {
             'Politik': self.nlp_de('Regierung Politiker Wahl Gesetz Bundesrat Parlament Partei Politik Diplomatie '
-                                   'International UNO NATO EU Brexit Vertrag Frieden Krieg Sanktionen'
+                                   'International UNO NATO EU Vertrag Frieden Krieg Sanktionen'
                                    'Staat Globalisierung Menschenrechte Krieg'),
-            'Regional': self.nlp_de('Stadt Kanton Gemeinde Bürger Stadtteil Einwohner Dorf Viertel Strasse Region'),
+            'Regional': self.nlp_de('Stadt Kanton Gemeinde Bürger Stadtteil Einwohner Dorf Viertel Strasse '
+                                    'Region lokal Anwohner'),
             'Wirtschaft': self.nlp_de('Wirtschaft Bank Unternehmen Aktien Börse Business BIP Umsatz '
                                       'Investitionen Industrie Handel Finanzen'),
             'Sport': self.nlp_de('Spiel Sport Turnier Spieler Trainer Wettkampf Meisterschaft Stadion Sieg Niederlage '
