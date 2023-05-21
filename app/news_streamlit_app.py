@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import holoviews as hv
 import relation_chord_chart as rcc
-import linechart_categories as lc
 
 
 def main():
