@@ -1,47 +1,50 @@
+import time
 import pandas as pd
 import plotly.graph_objects as go
-import time
 
 
-def weltkarte(data):
-    # Ausgabe der interaktiven Weltkarte.
-    start_time_weltkarte = time.time()
-    # Flatten the data and count occurrences
-    flat_list = [item for sublist in data for item in sublist]
-    df = pd.DataFrame(flat_list, columns=['Country'])
-    df = df['Country'].value_counts().reset_index()
-    df.columns = ['Country', 'Count']
+class WorldMap:
 
-    # Daten für die Kartenvisualisierung vorbereiten
-    fig = go.Figure(data=go.Choropleth(
-        locations=df['Country'],
-        z=df['Count'],
-        locationmode='country names',
-        colorscale='Greens',
-        colorbar_title="Count",
-    ))
+    def __init__(self, data):
+        self.data = data
+        self.start_time = time.time()
 
-    # Kartenlayout
-    fig.update_geos(showcountries=True, countrycolor="darkgrey", showocean=True, oceancolor="lightblue",
-                    showland=True, landcolor="white", showframe=False)
+    def erstelle_weltkarte(self):
+        # Flatten the data and count occurrences
+        flat_list = [item for sublist in self.data for item in sublist]
+        df = pd.DataFrame(flat_list, columns=['Country'])
+        df = df['Country'].value_counts().reset_index()
+        df.columns = ['Country', 'Count']
 
-    fig.update_layout(
-        title_text='Ländernennungen',
-        geo=dict(
-            scope='world',
-            projection_type='natural earth'
-        ),
-        width=900,
-        height=700
-    )
+        # Daten für die Kartenvisualisierung vorbereiten
+        fig = go.Figure(data=go.Choropleth(
+            locations=df['Country'],
+            z=df['Count'],
+            locationmode='country names',
+            colorscale='Greens',
+            colorbar_title="Count",
+        ))
 
-    # Karte anzeigen
-    print("Weltkarte", time.time() - start_time_weltkarte)
-    fig.show()
+        # Kartenlayout
+        fig.update_geos(showcountries=True, countrycolor="darkgrey", showocean=True, oceancolor="lightblue",
+                        showland=True, landcolor="white", showframe=False)
+
+        fig.update_layout(
+            title_text='Ländernennungen',
+            geo=dict(
+                scope='world',
+                projection_type='natural earth'
+            ),
+            width=900,
+            height=700
+        )
+
+        # Karte anzeigen
+        print("Weltkarte", time.time() - self.start_time)
+        return fig
 
 
 if __name__ == '__main__':
-    start_time = time.time()
     data_country = [['Switzerland', 'Germany'],
                     ['Germany'],
                     ['France', 'Germany', 'Germany'],
@@ -62,8 +65,7 @@ if __name__ == '__main__':
                     ['Switzerland', 'Switzerland', 'Switzerland', 'Switzerland'],
                     ['Switzerland'],
                     ['Switzerland']]
-
-    weltkarte(data_country)
-    completed_time = time.time()
-    final_tile = completed_time - start_time
+    karte = WorldMap(data_country)
+    karte.erstelle_weltkarte()
+    final_tile = time.time() - karte.start_time
     print("Ladezeit für Weltkarte:", final_tile, "Sekunden")

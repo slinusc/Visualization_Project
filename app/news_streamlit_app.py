@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import holoviews as hv
 from visualization_classes import relation_chord_chart as rcc
+from visualization_classes import geo_map as gm
+from visualization_classes.sent_sub_obj import SentimentPlot, SubjectivityPlot
 
 
 def main():
@@ -20,7 +22,7 @@ def main():
     # load data
 
     def load_data():
-        path = 'data/without_content.tsv.xz'
+        path = '../data/without_content.tsv.xz'
         df = pd.read_csv(path, sep='\t', compression='xz')
         df['countries'] = df['countries'].apply(eval)
         df['date'] = pd.to_datetime(df['date'])
@@ -47,12 +49,34 @@ def main():
     with col1:
         st.bokeh_chart(hv.render(chord_chart, backend='bokeh'))
 
+    # Create world map
+    data_country_series = filtered_df['countries_en']
+    data_country_list = [eval(i) for i in data_country_series.dropna().tolist()]
+
+    world_map = gm.WorldMap(data_country_list)
+    world_map_chart = world_map.erstelle_weltkarte()
+    with col2:
+        st.plotly_chart(world_map_chart)
+
+    # Create sentiment plot
+    sentiment_plot = SentimentPlot(filtered_df['sentiment'])
+    sentiment_plot.create_plot()
+    with col1:
+        st.plotly_chart(sentiment_plot.fig)
+
+    # Create subjectivity plot
+    subjectivity_plot = SubjectivityPlot(filtered_df['subjectivity'])
+    subjectivity_plot.create_plot()
+    with col1:
+        st.plotly_chart(subjectivity_plot.fig)
+
     # Create chord diagram
     """
     chord_chart_persons = rcc.ChordCharts(filtered_df['entities_header']).country_chord_chart(threshold=5)
     with col2:
         st.bokeh_chart(hv.render(chord_chart_persons, backend='bokeh'))
     """
+
 
 if __name__ == "__main__":
     main()
