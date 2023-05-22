@@ -83,7 +83,16 @@ def main():
     # Create a colored line chart with Plotly Express
     fig = px.line(df_grouped, x='date', y='count', color='article_category')
 
-    fig.update_layout(title='Line Chart of Medium Names', xaxis_title='Date', yaxis_title='Count')
+    fig.update_layout(
+        shapes=[
+            dict(
+                type='line',
+                yref='paper', y0=0, y1=1,
+                xref='x', x0=selected_date, x1=selected_date,
+                line=dict(color='Yellow', width=1)
+            )
+        ],
+        title='Line Chart of Medium Names', xaxis_title='Date', yaxis_title='Count')
 
     st.plotly_chart(fig)
 
