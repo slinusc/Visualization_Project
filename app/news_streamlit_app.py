@@ -4,6 +4,7 @@ import holoviews as hv
 from visualization_classes import relation_chord_chart as rcc
 from visualization_classes import geo_map as gm
 from visualization_classes.sent_sub_obj import SentimentPlot, SubjectivityPlot
+import plotly.express as px
 
 
 def main():
@@ -77,7 +78,7 @@ def main():
     with col2:
         st.bokeh_chart(hv.render(chord_chart_persons, backend='bokeh'))
     """
-    df_grouped = filtered_df.groupby(['date', 'article_category']).size().reset_index(name='count')
+    df_grouped = df.groupby(['date', 'article_category']).size().reset_index(name='count')
 
     # Create a colored line chart with Plotly Express
     fig = px.line(df_grouped, x='date', y='count', color='article_category')
