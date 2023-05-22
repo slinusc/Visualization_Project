@@ -49,6 +49,7 @@ def main():
     with col1:
         st.bokeh_chart(hv.render(chord_chart, backend='bokeh'))
 
+'''
     # Create world map
     data_country_series = filtered_df['countries_en']
     data_country_list = [eval(i) for i in data_country_series.dropna().tolist()]
@@ -69,13 +70,21 @@ def main():
     subjectivity_plot.create_plot()
     with col1:
         st.plotly_chart(subjectivity_plot.fig)
-
+'''
     # Create chord diagram
     """
     chord_chart_persons = rcc.ChordCharts(filtered_df['entities_header']).country_chord_chart(threshold=5)
     with col2:
         st.bokeh_chart(hv.render(chord_chart_persons, backend='bokeh'))
     """
+    df_grouped = filtered_df.groupby(['date', 'article_category']).size().reset_index(name='count')
+
+    # Create a colored line chart with Plotly Express
+    fig = px.line(df_grouped, x='date', y='count', color='article_category')
+
+    fig.update_layout(title='Line Chart of Medium Names', xaxis_title='Date', yaxis_title='Count')
+
+    st.plotly_chart(fig)
 
 
 if __name__ == "__main__":
