@@ -27,6 +27,7 @@ def main():
         path = '../data/without_content.tsv.xz'
         df = pd.read_csv(path, sep='\t', compression='xz')
         df['countries'] = df['countries'].apply(eval)
+        df['entities_header'] = df['entities_header'].apply(eval)
         df['date'] = pd.to_datetime(df['date'])
         return df
     df = load_data()

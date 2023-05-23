@@ -7,7 +7,9 @@ class theWordCloud:
         self.word_list = word_list
 
     def generate_wordcloud(self):
-        text = " ".join(self.word_list)
+        text = " "
+        for i in self.word_list:
+            text += " ".join(i) + " "
         wordcloud = WordCloud(width=800, height=400, collocations=False, background_color="white").generate(text)
         return wordcloud
 
@@ -18,7 +20,7 @@ class theWordCloud:
         return plt
 
 if __name__ == '__main__':
-    word_lists = ['Leitzinserhöhung', 'Ende', 'Schweizerinn', 'Quali-Ende', 'Tabakinitiative', 'Tür', 'Werbeverbot']
+    word_lists = [['Leitzinserhöhung', 'Ende', 'Schweizerin'], ['Quali-Ende', 'Tabakinitiative', 'Tür', 'Werbeverbot']]
     wordcloud_generator = theWordCloud(word_lists)
     generated_wordcloud = wordcloud_generator.generate_wordcloud()
     wordcloud_generator.display_wordcloud(generated_wordcloud)
