@@ -5,6 +5,7 @@ from visualization_classes import relation_chord_chart as rcc
 from visualization_classes import geo_map as gm
 from visualization_classes.sent_sub_obj import SentimentPlot, SubjectivityPlot
 from visualization_classes.wordclound import theWordCloud
+import plotly.express as px
 
 
 def main():
@@ -57,6 +58,7 @@ def main():
     with col2:
         st.pyplot(word_cloud.display_wordcloud(generated_wordcloud))
 
+
     # Create world map
     data_country_series = filtered_df['countries_en']
     data_country_list = [eval(i) for i in data_country_series.dropna().tolist()]
@@ -84,6 +86,23 @@ def main():
     with col2:
         st.bokeh_chart(hv.render(chord_chart_persons, backend='bokeh'))
     """
+    df_grouped = df.groupby(['date', 'article_category']).size().reset_index(name='count')
+
+    # Create a colored line chart with Plotly Express
+    fig = px.line(df_grouped, x='date', y='count', color='article_category')
+
+    fig.update_layout(
+        shapes=[
+            dict(
+                type='line',
+                yref='paper', y0=0, y1=1,
+                xref='x', x0=selected_date, x1=selected_date,
+                line=dict(color='Yellow', width=1)
+            )
+        ],
+        title='Line Chart of Medium Names', xaxis_title='Date', yaxis_title='Count')
+
+    st.plotly_chart(fig)
 
 
 if __name__ == "__main__":
