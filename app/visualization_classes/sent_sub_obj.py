@@ -71,7 +71,7 @@ class SubjectivityPlot:
 
     def count_subjectivity(self):
         for subjectivity in self.subjectivity_list:
-            if subjectivity < 0.5:
+            if subjectivity < 0.2:
                 self.balken_breiten[0] += 1
             else:
                 self.balken_breiten[1] += 1
