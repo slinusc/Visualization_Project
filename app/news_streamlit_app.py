@@ -4,6 +4,7 @@ import holoviews as hv
 from visualization_classes import relation_chord_chart as rcc
 from visualization_classes import geo_map as gm
 from visualization_classes.sent_sub_obj import SentimentPlot, SubjectivityPlot
+from visualization_classes.wordclound import theWordCloud
 
 
 def main():
@@ -48,6 +49,13 @@ def main():
     chord_chart = rcc.ChordCharts(filtered_df['countries']).country_chord_chart(threshold=5)
     with col1:
         st.bokeh_chart(hv.render(chord_chart, backend='bokeh'))
+
+    # Create word cloud
+    entities_header = filtered_df['entities_header'].dropna().tolist()
+    word_cloud = theWordCloud(entities_header)
+    generated_wordcloud = word_cloud.generate_wordcloud()
+    with col2:
+        st.pyplot(word_cloud.display_wordcloud(generated_wordcloud))
 
     # Create world map
     data_country_series = filtered_df['countries_en']
