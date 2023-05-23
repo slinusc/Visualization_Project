@@ -22,7 +22,7 @@ class WorldMap:
             z=df['Count'],
             locationmode='country names',
             colorscale='Greens',
-            colorbar_title="Count",
+            colorbar_title="Anzahl",
         ))
 
         # Kartenlayout
