@@ -8,7 +8,7 @@ class theWordCloud:
 
     def generate_wordcloud(self):
         text = " ".join(self.word_list)
-        wordcloud = WordCloud(collocations=False, background_color="white").generate(text)
+        wordcloud = WordCloud(width=800, height=400, collocations=False, background_color="white").generate(text)
         return wordcloud
 
     def display_wordcloud(self, wordcloud):
