@@ -1,5 +1,5 @@
 import spacy
-
+import csv
 
 class EntityAndSubjectExtractor:
     """
@@ -9,6 +9,12 @@ class EntityAndSubjectExtractor:
     """
     def __init__(self):
         self.nlp_de = spacy.load('de_core_news_lg')
+        self.famous_people = {}
+        with open('../data/persoenlichkeiten.csv', 'r', encoding='UTF-8') as file:
+            csv_reader = csv.reader(file)
+            next(csv_reader)
+            for row in csv_reader:
+                self.famous_people[row[1]] = row[0]
 
     def extract_entities(self, text):
         if isinstance(text, list):
@@ -17,11 +23,12 @@ class EntityAndSubjectExtractor:
         nouns = [token.lemma_ for token in doc if token.pos_ == 'NOUN']
         return nouns
 
-    def extract_people(self, text):
-        if isinstance(text, list):
-            text = " ".join(text)
-        doc = self.nlp_de(text)
-        people = [ent.lemma_ for ent in doc.ents if ent.label_ == 'PER']
+    def extract_people(self, word_list):
+        people = []
+        text = " ".join(word_list)
+        for person in self.famous_people.keys():
+            if person.lower() in text.lower():
+                people.append(person)
         return people
 
     def get_subjects(self, text):
@@ -38,9 +45,11 @@ class EntityAndSubjectExtractor:
 
 if __name__ == "__main__":
     analyser = EntityAndSubjectExtractor()
-    text = "Bundeskanzlerin Angela Merkel trifft sich mit US-Präsidenten Joe Biden zur Diskussion über Klimapolitik."
+    text = ["Bundeskanzlerin," "Angela", "Merkel",  "trifft", "sich", "mit", "US-Präsidenten", "Joe", "Biden", "zur",
+            "Diskussion", "über", "Klimapolitik."]
     entities = analyser.extract_entities(text)
     subjects = analyser.get_subjects(text)
     people = analyser.extract_people(text)
-    print(f'Entities: {entities}, Subject: {subjects}, People: {people}')
+    #print(f'Entities: {entities}, Subject: {subjects}, People: {people}')
+    print(f'People: {people}')
 

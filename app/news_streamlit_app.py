@@ -22,19 +22,20 @@ def main():
                     </style>
                     """, unsafe_allow_html=True)
     # load data
-
+    @st.cache_data
     def load_data():
         path = '../data/without_content.tsv.xz'
         df = pd.read_csv(path, sep='\t', compression='xz')
         df['countries'] = df['countries'].apply(eval)
         df['entities_header'] = df['entities_header'].apply(eval)
+        df['people'] = df['people'].apply(eval)
         df['date'] = pd.to_datetime(df['date'])
         return df
     df = load_data()
 
     # Filter data by date with streamlit date input
     selected_date = col1.date_input("Wähle Datum",
-                                  value=pd.to_datetime('2022-01-01'),
+                                  value=pd.to_datetime('2022-02-24'),
                                   min_value=pd.to_datetime('2022-01-01'),
                                   max_value=pd.to_datetime('2022-12-31'))
     selected_date = pd.to_datetime(selected_date)
@@ -47,10 +48,17 @@ def main():
     if category != 'Alle':
         filtered_df = filtered_df[filtered_df['article_category'] == category]
 
+    # Visualizations
+
     # Create chord diagram
     chord_chart = rcc.ChordCharts(filtered_df['countries']).country_chord_chart(threshold=5)
     with col1:
         st.bokeh_chart(hv.render(chord_chart, backend='bokeh'))
+
+    # Create chord diagram
+    chord_chart_people = rcc.ChordCharts(filtered_df['people']).country_chord_chart(threshold=1)
+    with col2:
+        st.bokeh_chart(hv.render(chord_chart_people, backend='bokeh'))
 
     # Create word cloud
     entities_header = filtered_df['entities_header'].dropna().tolist()
@@ -58,7 +66,6 @@ def main():
     generated_wordcloud = word_cloud.generate_wordcloud()
     with col2:
         st.pyplot(word_cloud.display_wordcloud(generated_wordcloud))
-
 
     # Create world map
     data_country_series = filtered_df['countries_en']
@@ -81,12 +88,7 @@ def main():
     with col1:
         st.plotly_chart(subjectivity_plot.fig)
 
-    # Create chord diagram
-    """
-    chord_chart_persons = rcc.ChordCharts(filtered_df['entities_header']).country_chord_chart(threshold=5)
-    with col2:
-        st.bokeh_chart(hv.render(chord_chart_persons, backend='bokeh'))
-    """
+
     df_grouped = df.groupby(['date', 'article_category']).size().reset_index(name='count')
 
     # Create a colored line chart with Plotly Express
