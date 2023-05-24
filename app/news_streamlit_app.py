@@ -5,6 +5,7 @@ from visualization_classes import relation_chord_chart as rcc
 from visualization_classes import geo_map as gm
 from visualization_classes.sent_sub_obj import SentimentPlot, SubjectivityPlot
 from visualization_classes.wordclound import theWordCloud
+from visualization_classes.linechart_categories import LinechartCategories
 import plotly.express as px
 
 
@@ -49,6 +50,13 @@ def main():
         filtered_df = filtered_df[filtered_df['article_category'] == category]
 
     # Visualizations
+
+    # Create linechart plot
+    linechartPlot = LinechartCategories(selected_date)
+    linechartPlot = linechartPlot.linechart_categories(df)
+    with col1:
+        st.plotly_chart(linechartPlot)
+
 
     # Create chord diagram
     chord_chart = rcc.ChordCharts(filtered_df['countries']).country_chord_chart(threshold=5)
