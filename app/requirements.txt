@@ -3,3 +3,4 @@ matplotlib==3.6.3
 pandas==1.5.3
 streamlit==1.21.0
 holoviews==1.15.0
+plotly==5.14.1
