@@ -10,14 +10,13 @@ import plotly.express as px
 
 
 def main():
-
     # layout streamlit app
     st.set_page_config(layout="wide")
-    col1, col2 = st.columns([1, 1])
-    full_width_col1 = st.columns(1)
-    col3, col4 = st.columns([1, 1])
-    full_width_col2 = st.columns(1)
-    col5, col6 = st.columns([1, 1])
+    col1, col2 = st.columns([1, 1])  # Widgets
+    full_width_col1 = st.columns(1)  # Line chart
+    col3, col4 = st.columns([1, 1])  # Chord chart
+    full_width_col2 = st.columns(1)  # Wordcloud
+    col5, col6 = st.columns([1, 1])  # Sentiment / Subjectivity
     full_width_col3 = st.columns(1)
 
     # remove streamlit menu
@@ -27,6 +26,7 @@ def main():
                     footer {visibility: hidden;}
                     </style>
                     """, unsafe_allow_html=True)
+
     # load data
     @st.cache_data
     def load_data():
@@ -37,13 +37,14 @@ def main():
         df['people'] = df['people'].apply(eval)
         df['date'] = pd.to_datetime(df['date'])
         return df
+
     df = load_data()
 
     # Filter data by date with streamlit date input
     selected_date = col1.date_input("Wähle Datum",
-                                  value=pd.to_datetime('2022-02-24'),
-                                  min_value=pd.to_datetime('2022-01-01'),
-                                  max_value=pd.to_datetime('2022-12-31'))
+                                    value=pd.to_datetime('2022-02-24'),
+                                    min_value=pd.to_datetime('2022-01-01'),
+                                    max_value=pd.to_datetime('2022-12-31'))
     selected_date = pd.to_datetime(selected_date)
     filtered_df = df[df['date'] == selected_date]
 
@@ -102,5 +103,7 @@ def main():
         st.plotly_chart(world_map_chart)
 
     """
+
+
 if __name__ == "__main__":
     main()
