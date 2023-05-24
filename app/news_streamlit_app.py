@@ -13,7 +13,10 @@ def main():
 
     # layout streamlit app
     st.set_page_config(layout="wide")
+    full_width_col1 = st.columns(1)
     col1, col2 = st.columns([1, 1])
+    full_width_col2 = st.columns(1)
+
 
     # remove streamlit menu
     st.markdown("""
@@ -25,7 +28,7 @@ def main():
     # load data
     @st.cache_data
     def load_data():
-        path = 'processed_data/without_content.tsv.xz'
+        path = '../data/without_content.tsv.xz'
         df = pd.read_csv(path, sep='\t', compression='xz')
         df['countries'] = df['countries'].apply(eval)
         df['entities_header'] = df['entities_header'].apply(eval)
@@ -52,11 +55,10 @@ def main():
     # Visualizations
 
     # Create linechart plot
-    linechartPlot = LinechartCategories(selected_date)
-    linechartPlot = linechartPlot.linechart_categories(df)
-    with col1:
-        st.plotly_chart(linechartPlot)
-
+    linechart_generator = LinechartCategories(selected_date)
+    linechart_plot = linechart_generator.linechart_categories(df)
+    with full_width_col1[0]:
+        st.plotly_chart(linechart_plot)
 
     # Create chord diagram
     chord_chart = rcc.ChordCharts(filtered_df['countries']).country_chord_chart(threshold=5)
@@ -81,7 +83,7 @@ def main():
 
     world_map = gm.WorldMap(data_country_list)
     world_map_chart = world_map.erstelle_weltkarte()
-    with col2:
+    with full_width_col2[0]:
         st.plotly_chart(world_map_chart)
 
     # Create sentiment plot
@@ -95,26 +97,6 @@ def main():
     subjectivity_plot.create_plot()
     with col1:
         st.plotly_chart(subjectivity_plot.fig)
-
-
-    df_grouped = df.groupby(['date', 'article_category']).size().reset_index(name='count')
-
-    # Create a colored line chart with Plotly Express
-    fig = px.line(df_grouped, x='date', y='count', color='article_category')
-
-    fig.update_layout(
-        shapes=[
-            dict(
-                type='line',
-                yref='paper', y0=0, y1=1,
-                xref='x', x0=selected_date, x1=selected_date,
-                line=dict(color='Yellow', width=1)
-            )
-        ],
-        title='Line Chart of Medium Names', xaxis_title='Date', yaxis_title='Count')
-
-    st.plotly_chart(fig)
-
 
 if __name__ == "__main__":
     main()

@@ -35,8 +35,7 @@ class WorldMap:
                 scope='world',
                 projection_type='natural earth'
             ),
-            width=900,
-            height=700
+            width=1400,
         )
 
         # Karte anzeigen
