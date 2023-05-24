@@ -4,4 +4,4 @@ pandas==1.5.3
 streamlit==1.21.0
 holoviews==1.15.0
 plotly==5.14.1
-wordcloud==1.9.1
+wordcloud==1.9.1.1
