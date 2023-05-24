@@ -25,7 +25,7 @@ def main():
     # load data
     @st.cache_data
     def load_data():
-        path = 'without_content.tsv.xz'
+        path = 'processed_data/without_content.tsv.xz'
         df = pd.read_csv(path, sep='\t', compression='xz')
         df['countries'] = df['countries'].apply(eval)
         df['entities_header'] = df['entities_header'].apply(eval)
