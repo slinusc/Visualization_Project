@@ -36,6 +36,7 @@ class WorldMap:
                 projection_type='natural earth'
             ),
             width=1400,
+            height=500
         )
 
         # Karte anzeigen

@@ -10,11 +10,11 @@ class theWordCloud:
         text = " "
         for i in self.word_list:
             text += " ".join(i) + " "
-        wordcloud = WordCloud(width=800, height=400, collocations=False, background_color="white").generate(text)
+        wordcloud = WordCloud(width=3200, height=900, collocations=False, background_color="white").generate(text)
         return wordcloud
 
     def display_wordcloud(self, wordcloud):
-        plt.figure(figsize=(10, 5))
+        plt.figure(figsize=(25, 50))
         plt.imshow(wordcloud, interpolation="bilinear")
         plt.axis("off")
         return plt

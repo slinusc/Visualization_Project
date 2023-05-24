@@ -13,10 +13,12 @@ def main():
 
     # layout streamlit app
     st.set_page_config(layout="wide")
-    full_width_col1 = st.columns(1)
     col1, col2 = st.columns([1, 1])
+    full_width_col1 = st.columns(1)
+    col3, col4 = st.columns([1, 1])
     full_width_col2 = st.columns(1)
-
+    col5, col6 = st.columns([1, 1])
+    full_width_col3 = st.columns(1)
 
     # remove streamlit menu
     st.markdown("""
@@ -62,41 +64,43 @@ def main():
 
     # Create chord diagram
     chord_chart = rcc.ChordCharts(filtered_df['countries']).country_chord_chart(threshold=5)
-    with col1:
+    with col3:
         st.bokeh_chart(hv.render(chord_chart, backend='bokeh'))
 
     # Create chord diagram
     chord_chart_people = rcc.ChordCharts(filtered_df['people']).country_chord_chart(threshold=1)
-    with col2:
+    with col4:
         st.bokeh_chart(hv.render(chord_chart_people, backend='bokeh'))
 
     # Create word cloud
+
     entities_header = filtered_df['entities_header'].dropna().tolist()
     word_cloud = theWordCloud(entities_header)
     generated_wordcloud = word_cloud.generate_wordcloud()
-    with col2:
+    with full_width_col2[0]:
         st.pyplot(word_cloud.display_wordcloud(generated_wordcloud))
 
+    # Create sentiment plot
+    sentiment_plot = SentimentPlot(filtered_df['sentiment'])
+    sentiment_plot.create_plot()
+    with col5:
+        st.plotly_chart(sentiment_plot.fig)
+
+    # Create subjectivity plot
+    subjectivity_plot = SubjectivityPlot(filtered_df['subjectivity'])
+    subjectivity_plot.create_plot()
+    with col6:
+        st.plotly_chart(subjectivity_plot.fig)
+    """
     # Create world map
     data_country_series = filtered_df['countries_en']
     data_country_list = [eval(i) for i in data_country_series.dropna().tolist()]
 
     world_map = gm.WorldMap(data_country_list)
     world_map_chart = world_map.erstelle_weltkarte()
-    with full_width_col2[0]:
+    with full_width_col3[0]:
         st.plotly_chart(world_map_chart)
 
-    # Create sentiment plot
-    sentiment_plot = SentimentPlot(filtered_df['sentiment'])
-    sentiment_plot.create_plot()
-    with col1:
-        st.plotly_chart(sentiment_plot.fig)
-
-    # Create subjectivity plot
-    subjectivity_plot = SubjectivityPlot(filtered_df['subjectivity'])
-    subjectivity_plot.create_plot()
-    with col1:
-        st.plotly_chart(subjectivity_plot.fig)
-
+    """
 if __name__ == "__main__":
     main()
