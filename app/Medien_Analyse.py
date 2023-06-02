@@ -19,7 +19,7 @@ def main():
     df = load_data()
 
     # layout streamlit app
-    col1, col2 = st.columns([1, 1])  # Widgets
+    col1, col2, col3 = st.columns([1, 1, 1])  # Widgets
     full_width_col1 = st.columns(1)  # Line chart
     full_width_col0 = st.columns(1)  # Line charts
 
@@ -49,6 +49,13 @@ def main():
     category = col2.selectbox('Wähle Kategorie', categories)
     if category != 'Alle':
         filtered_df = filtered_df[filtered_df['article_category'] == category]
+
+    # Filter data by medium_name with streamlit dropdown
+    newspapers = df['medium_name'].unique()
+    newspapers = ['Alle'] + list(newspapers)
+    selected_newspaper = col3.selectbox('Wähle Zeitung', newspapers)
+    if selected_newspaper != 'Alle':
+        filtered_df = filtered_df[filtered_df['medium_name'] == selected_newspaper]
 
     # Create linechart plot
     linechart_generator = LinechartCategories()
