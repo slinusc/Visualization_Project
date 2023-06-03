@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 from classes.linechart_categories import LinechartCategories
-from classes.line_chart_medium import NewspaperCategoryPlot
+from classes.multiple_line_chart_medium import NewspaperCategoryPlot
 
 st.set_page_config(layout="wide")
 def main():
@@ -19,7 +19,7 @@ def main():
     df = load_data()
 
     # layout streamlit app
-
+    st.header('Medienanalyse')
     col1, col2, col3 = st.columns([1, 1, 1])  # Widgets
     full_width_col0 = st.columns(1)  # Line charts
     full_width_col1 = st.columns(1)  # Line chart
@@ -119,7 +119,7 @@ def main():
         filtered_df['Datum'] = filtered_df['Datum'].dt.strftime('%d.%m.%Y')
         st.subheader('Artikeltabelle')
         st.button('Info Artikeltabelle', help='Die Tabelle zeigt die Artikel an, nach denen die Filter gesetzt wurden.')
-        st.dataframe((filtered_df.loc[:, ['Medium', 'Headline','Kategorie',  'Datum']]))
+        st.dataframe(filtered_df.loc[:, ['Medium', 'Headline','Kategorie',  'Datum']], width=1100)
 
 if __name__ == "__main__":
     main()

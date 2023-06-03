@@ -41,7 +41,8 @@ class NewspaperCategoryPlot:
             col = i % 4 + 1
 
             # Erstellen Sie ein Liniendiagramm für die Zeitung und fügen Sie es der subplot Figur hinzu
-            fig.add_trace(go.Scatter(x=df_grouped['date'], y=df_grouped['count'], mode='lines', name=newspaper), row=row, col=col)
+            fig.add_trace(go.Scatter(x=df_grouped['date'], y=df_grouped['count'], mode='lines', name=newspaper, line=dict(color='#1f77b4')
+                                     ), row=row, col=col)
 
         # Legen Sie die Titel der subplot Figur fest
         fig.update_layout(showlegend=False, plot_bgcolor='white')
@@ -49,7 +50,7 @@ class NewspaperCategoryPlot:
         # Setze die Hintergrundfarbe der Achsen auf Weiß und entferne die Gitterlinien
         fig.update_xaxes(showgrid=False, gridcolor='white')
         fig.update_yaxes(showgrid=False, gridcolor='white')
-        fig.update_layout(showlegend=False, plot_bgcolor='white', width=1100)
+        fig.update_layout(showlegend=False, plot_bgcolor='white', width=1100, )
 
         return fig
 
