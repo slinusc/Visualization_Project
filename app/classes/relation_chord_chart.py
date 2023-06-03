@@ -3,29 +3,23 @@ import pandas as pd
 import holoviews as hv
 from holoviews import opts, dim, Dataset
 
-
 class ChordCharts:
 
     def __init__(self, data):
         self.data = data.tolist()
         self.edges_list = []
 
-    def threshold_filter(self, threshold):
+    def create_edges(self):
         for connection in self.data:
             for pair in itertools.combinations(connection, 2):
                 self.edges_list.append(pair)
         edges_df = pd.DataFrame(self.edges_list, columns=['source', 'target'])
-        edges_count = edges_df.groupby('source').count()
-        edges_count.columns = ['count']
-        filtered_countries = edges_count[edges_count['count'] >= threshold].index
-        filtered_edges_df = edges_df[
-            edges_df['source'].isin(filtered_countries) & edges_df['target'].isin(filtered_countries)]
-        edges_ds = Dataset(filtered_edges_df, ['source', 'target'])
+        edges_ds = Dataset(edges_df, ['source', 'target'])
         return edges_ds
 
-    def country_chord_chart(self, threshold=3):
+    def country_chord_chart(self):
         hv.extension('bokeh')
-        chord = hv.Chord(self.threshold_filter(threshold)).select(value=(1, None))
+        chord = hv.Chord(self.create_edges()).select(value=(1, None))
         return chord.opts(
             opts.Chord(
                 cmap='Category20',
@@ -38,3 +32,8 @@ class ChordCharts:
                 tools=['tap']
             )
         )
+
+if __name__ == '__main__':
+    data = [['Ukraine, Deutschland'], ['Deutschland', 'USA'], ['USA', 'Deutschland'], ['Ukraine', 'USA']]
+    test = ChordCharts(data)
+    test.country_chord_chart()

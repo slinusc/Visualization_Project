@@ -6,13 +6,13 @@ class LinechartCategories:
         pass
 
     def linechart_categories(self, data):
-        df_grouped = data.groupby(['date', 'article_category']).size().reset_index(name='count')
-        fig = px.line(df_grouped, x='date', y='count', color='article_category')
+        df_grouped = data.groupby(['Datum', 'Kategorie']).size().reset_index(name='Anzahl')
+        fig = px.line(df_grouped, x='Datum', y='Anzahl', color='Kategorie')
         fig.update_layout(
-            xaxis_title='Datum', yaxis_title='Anzahl',
-            width=1100  # Change the width,
+            width=1100
         )
         return fig
+
 
 if __name__ == '__main__':
     pass
