@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import holoviews as hv
 import sys
-sys.path.insert(0, '../classes')
+sys.path.insert(0, 'C:/Users/linus/OneDrive/BSc_Data_Science/Semester_2/Data_Visualisation/visualization_project/app'
+                   '/classes')
 import relation_chord_chart as rcc
 import sent_sub_obj as sso
 import wordclound as wc

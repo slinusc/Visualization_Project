@@ -4,9 +4,8 @@ import plotly.graph_objects as go
 from classes.linechart_categories import LinechartCategories
 from classes.line_chart_medium import NewspaperCategoryPlot
 
-
+st.set_page_config(layout="wide")
 def main():
-    st.set_page_config(layout="wide")
     @st.cache_data
     def load_data():
         path = '../data/without_content.tsv.xz'
@@ -20,9 +19,11 @@ def main():
     df = load_data()
 
     # layout streamlit app
+
     col1, col2, col3 = st.columns([1, 1, 1])  # Widgets
-    full_width_col1 = st.columns(1)  # Line chart
     full_width_col0 = st.columns(1)  # Line charts
+    full_width_col1 = st.columns(1)  # Line chart
+    full_width_col2 = st.columns(1)  # Dataframe
 
     # remove streamlit menu
     st.markdown("""
@@ -54,9 +55,7 @@ def main():
         categories_options = ['Alle'] + list(categories)
         selected_categories = st.multiselect('Wähle Kategorie', categories_options, default=['Alle'])
         st.button('Info Kategorien', help='Wählen Sie die Kategorien aus, die Sie im Diagramm anzeigen möchten. '
-                                          'Die Kategorien wurden von den Autoren definiert und zusammengestellt. '
-                                          'Die Kategorien stimmen teils nicht 1 zu 1 mit den Kategorien der jeweiligen '
-                                          'Zeitung überein.')
+                                          'Die Kategorien wurden von den Autoren definiert und zusammengestellt. ')
         if 'Alle' in selected_categories:
             # all categories are selected, no filtering needed
             pass
@@ -82,13 +81,17 @@ def main():
         # Create linechart plot
         linechart_generator = LinechartCategories()
         linechart_plot = linechart_generator.linechart_categories(filtered_df)
-        with full_width_col1[0]:
+        with full_width_col0[0]:
+            st.subheader('Anzahl Artikel nach Kategorien')
+            st.button('Info', help='Es werden die Anzahl der Artikel pro Kategorie angezeigt.')
             st.plotly_chart(linechart_plot)
 
         # Create line chart medium
         line_chart = NewspaperCategoryPlot(filtered_df, selected_categories)
         line_medium = line_chart.plot_newspaper_category()
-        with full_width_col0[0]:
+        with full_width_col1[0]:
+            st.subheader('Anzahl Artikel nach Zeitung')
+            st.button('Info', help='Es werden die Anzahl der Artikel pro Zeitung angezeigt.')
             st.plotly_chart(line_medium)
     else:
         fig = go.Figure()
@@ -101,13 +104,22 @@ def main():
                 name=newspaper
             ))
 
-        fig.update_layout(title='Häufigkeiten nach Kategorien',
-                          xaxis_title='Kategorie',
+        fig.update_layout(xaxis_title='Kategorie',
                           yaxis_title='Häufigkeit',
                           barmode='stack',
                           width=1000, height=500)
-        st.plotly_chart(fig)
+        with full_width_col1[0]:
+            st.subheader('Häufigkeiten nach Kategorien')
+            st.plotly_chart(fig)
 
+    # Create dataframe
+    with full_width_col2[0]:
+        filtered_df.columns = ['Medium', 'Headline', 'Datum', 'Länder', 'sentiment', 'subjectivity',
+                      'entities_header', 'Kategorie', 'countries_en', 'Personen']
+        filtered_df['Datum'] = filtered_df['Datum'].dt.strftime('%d.%m.%Y')
+        st.subheader('Artikeltabelle')
+        st.button('Info Artikeltabelle', help='Die Tabelle zeigt die Artikel an, nach denen die Filter gesetzt wurden.')
+        st.dataframe((filtered_df.loc[:, ['Medium', 'Headline','Kategorie',  'Datum']]))
 
 if __name__ == "__main__":
     main()

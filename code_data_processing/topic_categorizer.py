@@ -13,8 +13,8 @@ class TopicCategorizer:
     ähnliche Vektoren haben sollten.
 
     Attribute:
-    - nlp_de (Language): Ein Spacy-Sprachmodell für Deutsch.
-    - topics (dict): Ein Wörterbuch, das jede Kategorie ihren Schlüsselwörtern zuordnet.
+    - nlp_de (Language): Spacy-Sprachmodell für Deutsch.
+    - topics (dict): Ein Dictionary, das jede Kategorie ihren Schlüsselwörtern zuordnet.
     """
 
     def __init__(self):
@@ -23,19 +23,19 @@ class TopicCategorizer:
         self.topics = {
             'Politik': self.nlp_de('Regierung Politiker Wahl Gesetz Bundesrat Parlament Partei Politik Diplomatie '
                                    'International UNO NATO EU Vertrag Frieden Krieg Sanktionen'
-                                   'Staat Globalisierung Menschenrechte Krieg'),
+                                   'Staat Globalisierung Menschenrechte Krieg Politik'),
             'Regional': self.nlp_de('Stadt Kanton Gemeinde Bürger Stadtteil Einwohner Dorf Viertel Strasse '
-                                    'Region lokal Anwohner'),
+                                    'Region lokal Anwohner Quartier Regional Gemeinderat Gemeindeversammlung'),
             'Wirtschaft': self.nlp_de('Wirtschaft Bank Unternehmen Aktien Börse Business BIP Umsatz '
-                                      'Investitionen Industrie Handel Finanzen'),
+                                      'Investitionen Industrie Handel Finanzen Preis Wachstum Firma CEO Dividende'),
             'Sport': self.nlp_de('Spiel Sport Turnier Spieler Trainer Wettkampf Meisterschaft Stadion Sieg Niederlage '
-                                 'WM Handball Fussball Tennis Basketball Eishockey Formel1'),
+                                 'WM Handball Fussball Tennis Basketball Eishockey Formel1 Volleyball Ballsport'),
             'Kultur': self.nlp_de('Kunst Literatur Film Musik Theater Tanz Mode '
-                                  'Fotografie Roman Gedicht Kino Contest Star'),
-            'Wissenschaft & Technik': self.nlp_de('Forschung Wissenschaft Studie Entdeckung Technologie Software '
-                                                  'Hardware Internet Ökologie Nachhaltigkeit Energie '
-                                                  'Umweltschutz Ingenieur Informatik Medizin '
-                                                  'Chemie Physik Künstliche Intelligenz'),
+                                  'Fotografie Roman Gedicht Kino Contest Star Kulinarik Kultur'),
+            'Wissenschaft & Technik': self.nlp_de('Forschung Wissenschaft Studie Entdeckung Technologie Technik '
+                                                  'Software Hardware Internet Ökologie Energie Hochschule'
+                                                  'Umweltschutz Ingenieur Informatik Medizin Universität'
+                                                  'Chemie Physik Künstliche Intelligenz AI Digitalisierung Robotik'),
         }
 
     def categorize(self, text):
