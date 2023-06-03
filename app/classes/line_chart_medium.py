@@ -2,17 +2,21 @@ import pandas as pd
 import plotly.subplots as sp
 import plotly.graph_objects as go
 
+
 class NewspaperCategoryPlot:
     def __init__(self, df, category):
         self.df = df
         self.category = category
 
     def plot_newspaper_category(self):
-        # Filtern Sie den DataFrame nach der spezifischen Kategorie
-        if self.category != 'Alle':
-            df_category = self.df[self.df['article_category'] == self.category]
-        else:
+        # Überprüfen, ob 'Alle' in der Liste der ausgewählten Kategorien vorhanden ist.
+        # Wenn 'Alle' ausgewählt ist, bedeutet das, dass wir keinen Filter auf die Kategorie anwenden wollen.
+        if 'Alle' in self.category:
+            # Wenn 'Alle' ausgewählt ist, verwenden wir den gesamten DataFrame ohne Filter.
             df_category = self.df
+        else:
+            # Wenn 'Alle' nicht ausgewählt ist, filtern wir den DataFrame nach den ausgewählten Kategorien.
+            df_category = self.df[self.df['article_category'].isin(self.category)]
 
         # Liste der Zeitungen
         newspapers = df_category['medium_name'].unique()

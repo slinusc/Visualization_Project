@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.graph_objects as go
 from classes.linechart_categories import LinechartCategories
 from classes.line_chart_medium import NewspaperCategoryPlot
 
@@ -32,43 +33,80 @@ def main():
                             """, unsafe_allow_html=True)
 
     # Filter data by date with streamlit date input
-    start_date, end_date = col1.date_input(
-        "Wählen Sie einen Datumsbereich",
-        [pd.to_datetime('2022-01-01'), pd.to_datetime('2022-01-31')],
-        min_value=pd.to_datetime('2022-01-01'),
-        max_value=pd.to_datetime('2022-12-31'))
+    with col1:
+        start_date, end_date = st.date_input(
+            "Wählen Sie einen Datumsbereich",
+            [pd.to_datetime('2022-01-01'), pd.to_datetime('2022-01-31')],
+            min_value=pd.to_datetime('2022-01-01'),
+            max_value=pd.to_datetime('2022-12-31')
+        )
+        st.button('Info Datumsbereich', help='Wählen Sie den Start- und Enddatumsbereich aus, für den Sie Daten '
+                                             'anzeigen möchten. In dieser Version der App kann jeder beliebige '
+                                             'Zeitraum im Jahr 2022 ausgewählt werden. Es kann auch jeder Tag einzeln '
+                                             'analysiert werden.')
+        start_date = pd.Timestamp(start_date)
+        end_date = pd.Timestamp(end_date)
+        filtered_df = df[(df['date'] >= start_date) & (df['date'] <= end_date)]
 
-    start_date = pd.Timestamp(start_date)
-    end_date = pd.Timestamp(end_date)
+    # Filter data by category with streamlit multiselect
+    with col2:
+        categories = df['article_category'].unique()
+        categories_options = ['Alle'] + list(categories)
+        selected_categories = st.multiselect('Wähle Kategorie', categories_options, default=['Alle'])
+        st.button('Info Kategorien', help='Wählen Sie die Kategorien aus, die Sie im Diagramm anzeigen möchten. '
+                                          'Die Kategorien wurden von den Autoren definiert und zusammengestellt. '
+                                          'Die Kategorien stimmen teils nicht 1 zu 1 mit den Kategorien der jeweiligen '
+                                          'Zeitung überein.')
+        if 'Alle' in selected_categories:
+            # all categories are selected, no filtering needed
+            pass
+        else:
+            filtered_df = filtered_df[filtered_df['article_category'].isin(selected_categories)]
 
-    filtered_df = df[(df['date'] >= start_date) & (df['date'] <= end_date)]
+    # Filter data by medium_name with streamlit multiselect
+    with col3:
+        newspapers = df['medium_name'].unique()
+        newspapers_options = ['Alle'] + list(newspapers)
+        selected_newspapers = st.multiselect('Wähle Zeitung', newspapers_options, default=['Alle'])
+        st.button('Info Zeitungen', help='Wählen Sie die Zeitungen aus, deren Daten Sie im Diagramm anzeigen möchten. '
+                                         'In dieser Version stehen acht Zeitungen zur Verfügung.')
 
-    # Filter data by category with streamlit dropdown
-    categories = df['article_category'].unique()
-    categories = ['Alle'] + list(categories)
-    category = col2.selectbox('Wähle Kategorie', categories)
-    if category != 'Alle':
-        filtered_df = filtered_df[filtered_df['article_category'] == category]
+        if 'Alle' in selected_newspapers:
+            # all newspapers are selected
+            selected_newspapers = newspapers
+        else:
+            filtered_df = filtered_df[filtered_df['medium_name'].isin(selected_newspapers)]
 
-    # Filter data by medium_name with streamlit dropdown
-    newspapers = df['medium_name'].unique()
-    newspapers = ['Alle'] + list(newspapers)
-    selected_newspaper = col3.selectbox('Wähle Zeitung', newspapers)
-    if selected_newspaper != 'Alle':
-        filtered_df = filtered_df[filtered_df['medium_name'] == selected_newspaper]
+    # Check if start and end date are the same
+    if start_date != end_date:
+        # Create linechart plot
+        linechart_generator = LinechartCategories()
+        linechart_plot = linechart_generator.linechart_categories(filtered_df)
+        with full_width_col1[0]:
+            st.plotly_chart(linechart_plot)
 
-    # Create linechart plot
-    linechart_generator = LinechartCategories()
-    linechart_plot = linechart_generator.linechart_categories(filtered_df)
-    with full_width_col1[0]:
-        st.plotly_chart(linechart_plot)
+        # Create line chart medium
+        line_chart = NewspaperCategoryPlot(filtered_df, selected_categories)
+        line_medium = line_chart.plot_newspaper_category()
+        with full_width_col0[0]:
+            st.plotly_chart(line_medium)
+    else:
+        fig = go.Figure()
+        for newspaper in selected_newspapers:
+            newspaper_df = filtered_df[filtered_df['medium_name'] == newspaper]
+            category_frequencies = newspaper_df['article_category'].value_counts()
+            fig.add_trace(go.Bar(
+                x=category_frequencies.index,
+                y=category_frequencies.values,
+                name=newspaper
+            ))
 
-    # Create line chart medium
-    line_chart = NewspaperCategoryPlot(filtered_df, category)
-    line_medium = line_chart.plot_newspaper_category()
-    with full_width_col0[0]:
-        st.plotly_chart(line_medium)
-
+        fig.update_layout(title='Häufigkeiten nach Kategorien',
+                          xaxis_title='Kategorie',
+                          yaxis_title='Häufigkeit',
+                          barmode='stack',
+                          width=1000, height=500)
+        st.plotly_chart(fig)
 
 
 if __name__ == "__main__":
