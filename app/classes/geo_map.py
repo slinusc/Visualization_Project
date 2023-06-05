@@ -30,13 +30,12 @@ class WorldMap:
                         showland=True, landcolor="white", showframe=False)
 
         fig.update_layout(
-            title_text='Ländernennungen',
             geo=dict(
                 scope='world',
                 projection_type='natural earth'
             ),
-            width=1400,
-            height=500
+            width=1600,
+            height=600
         )
 
         # Karte anzeigen

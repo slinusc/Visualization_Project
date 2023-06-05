@@ -50,6 +50,9 @@ def main():
     full_width_col2 = st.columns(1)  # Topic analysis
     full_width_col3 = st.columns(1)  # Dataframe
 
+    # CONFIG FOR ALL PLOTS
+    config = dict({'displayModeBar': False})
+
     # remove streamlit menu
     st.markdown("""
                             <style>
@@ -101,7 +104,7 @@ def main():
         with full_width_col0[0]:
             st.subheader('Anzahl Artikel nach Kategorien')
             st.button('ℹ️', help='Es werden die Anzahl der Artikel pro Kategorie angezeigt.')
-            st.plotly_chart(linechart_plot)
+            st.plotly_chart(linechart_plot, config=config)
 
         # Create line chart medium
         line_chart = NewspaperCategoryPlot(filtered_df, selected_categories)
@@ -109,7 +112,7 @@ def main():
         with full_width_col1[0]:
             st.subheader('Anzahl Artikel nach Zeitung')
             st.button('ℹ️', help='Es werden die Anzahl der Artikel pro Zeitung angezeigt.')
-            st.plotly_chart(line_medium)
+            st.plotly_chart(line_medium, config=config)
     else:
         fig = go.Figure()
         for newspaper in selected_newspapers:
@@ -128,7 +131,7 @@ def main():
         with full_width_col1[0]:
             st.subheader('Häufigkeiten nach Kategorien')
             st.button('ℹ️', help='Es werden die Anzahl der Artikel pro Zeitung angezeigt.')
-            st.plotly_chart(fig)
+            st.plotly_chart(fig,config=config)
 
     # Topic analysis
     with full_width_col2[0]:
@@ -136,7 +139,7 @@ def main():
         st.button('ℹ️', help='Die Themen Analyse zeigt die am häufigsten vorkommenden Wörter '
                              'in den Artikeln an.')
         topic_analysis = TopicAnalysis()
-        st.plotly_chart(topic_analysis.plot_most_common_words(filtered_df['Entitäten Header'], 20))
+        st.plotly_chart(topic_analysis.plot_most_common_words(filtered_df['Entitäten Header'], 20),config=config)
 
     # Create dataframe
     with full_width_col3[0]:

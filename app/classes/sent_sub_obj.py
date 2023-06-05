@@ -46,7 +46,6 @@ class SentimentPlot:
         self.count_sentiment()
         self.add_bars()
         self.fig.update_layout(
-            title='Stimmung',
             xaxis=dict(
                 range=[0, len(self.sentiment_list)],
                 showticklabels=False
@@ -100,7 +99,6 @@ class SubjectivityPlot:
         self.count_subjectivity()
         self.add_bars()
         self.fig.update_layout(
-            title='Subjektivität',
             xaxis=dict(
                 range=[0, len(self.subjectivity_list)],
                 showticklabels=False
