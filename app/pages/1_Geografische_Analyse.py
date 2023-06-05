@@ -82,21 +82,21 @@ with col3:
     selected_countries = st.multiselect('Wähle Land', country_options, default=['Alle'])
 
 
-    def contains_country(country_list, country):
-        for i in country:
-            if i in country_list:
+    def contains_country(country_list, countries):
+        for country in countries:
+            if country in country_list:
                 return True
         return False
 
 
     if 'Alle' not in selected_countries:
         filtered_df = filtered_df[filtered_df['Länder'].apply(lambda x:
-                                                                 contains_country(x, country=selected_countries))]
+                                                                 contains_country(x, countries=selected_countries))]
     else:
         pass
 
 # Create chord diagram
-chord_chart = rcc.ChordCharts(filtered_df['Länder']).country_chord_chart()
+chord_chart = rcc.ChordCharts(filtered_df['Länder'], specific_entities=selected_countries).country_chord_chart()
 with col4[0]:
     st.bokeh_chart(hv.render(chord_chart, backend='bokeh'))
 
