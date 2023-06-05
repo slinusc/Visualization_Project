@@ -63,14 +63,19 @@ def main():
 
     # Filter data by date with streamlit date input
     with col1:
-        start_date, end_date = st.date_input(
+        dates = st.date_input(
             "Wähle Datum",
             [pd.to_datetime('2022-02-01'), pd.to_datetime('2022-02-28')],
             min_value=pd.to_datetime('2022-01-01'),
             max_value=pd.to_datetime('2022-12-31')
         )
-        start_date = pd.Timestamp(start_date)
-        end_date = pd.Timestamp(end_date)
+        start_date = pd.Timestamp(dates[0])
+        if len(dates) == 1:
+            end_date = start_date
+            st.error('Bitte wählen Sie ein Enddatum aus.')
+        elif len(dates) == 2:
+            end_date = pd.Timestamp(dates[1])
+
         filtered_df = df[(df['Datum'] >= start_date) & (df['Datum'] <= end_date)]
 
     # Filter data by category with streamlit multiselect

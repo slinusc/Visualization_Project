@@ -87,9 +87,9 @@ with col3:
     selected_countries = st.multiselect('Wähle Land', country_options, default=['Alle'])
 
 
-    def contains_country(country_list, country):
-        for i in country:
-            if i in country_list:
+    def contains_country(country_list, countries):
+        for country in countries:
+            if country in country_list:
                 return True
         return False
 
