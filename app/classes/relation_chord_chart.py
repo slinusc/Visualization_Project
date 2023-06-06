@@ -5,22 +5,14 @@ from holoviews import opts, dim, Dataset
 
 class ChordCharts:
 
-    def __init__(self, data, specific_entities=None):
+    def __init__(self, data):
         self.data = data.tolist()
         self.edges_list = []
-        if 'Alle' not in specific_entities:
-            self.specific_countries = specific_entities
-        else:
-            self.specific_countries = None
 
     def create_edges(self):
         for connection in self.data:
             for pair in itertools.combinations(connection, 2):
-                if self.specific_countries:  # If specific countries have been specified
-                    if any(country in pair for country in self.specific_countries):  # Add pairs that contain any of the specific countries
-                        self.edges_list.append(pair)
-                else:  # If no specific countries have been specified, add all pairs
-                    self.edges_list.append(pair)
+                self.edges_list.append(pair)
         edges_df = pd.DataFrame(self.edges_list, columns=['source', 'target'])
         # Count the frequency of each country
         freq_df = pd.concat([edges_df['source'], edges_df['target']]).value_counts().reset_index()
@@ -47,3 +39,7 @@ class ChordCharts:
             )
         )
 
+if __name__ == '__main__':
+    data = [['Ukraine, Deutschland'], ['Deutschland', 'USA'], ['USA', 'Deutschland'], ['Ukraine', 'USA']]
+    test = ChordCharts(data)
+    test.country_chord_chart()
