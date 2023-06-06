@@ -4,7 +4,8 @@ import holoviews as hv
 import sys
 import csv
 
-sys.path.insert(0, r'C:\Users\aober\Documents\Data Science Studium\2 Semster\VDSS\semesterProjekt\visualization_project\app\classes')
+sys.path.insert(0, 'C:/Users/linus/OneDrive/BSc_Data_Science/Semester_2/Data_Visualisation/visualization_project/app'
+                   '/classes')
 import relation_chord_chart as rcc
 import geo_map as gm
 from topic_analysis import TopicAnalysis
