@@ -26,7 +26,7 @@ class TopicAnalysis:
             x=words,
             y=counts
         )])
-        fig.update_layout(xaxis_title='Worte', yaxis_title='Anzahl', width=1100)
+        fig.update_layout(xaxis_title='Worte', yaxis_title='Anzahl', width=1100, height=500)
         return fig
 
 

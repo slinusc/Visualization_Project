@@ -42,7 +42,9 @@ def main():
                          "3. Zeitungen: Mit dieser Option können Sie auswählen, "
                          "von welchen Zeitungen die Daten angezeigt werden sollen. "
                          "Es stehen acht verschiedene Zeitungen zur Auswahl, "
-                         "und Sie können eine oder mehrere davon auswählen.")
+                         "und Sie können eine oder mehrere davon auswählen.\n\n"
+                         " Für weitere Informationen besuchen Sie: "
+                         "https://github.com/slinusc/visualization_project/blob/main/README.md")
 
     col1, col2, col3 = st.columns([1, 1, 1])  # Widgets
     full_width_col0 = st.columns(1)  # Line charts
@@ -108,7 +110,9 @@ def main():
         linechart_plot = linechart_generator.linechart_categories(filtered_df)
         with full_width_col0[0]:
             st.subheader('Anzahl Artikel nach Kategorien')
-            st.button('ℹ️', help='Es werden die Anzahl der Artikel pro Kategorie angezeigt.')
+            st.button('ℹ️', help="Es werden die Anzahl der Artikel pro Kategorie angezeigt.\n\n"
+                                 " Für weitere Informationen besuchen Sie: "
+                                 "https://github.com/slinusc/visualization_project/blob/main/README.md")
             st.plotly_chart(linechart_plot, config=config)
 
         # Create line chart medium
@@ -116,7 +120,9 @@ def main():
         line_medium = line_chart.plot_newspaper_category()
         with full_width_col1[0]:
             st.subheader('Anzahl Artikel nach Zeitung')
-            st.button('ℹ️', help='Es werden die Anzahl der Artikel pro Zeitung angezeigt.')
+            st.button('ℹ️', help="Es werden die Anzahl der Artikel pro Zeitung angezeigt.\n\n"
+                                 " Für weitere Informationen besuchen Sie: "
+                                 "https://github.com/slinusc/visualization_project/blob/main/README.md")
             st.plotly_chart(line_medium, config=config)
     else:
         fig = go.Figure()
@@ -135,18 +141,22 @@ def main():
                           width=1100, height=500)
         with full_width_col1[0]:
             st.subheader('Häufigkeiten nach Kategorien')
-            st.button('ℹ️', help='Es werden die Anzahl der Artikel pro Zeitung angezeigt.')
-            st.plotly_chart(fig,config=config)
+            st.button('ℹ️', help="Es werden die Anzahl der Artikel pro Zeitung angezeigt. \n\n"
+                                 " Für weitere Informationen besuchen Sie: "
+                                 "https://github.com/slinusc/visualization_project/blob/main/README.md")
+            st.plotly_chart(fig, config=config)
 
-    # Topic analysis
+    # TOPIC ANALYSIS
     with full_width_col2[0]:
         st.subheader('Themen Analyse')
-        st.button('ℹ️', help='Die Themen Analyse zeigt die am häufigsten vorkommenden Wörter '
-                             'in den Artikeln an.')
+        st.button('ℹ️', help="Die Themen Analyse zeigt die am häufigsten vorkommenden Wörter "
+                             "in den Artikeln an.\n\n"
+                             " Für weitere Informationen besuchen Sie: "
+                             "https://github.com/slinusc/visualization_project/blob/main/README.md")
         topic_analysis = TopicAnalysis()
-        st.plotly_chart(topic_analysis.plot_most_common_words(filtered_df['Entitäten Header'], 20),config=config)
+        st.plotly_chart(topic_analysis.plot_most_common_words(filtered_df['Entitäten Header'], 20), config=config)
 
-    # Create dataframe
+    # DATAFRAME
     with full_width_col3[0]:
         filtered_df['Datum'] = filtered_df['Datum'].dt.strftime('%d.%m.%Y')
         st.subheader('Artikeltabelle')

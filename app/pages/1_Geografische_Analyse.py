@@ -159,8 +159,6 @@ with col4[1]:
     st.button('ℹ️', help=objectivity_subjectivity_description)
     st.plotly_chart(subjectivity_plot.fig,config=config)
 
-
-
 # WORLDMAP
 data_country_series = filtered_df['Länder (englisch)']
 data_country_list = [eval(i) for i in data_country_series.dropna().tolist()]
