@@ -17,7 +17,7 @@ class ChordCharts:
         # Count the frequency of each country
         freq_df = pd.concat([edges_df['source'], edges_df['target']]).value_counts().reset_index()
         # Keep the top 20 countries
-        top_20_countries = freq_df.nlargest(15, 'count')['index'].tolist()
+        top_20_countries = freq_df.nlargest(15, 0)['index'].tolist()
         # Filter edges_df to keep only pairs where both countries are in the top 20
         edges_df = edges_df[edges_df['source'].isin(top_20_countries) & edges_df['target'].isin(top_20_countries)]
         return edges_df
