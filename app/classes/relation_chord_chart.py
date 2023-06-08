@@ -20,7 +20,7 @@ class ChordCharts:
         top_20_countries = freq_df.nlargest(15, 'count')['index'].tolist()
         # Filter edges_df to keep only pairs where both countries are in the top 20
         edges_df = edges_df[edges_df['source'].isin(top_20_countries) & edges_df['target'].isin(top_20_countries)]
-        return freq_df
+        return edges_df
 
     def country_chord_chart(self):
         hv.extension('bokeh')
