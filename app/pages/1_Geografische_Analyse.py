@@ -95,8 +95,7 @@ with col3:
 
 
     if 'Alle' not in selected_countries:
-        filtered_df = filtered_df[filtered_df['Länder'].apply(lambda x:
-                                                              all(country in x for country in selected_countries))]
+        filtered_df = filtered_df[filtered_df['Länder'].apply(lambda x: contains_country(x, selected_countries))]
     else:
         pass
 
@@ -117,7 +116,7 @@ with left_col:
 # CHORD RELATION DIAGRAM
 chord_chart = rcc.ChordCharts(filtered_df['Länder']).country_chord_chart()
 with col4[0]:
-    st.subheader("Länder Vorkomnisse in Artikel")
+    st.subheader("Beziehung zwischen Ländern")
     st.bokeh_chart(hv.render(chord_chart, backend='bokeh'))
 
 # SENTIMENT PLOT
@@ -127,7 +126,7 @@ with col4[1]:
     st.set_option('deprecation.showPyplotGlobalUse', False)
     sentiment_plot = sp.SentimentObjectivityPlots(filtered_df['sentiment'], filtered_df['subjectivity'])
     sentiment_plot.plot()
-    st.subheader("Stimmung")
+    st.subheader("Stimmung & Subjektivität")
     st.button('ℹ️', help="")
     st.pyplot(sentiment_plot.plot(), config=config)
 
