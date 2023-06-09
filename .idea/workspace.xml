@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63a4bf34-8a3f-4ab3-b606-8ba35703923f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/classes/sentiment_plot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Medien_Analyse.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/Medien_Analyse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/classes/relation_chord_chart.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/classes/relation_chord_chart.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/classes/geo_map.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/classes/geo_map.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/classes/topic_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/classes/topic_analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/pages/1_Geografische_Analyse.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/1_Geografische_Analyse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/2_Personen_Analyse.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/2_Personen_Analyse.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code_data_processing/data_processing_pipeline.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/code_data_processing/data_processing_pipeline.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -138,6 +138,7 @@
       <workItem from="1686213404815" duration="3063000" />
       <workItem from="1686225208496" duration="61000" />
       <workItem from="1686239939677" duration="4030000" />
+      <workItem from="1686316238991" duration="1803000" />
     </task>
     <servers />
   </component>

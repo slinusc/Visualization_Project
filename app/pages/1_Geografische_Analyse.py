@@ -22,7 +22,6 @@ def load_data():
     df['date'] = pd.to_datetime(df['date'])
     return df
 
-
 df = load_data()
 df.columns = ['Medium', 'Headline', 'Datum', 'Länder', 'sentiment', 'subjectivity',
                            'Entitäten Header', 'Kategorie', 'Länder (englisch)', 'Personen']
@@ -39,7 +38,7 @@ st.button('ℹ️', help="Mit den Filteroptionen können Sie die angezeigten Dat
                      "sein sollen. ")
 
 col1, col2, col3 = st.columns([1, 1, 1])  # Widgets
-full_width_col1 = st.columns(1)  # Geo map
+left_col, right_col = st.columns([2, 1])  # Geo map
 col4 = st.columns([2, 1])  # Chord chart & Sentiment / Objectivity
 full_width_col2 = st.columns(1)  # Topic Analysis
 full_width_col3 = st.columns(1)  # Dataframe
@@ -49,6 +48,7 @@ st.markdown("""
                                     <style>
                                     #MainMenu {visibility: hidden;}
                                     footer {visibility: hidden;}
+                                    .st-dd {color: white; background-color: #1f77b4;}
                                     </style>
                                     """, unsafe_allow_html=True)
 
@@ -107,16 +107,18 @@ data_country_list = [eval(i) for i in data_country_series.dropna().tolist()]
 
 world_map = gm.WorldMap(data_country_list)
 world_map_chart = world_map.erstelle_weltkarte()
-with full_width_col1[0]:
-    st.header("Ländernennung")
+with left_col:
+    st.subheader("Ländernennung")
+    st.button('ℹ️', help="Die Weltkarte stellt diejenigen Länder dar, die in Artikeln genannt wurden. Bei Filterung "
+                         "nach einem spezifischen Land, werden ausserdem diejenigen Länder angezeigt, die zusammen mit"
+                         "dem gesuchten Land genannt wurden. \n")
     st.plotly_chart(world_map_chart, config={'scrollZoom': False, 'displayModeBar': False}, use_container_width=True)
 
 # CHORD RELATION DIAGRAM
 chord_chart = rcc.ChordCharts(filtered_df['Länder']).country_chord_chart()
 with col4[0]:
-    st.header("Länder Vorkomnisse in Artikel")
+    st.subheader("Länder Vorkomnisse in Artikel")
     st.bokeh_chart(hv.render(chord_chart, backend='bokeh'))
-
 
 # SENTIMENT PLOT
 #sentiment_plot = sso.SentimentPlot(filtered_df['sentiment'])
@@ -125,7 +127,7 @@ with col4[1]:
     st.set_option('deprecation.showPyplotGlobalUse', False)
     sentiment_plot = sp.SentimentObjectivityPlots(filtered_df['sentiment'], filtered_df['subjectivity'])
     sentiment_plot.plot()
-    st.header("Stimmung")
+    st.subheader("Stimmung")
     st.button('ℹ️', help="")
     st.pyplot(sentiment_plot.plot(), config=config)
 

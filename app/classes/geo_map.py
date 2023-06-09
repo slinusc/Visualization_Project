@@ -21,12 +21,12 @@ class WorldMap:
             locations=df['Country'],
             z=df['Count'],
             locationmode='country names',
-            colorscale='Greens',
-            colorbar_title="Anzahl",
+            colorscale='Blues',
+            showscale=False
         ))
 
         # Kartenlayout
-        fig.update_geos(showcountries=True, countrycolor="darkgrey", showocean=True, oceancolor="lightblue",
+        fig.update_geos(showcountries=True, countrycolor="darkgrey", showocean=True, oceancolor="white",
                         showland=True, landcolor="white", showframe=False)
 
         fig.update_layout(
@@ -34,8 +34,8 @@ class WorldMap:
                 scope='world',
                 projection_type='natural earth'
             ),
-            width=1600,
-            height=600
+            width=1000,
+            height=600,
         )
 
         # Karte anzeigen
