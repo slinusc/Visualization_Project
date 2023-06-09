@@ -5,7 +5,8 @@ from classes.linechart_categories import LinechartCategories
 from classes.multiple_line_chart_medium import NewspaperCategoryPlot
 from classes.topic_analysis import TopicAnalysis
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", menu_items={}, )
+
 
 
 def main():
