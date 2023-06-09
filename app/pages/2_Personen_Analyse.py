@@ -37,6 +37,7 @@ st.markdown("""
                                 <style>
                                 #MainMenu {visibility: hidden;}
                                 footer {visibility: hidden;}
+                                .st-dd {color: white; background-color: #1f77b4;}
                                 </style>
                                 """, unsafe_allow_html=True)
 

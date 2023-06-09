@@ -24,7 +24,8 @@ class TopicAnalysis:
         words = [word.capitalize() for word in words]
         fig = go.Figure(data=[go.Bar(
             x=words,
-            y=counts
+            y=counts,
+            marker=dict(color='#1f77b4')
         )])
         fig.update_layout(xaxis_title='Worte', yaxis_title='Anzahl', width=1100, height=500)
         return fig
