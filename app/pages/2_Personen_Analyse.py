@@ -6,6 +6,7 @@ sys.path.insert(0, r'C:\Users\aober\Documents\Data Science Studium\2 Semster\VDS
 import relation_chord_chart as rcc
 import sent_sub_obj as sso
 from topic_analysis import TopicAnalysis
+from top_pers_coun import StackedBarPlot
 
 @st.cache_data
 def load_data():
@@ -25,9 +26,9 @@ df.columns = ['Medium', 'Headline', 'Datum', 'Länder', 'sentiment', 'subjectivi
 # layout streamlit app
 col1, col2 = st.columns([1, 1])  # Widgets
 full_width_col1 = st.columns(1)
-full_width_col2 = st.columns(1)  # Topic Analysis
+full_width_col2 = st.columns(1)
+full_width_col3 = st.columns(1)  # Topic Analysis
 col4 = st.columns([1, 1])  # Chord chart & Sentiment / Objectivity
-full_width_col3 = st.columns(1)  # Data Table
 
 # CONFIG FOR ALL PLOTS
 config = dict({'displayModeBar': False})
@@ -58,6 +59,15 @@ with col2:
         filtered_df = filtered_df[filtered_df['Kategorie'].isin(selected_categories)]
     else:
         pass
+
+
+# TOP 10 Personen
+bar_chart = StackedBarPlot(filtered_df, filter='Personen')
+fig = bar_chart.plot()
+with full_width_col1[0]:
+    st.subheader("Die häufigst genannten Personen")
+    st.plotly_chart(fig)
+
 
 # CHORD DIAGRAM
 chord_chart_people = rcc.ChordCharts(filtered_df['Personen']).country_chord_chart()

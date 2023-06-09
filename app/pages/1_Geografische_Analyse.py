@@ -4,12 +4,12 @@ import holoviews as hv
 import sys
 import csv
 
-sys.path.insert(0, 'C:/Users/linus/OneDrive/BSc_Data_Science/Semester_2/Data_Visualisation/visualization_project/app'
-                   '/classes')
+sys.path.insert(0, r'C:\Users\aober\Documents\Data Science Studium\2 Semster\VDSS\semesterProjekt\visualization_project\app\classes')
 import relation_chord_chart as rcc
 import geo_map as gm
 from topic_analysis import TopicAnalysis
 import sentiment_plot as sp
+from top_pers_coun import StackedBarPlot
 
 
 @st.cache_data
@@ -112,6 +112,14 @@ with left_col:
                          "nach einem spezifischen Land, werden ausserdem diejenigen Länder angezeigt, die zusammen mit"
                          "dem gesuchten Land genannt wurden. \n")
     st.plotly_chart(world_map_chart, config={'scrollZoom': False, 'displayModeBar': False}, use_container_width=True)
+
+# TOP 10LÄNDER
+bar_chart = StackedBarPlot(filtered_df, filter='country')
+fig = bar_chart.plot()
+with right_col:
+    st.subheader("Die häufigst genannten Länder")
+    st.plotly_chart(fig)
+
 
 # CHORD RELATION DIAGRAM
 chord_chart = rcc.ChordCharts(filtered_df['Länder']).country_chord_chart()
