@@ -32,9 +32,10 @@ class ChordCharts:
                 edge_color=dim('source').str(),
                 labels='index',
                 node_color=dim('index').str(),
-                width=650,
-                height=650,
-                tools=['tap']
+                width=600,
+                height=600,
+                tools=['tap'],
+                toolbar=None
             )
         )
 

@@ -4,7 +4,8 @@ import holoviews as hv
 import sys
 import csv
 
-sys.path.insert(0, r'C:\Users\aober\Documents\Data Science Studium\2 Semster\VDSS\semesterProjekt\visualization_project\app\classes')
+sys.path.insert(0, 'C:/Users/linus/OneDrive/BSc_Data_Science/Semester_2/Data_Visualisation/'
+                   'visualization_project/app/classes')
 import relation_chord_chart as rcc
 import geo_map as gm
 from topic_analysis import TopicAnalysis
@@ -34,8 +35,8 @@ st.button('ℹ️', help="Mit den Filteroptionen können Sie die angezeigten Dat
                      "möglich, Daten für jeden beliebigen Tag im Jahr 2022 zu analysieren. \n\n"
                      "2. Kategorie: Hier können Sie auswählen, welche Artikelkategorien in den Daten enthalten "
                      "sein sollen. \n"
-                     "3. Länder: Mit dieser Option können Sie auswählen, welche Länder in den Daten enthalten "
-                     "sein sollen. ")
+                     "3. Länder: Mit dieser Option können Sie auswählen, nach welchen Ländern die Daten "
+                     "gefiltert gefiltert werden sollen.\n")
 
 col1, col2, col3 = st.columns([1, 1, 1])  # Widgets
 left_col, right_col = st.columns([2, 1])  # Geo map
@@ -75,30 +76,16 @@ with col2:
 
 # COUNTRY SELECTION (FILTER)
 with col3:
-    country_en_de_dict = {}
-    with open('../data/countries_en_de.csv', 'r', encoding='UTF-8') as file:
-        csv_reader = csv.reader(file)
-        next(csv_reader)
-        for row in csv_reader:
-            country_en_de_dict[row[1]] = row[0]
-    countries = list(country_en_de_dict.keys())
-    country_options = ['Alle'] + countries
+    options = ['Alle'] + filtered_df['Länder'].explode().astype(str).unique().tolist()
+    options = [i for i in options if i != 'nan']
+    options = sorted(options)
     # create multiselect widget
-    selected_countries = st.multiselect('Wähle Land', country_options, default=['Alle'])
+    selected = st.multiselect('Wähle Land', options , default=['Alle'])
 
-
-    def contains_country(country_list, countries):
-        for country in countries:
-            if country in country_list:
-                return True
-        return False
-
-
-    if 'Alle' not in selected_countries:
-        filtered_df = filtered_df[filtered_df['Länder'].apply(lambda x: contains_country(x, selected_countries))]
+    if 'Alle' not in selected:
+        filtered_df = filtered_df[filtered_df['Länder'].apply(lambda x: any(i in x for i in selected))]
     else:
         pass
-
 
 # WORLDMAP
 data_country_series = filtered_df['Länder (englisch)']
@@ -128,15 +115,13 @@ with col4[0]:
     st.bokeh_chart(hv.render(chord_chart, backend='bokeh'))
 
 # SENTIMENT PLOT
-#sentiment_plot = sso.SentimentPlot(filtered_df['sentiment'])
-
 with col4[1]:
     st.set_option('deprecation.showPyplotGlobalUse', False)
     sentiment_plot = sp.SentimentObjectivityPlots(filtered_df['sentiment'], filtered_df['subjectivity'])
     sentiment_plot.plot()
     st.subheader("Stimmung & Subjektivität")
     st.button('ℹ️', help="")
-    st.pyplot(sentiment_plot.plot(), config=config)
+    st.bokeh_chart(sentiment_plot.plot())
 
 # TOPIC ANALYSIS
 with full_width_col2[0]:

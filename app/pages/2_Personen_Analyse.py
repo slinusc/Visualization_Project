@@ -2,11 +2,13 @@ import streamlit as st
 import pandas as pd
 import holoviews as hv
 import sys
+import csv
 sys.path.insert(0, r'C:\Users\aober\Documents\Data Science Studium\2 Semster\VDSS\semesterProjekt\visualization_project\app\classes')
 import relation_chord_chart as rcc
 import sent_sub_obj as sso
 from topic_analysis import TopicAnalysis
 from top_pers_coun import StackedBarPlot
+import sentiment_plot as sp
 
 @st.cache_data
 def load_data():
@@ -24,9 +26,10 @@ df.columns = ['Medium', 'Headline', 'Datum', 'Länder', 'sentiment', 'subjectivi
                            'Entitäten Header', 'Kategorie', 'Länder (englisch)', 'Personen']
 
 # layout streamlit app
-col1, col2 = st.columns([1, 1])  # Widgets
+st.header('Personen Analyse')
+col1, col2, col3 = st.columns([1, 1, 1])  # Widgets
 full_width_col1 = st.columns(1)
-col4 = st.columns([1, 1])  # Chord chart & Sentiment / Objectivity
+col4 = st.columns([2, 1])  # Chord chart & Sentiment / Objectivity
 full_width_col2 = st.columns(1)
 full_width_col3 = st.columns(1)  # Topic Analysis
 
@@ -60,6 +63,20 @@ with col2:
     else:
         pass
 
+# COUNTRY SELECTION (FILTER)
+with col3:
+    options = ['Alle'] + filtered_df['Personen'].explode().astype(str).unique().tolist()
+    options = [i for i in options if i != 'nan']
+    options = sorted(options)
+    # create multiselect widget
+    selected = st.multiselect('Wähle Persönlichkeit', options, default=['Alle'])
+
+    if 'Alle' not in selected:
+        filtered_df = filtered_df[filtered_df['Personen'].apply(lambda x: any(i in x for i in selected))]
+    else:
+        pass
+
+
 
 # TOP 10 Personen
 bar_chart = StackedBarPlot(filtered_df, filter='Personen')
@@ -69,26 +86,21 @@ with full_width_col1[0]:
     st.plotly_chart(fig, config=config)
 
 
-# CHORD DIAGRAM
-chord_chart_people = rcc.ChordCharts(filtered_df['Personen']).country_chord_chart()
+# CHORD RELATION DIAGRAM
+chord_chart = rcc.ChordCharts(filtered_df['Länder']).country_chord_chart()
 with col4[0]:
-    st.bokeh_chart(hv.render(chord_chart_people, backend='bokeh', config=dict({'toolbar.logo': None})))
-
+    st.subheader("Beziehung zwischen Ländern")
+    st.button('ℹ️', help="")
+    st.bokeh_chart(hv.render(chord_chart, backend='bokeh'))
 
 # SENTIMENT PLOT
-sentiment_plot = sso.SentimentPlot(filtered_df['sentiment'])
-sentiment_plot.create_plot()
 with col4[1]:
-    st.subheader('Stimmung')
-    st.plotly_chart(sentiment_plot.fig, config=config)
-
-# SUBJECTIVITY PLOT
-subjectivity_plot = sso.SubjectivityPlot(filtered_df['subjectivity'])
-subjectivity_plot.create_plot()
-with col4[1]:
-    st.header("Subjektivität")
-    st.button('ℹ️', help='Das subjektivitäts Balkendiagramm visualisiert wie objektiv die Artikel geschrieben sind, oder beziehungsweise subjektiv.')
-    st.plotly_chart(subjectivity_plot.fig, config=config)
+    st.set_option('deprecation.showPyplotGlobalUse', False)
+    sentiment_plot = sp.SentimentObjectivityPlots(filtered_df['sentiment'], filtered_df['subjectivity'])
+    sentiment_plot.plot()
+    st.subheader("Stimmung & Subjektivität")
+    st.button('ℹ️', help="Die Stimmung und Subjektivität der Artikel wird in diesem Plot dargestellt.")
+    st.bokeh_chart(sentiment_plot.plot())
 
 # TOPIC ANALYSIS
 with full_width_col2[0]:

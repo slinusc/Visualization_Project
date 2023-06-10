@@ -1,29 +1,39 @@
-import matplotlib.pyplot as plt
-import numpy as np
+from bokeh.io import show
+from bokeh.plotting import figure
+from bokeh.layouts import gridplot
+from bokeh.models import ColumnDataSource, LabelSet
+from bokeh.palettes import Category20c, Category10, Viridis3
+from bokeh.transform import cumsum
+from math import pi
+import pandas as pd
+
 
 class SentimentObjectivityPlots:
     def __init__(self, sentiment_list, subjectivity_list):
         self.sentiment_list = sentiment_list
         self.subjectivity_list = subjectivity_list
-
-        self.sentiment_labels = ['< -0.5', '< 0', '< 0.5', '>= 0.5']
-        self.subjectivity_labels = ['< 0.2', '>= 0.2']
+        self.sentiment_labels = ['negativ', 'neutral', 'positiv', 'sehr positiv']
+        self.subjectivity_labels = ['objektiv','eher objektiv', 'eher subjektiv', 'subjektiv']
 
     def count_subjectivity(self):
-        counts = [0, 0]
+        counts = [0, 0 ,0, 0]
         for subjectivity in self.subjectivity_list:
-            if subjectivity < 0.2:
+            if subjectivity < 0.1:
                 counts[0] += 1
-            else:
+            elif subjectivity < 0.2:
                 counts[1] += 1
+            elif subjectivity < 0.4:
+                counts[2] += 1
+            else:
+                counts[3] += 1
         return counts
 
     def count_sentiment(self):
         counts = [0, 0, 0, 0]
         for sentiment in self.sentiment_list:
-            if sentiment < -0.5:
+            if sentiment < 0.0:
                 counts[0] += 1
-            elif sentiment < 0:
+            elif sentiment < 0.25:
                 counts[1] += 1
             elif sentiment < 0.5:
                 counts[2] += 1
@@ -35,30 +45,61 @@ class SentimentObjectivityPlots:
         sentiment_counts = self.count_sentiment()
         subjectivity_counts = self.count_subjectivity()
 
-        cmap = plt.cm.get_cmap('Blues')
-        colors = cmap(np.linspace(0.3, 1, 4))
+        # Process the sentiment data
+        sentiment_data = {
+            'label': self.sentiment_labels,
+            'counts': sentiment_counts,
+            'angle': [count/sum(sentiment_counts)*2*pi for count in sentiment_counts],
+            'color': Category20c[len(sentiment_counts)],
+            'percent': [str(round(count/sum(sentiment_counts)*100, 2)) + "%" for count in sentiment_counts],
+        }
 
-        fig, axs = plt.subplots(2, 1, figsize=(10, 15))
+        # Process the subjectivity data
+        subjectivity_data = {
+            'label': self.subjectivity_labels,
+            'counts': subjectivity_counts,
+            'angle': [count / sum(subjectivity_counts) * 2 * pi for count in subjectivity_counts],
+            'color': Category20c[len(subjectivity_counts)],
+            'percent': [str(round(count / sum(subjectivity_counts) * 100, 2)) + "%" for count in subjectivity_counts]
+        }
 
-        axs[0].pie(sentiment_counts, labels=self.sentiment_labels, colors=colors, autopct='%1.1f%%', startangle=90, pctdistance=0.85)
-        axs[0].set_title('Sentiment')
-        centre_circle = plt.Circle((0,0),0.70,fc='white')
-        axs[0].add_artist(centre_circle)
+        plots = []
+        for data, title in zip([sentiment_data, subjectivity_data], ['Sentiment', 'Subjectivity']):
+            source = ColumnDataSource(data=data)
 
-        axs[1].pie(subjectivity_counts, labels=self.subjectivity_labels, colors=colors, autopct='%1.1f%%', startangle=90, pctdistance=0.85)
-        axs[1].set_title('Subjectivity')
-        centre_circle = plt.Circle((0,0),0.70,fc='white')
-        axs[1].add_artist(centre_circle)
+            p = figure(tools="hover", tooltips="@percent: @label", x_range=(-.5, .5))
 
-        axs[0].axis('equal')
-        axs[1].axis('equal')
+            p.annular_wedge(x=0, y=1, inner_radius=0.2, outer_radius=0.4,
+                            start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
+                            line_color="white", fill_color='color', source=source
+                            )
 
-        plt.tight_layout()
-        plt.show()
+            p.axis.axis_label=None
+            p.axis.visible=False
+            p.grid.grid_line_color = None
+            p.border_fill_color = None
+            p.outline_line_color = None
+
+            plots.append(p)
+
+        grid = gridplot(plots, ncols=1, plot_width=250, plot_height=250, toolbar_location=None)
+
+        # Show the plot
+        return grid
+
 
 if '__main__' == __name__:
+    def load_data():
+        path = '../processed_data/without_content.tsv.xz'
+        df = pd.read_csv(path, sep='\t', compression='xz')
+        df['countries'] = df['countries'].apply(eval)
+        df['entities_header'] = df['entities_header'].apply(eval)
+        df['people'] = df['people'].apply(eval)
+        df['date'] = pd.to_datetime(df['date'])
+        return df
 
-    sentiments = [0.1, -0.3, 0.5, 0.8, -0.6]
-    subjectivities = [0.1, 0.3, 0.5, 0.8, 0.6]
+    df = load_data()
+    sentiments = df['sentiment']
+    subjectivities = df['subjectivity']
     plotter = SentimentObjectivityPlots(sentiments, subjectivities)
     plotter.plot()

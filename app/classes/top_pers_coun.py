@@ -43,7 +43,7 @@ class StackedBarPlot:
             fig = px.bar(self.df, x=column_name, y='counts', color='Kategorie',
                          labels={column_name: 'Personen', 'Kategorie': 'Kategorie', 'counts': 'Anzahl'},
                          height=600,
-                         width=1400,
+                         width=1100,
                          category_orders={column_name: sorted_categories})
         return fig
 
