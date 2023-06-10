@@ -118,7 +118,7 @@ bar_chart = StackedBarPlot(filtered_df, filter='country')
 fig = bar_chart.plot()
 with right_col:
     st.subheader("Die häufigst genannten Länder")
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, config=config)
 
 
 # CHORD RELATION DIAGRAM

@@ -26,9 +26,9 @@ df.columns = ['Medium', 'Headline', 'Datum', 'Länder', 'sentiment', 'subjectivi
 # layout streamlit app
 col1, col2 = st.columns([1, 1])  # Widgets
 full_width_col1 = st.columns(1)
+col4 = st.columns([1, 1])  # Chord chart & Sentiment / Objectivity
 full_width_col2 = st.columns(1)
 full_width_col3 = st.columns(1)  # Topic Analysis
-col4 = st.columns([1, 1])  # Chord chart & Sentiment / Objectivity
 
 # CONFIG FOR ALL PLOTS
 config = dict({'displayModeBar': False})
@@ -65,8 +65,8 @@ with col2:
 bar_chart = StackedBarPlot(filtered_df, filter='Personen')
 fig = bar_chart.plot()
 with full_width_col1[0]:
-    st.subheader("Die häufigst genannten Personen")
-    st.plotly_chart(fig)
+    st.subheader("Die häufigst vorkommenden Personen")
+    st.plotly_chart(fig, config=config)
 
 
 # CHORD DIAGRAM

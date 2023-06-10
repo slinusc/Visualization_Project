@@ -11,18 +11,16 @@ class StackedBarPlot:
     def preprocess(self):
         column_name = 'Länder' if self.filter == 'country' else 'Personen'
         self.df = self.df.explode(column_name)
-        top_10 = self.df[column_name].value_counts().index[:10]
+        if column_name == 'Länder':
+            top_10 = self.df[column_name].value_counts().index[:10]
+        else:
+            top_10 = self.df[column_name].value_counts().index[:20]
+
         self.df = self.df[self.df[column_name].isin(top_10)]
         self.df = self.df.groupby([self.df[column_name], 'Kategorie']).size().reset_index(name='counts')
-
-        # Calculate total counts for each category
         total_counts = self.df.groupby(column_name)['counts'].sum().reset_index(name='total_counts')
-
-        # Merge total_counts with self.df
         self.df = pd.merge(self.df, total_counts, on=column_name)
-
-        # Sort by total_counts in descending order
-        self.df.sort_values('total_counts', ascending=False, inplace=True)
+        self.df.sort_values(['total_counts', 'Kategorie'], ascending=[False, True], inplace=True)
 
     def plot(self):
         self.preprocess()
@@ -30,14 +28,22 @@ class StackedBarPlot:
         sorted_categories = self.df[column_name].unique().tolist()
         if self.filter == 'country':
             fig = px.bar(self.df, y=column_name, x='counts', color='Kategorie',
-                         labels={column_name: 'Country', 'Kategorie': 'Category', 'counts': 'Counts'},
+                         labels={column_name: 'Länder', 'Kategorie': 'Kategorie', 'counts': 'Anzahl'},
                          height=600,
                          width=400,
                          category_orders={column_name: sorted_categories})
+            fig.update_layout(legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                x=0,
+                borderwidth=10,
+                xanchor="left"))
         else:
             fig = px.bar(self.df, x=column_name, y='counts', color='Kategorie',
-                         labels={column_name: 'Person', 'Kategorie': 'Category', 'counts': 'Counts'},
+                         labels={column_name: 'Personen', 'Kategorie': 'Kategorie', 'counts': 'Anzahl'},
                          height=600,
+                         width=1400,
                          category_orders={column_name: sorted_categories})
         return fig
 
