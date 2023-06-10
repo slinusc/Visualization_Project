@@ -108,9 +108,9 @@ world_map = gm.WorldMap(data_country_list)
 world_map_chart = world_map.erstelle_weltkarte()
 with left_col:
     st.subheader("Ländernennung")
-    st.button('ℹ️', help="Die Weltkarte stellt diejenigen Länder dar, die in Artikeln genannt wurden. Bei Filterung "
-                         "nach einem spezifischen Land, werden ausserdem diejenigen Länder angezeigt, die zusammen mit"
-                         "dem gesuchten Land genannt wurden. \n")
+#    st.button('ℹ️', help="Die Weltkarte stellt diejenigen Länder dar, die in Artikeln genannt wurden. Bei Filterung "
+#                         "nach einem spezifischen Land, werden ausserdem diejenigen Länder angezeigt, die zusammen mit"
+#                         "dem gesuchten Land genannt wurden. \n")
     st.plotly_chart(world_map_chart, config={'scrollZoom': False, 'displayModeBar': False}, use_container_width=True)
 
 # TOP 10LÄNDER
