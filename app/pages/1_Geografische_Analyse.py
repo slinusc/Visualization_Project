@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import holoviews as hv
 import sys
-import csv
 
 sys.path.insert(0, 'C:/Users/linus/OneDrive/BSc_Data_Science/Semester_2/Data_Visualisation/'
                    'visualization_project/app/classes')
@@ -119,7 +118,10 @@ with right_col:
 chord_chart = rcc.ChordCharts(filtered_df['Länder']).country_chord_chart()
 with col4[0]:
     st.subheader("Beziehung zwischen Ländern")
-    st.button('ℹ️', help="")
+    st.button('ℹ️', help="Es werden die Beziehungen zwischen Ländern visualisiert. Eine Beziehung stell eine "
+                         "gemeinsame Nennung im Artikel dar.\n\n"
+                         " Für weitere Informationen besuchen Sie: "
+                         "https://github.com/slinusc/visualization_project/blob/main/README.md")
     st.bokeh_chart(hv.render(chord_chart, backend='bokeh'))
 
 # SENTIMENT PLOT
@@ -139,15 +141,6 @@ with col4[1]:
     st.markdown("  \n")  # Leerzeile für den Abstand
     st.markdown("  \n")  # Leerzeile für den Abstand
     st.plotly_chart(sentiment_plot.plot())
-
-# TOPIC ANALYSIS
-"""
-with full_width_col2[0]:
-    st.subheader('Themen Analyse')
-    st.button('ℹ️', help='Die Themen Analyse zeigt die am häufigsten vorkommenden Wörter '
-                         'in den Artikeln an.')
-    topic_analysis = TopicAnalysis()
-    st.plotly_chart(topic_analysis.plot_most_common_words(filtered_df['Entitäten Header'], 20),config=config)"""
 
 # DATA TABLE
 with full_width_col3[0]:
