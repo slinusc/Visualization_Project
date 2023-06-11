@@ -1,13 +1,22 @@
 import plotly.express as px
 import pandas as pd
 
+
 class StackedBarPlot:
+    """
+    Die StackedBarPlot-Klasse erstellt ein gestapeltes Balkendiagramm aus einem gegebenen DataFrame.
+    Die Klasse unterstützt Filteroptionen für die Visualisierung nach Ländern oder Personen.
+    """
 
     def __init__(self, df, filter):
         self.df = df
         self.filter = filter
 
     def preprocess(self):
+        """
+        Bereitet die Daten für das Diagramm vor. Es werden die Top-10-Länder oder Top-20-Personen ermittelt
+        und die Daten entsprechend gefiltert und sortiert.
+        """
         column_name = 'Länder' if self.filter == 'country' else 'Personen'
         self.df = self.df.explode(column_name)
         if column_name == 'Länder':
@@ -22,6 +31,13 @@ class StackedBarPlot:
         self.df.sort_values(['total_counts', 'Kategorie'], ascending=[False, True], inplace=True)
 
     def plot(self):
+        """
+        Erzeugt ein gestapeltes Balkendiagramm basierend auf den verarbeiteten Daten.
+        In Abhängigkeit vom Filterkriterium werden entweder gestapelte Balkendiagramme für die Top-10-Länder oder
+        Top-20-Personen erzeugt. Die Methode ruft zunächst die `preprocess`-Methode auf, um die Daten vorzubereiten.
+        Anschliessend wird ein Plotly-Express-Balkendiagramm erzeugt, das die Anzahl der Kategorien nach Ländern
+        oder Personen darstellt.
+        """
         self.preprocess()
         column_name = 'Länder' if self.filter == 'country' else 'Personen'
         sorted_categories = self.df[column_name].unique().tolist()

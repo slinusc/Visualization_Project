@@ -3,8 +3,7 @@ import pandas as pd
 import holoviews as hv
 import sys
 
-sys.path.insert(0, 'C:/Users/linus/OneDrive/BSc_Data_Science/Semester_2/Data_Visualisation/'
-                   'visualization_project/app/classes')
+sys.path.insert(0, 'C:/Users/andre/Git_ripository/visualization_project/app/classes')
 import relation_chord_chart as rcc
 import geo_map as gm
 import sentiment_plot as sp
@@ -21,9 +20,10 @@ def load_data():
     df['date'] = pd.to_datetime(df['date'])
     return df
 
+
 df = load_data()
 df.columns = ['Medium', 'Headline', 'Datum', 'Länder', 'sentiment', 'subjectivity',
-                           'Entitäten Header', 'Kategorie', 'Länder (englisch)', 'Personen']
+              'Entitäten Header', 'Kategorie', 'Länder (englisch)', 'Personen']
 
 # LAYOUT STREAMLIT APP
 st.header('Geografische Analyse')
@@ -43,10 +43,9 @@ st.button('ℹ️', help="Mit den Filteroptionen können Sie die angezeigten Dat
 col1, col2, col3 = st.columns([1, 1, 1])  # Widgets
 left_col, right_col = st.columns([2, 1])  # Geo map
 col4 = st.columns([2, 1])  # Chord chart & Sentiment / Objectivity
-full_width_col2 = st.columns(1)  # Topic Analysis
 full_width_col3 = st.columns(1)  # Dataframe
 
-# HIDE STREAMLIT MENU
+# STREAMLIT-MENÜ AUSBLENDEN & FARBE ANPASSEN (BLAU)
 st.markdown("""
                                     <style>
                                     #MainMenu {visibility: hidden;}
@@ -55,10 +54,10 @@ st.markdown("""
                                     </style>
                                     """, unsafe_allow_html=True)
 
-# CONFIG FOR ALL PLOTS
+# KONFIGURATION FÜR ALLE PLOTS
 config = dict({'displayModeBar': False})
 
-# DATE SELECTION (FILTER)
+# DATUMSAUSWAHL (FILTER)
 selected_date = col1.date_input("Wähle Datum",
                                 value=pd.to_datetime('2022-02-24'),
                                 min_value=pd.to_datetime('2022-01-01'),
@@ -66,7 +65,7 @@ selected_date = col1.date_input("Wähle Datum",
 selected_date = pd.to_datetime(selected_date)
 filtered_df = df[df['Datum'] == selected_date]
 
-# CATEGORY SELECTION (FILTER)
+# KATEGORIEAUSWAHL (FILTER)
 with col2:
     categories = df['Kategorie'].unique()
     categories_options = ['Alle'] + list(categories)
@@ -76,14 +75,14 @@ with col2:
     else:
         pass
 
-# COUNTRY SELECTION (FILTER)
+# LÄNDERAUSWAHL (FILTER)
 with col3:
     options = filtered_df['Länder'].explode().astype(str).unique().tolist()
     options = [i for i in options if i != 'nan']
     options = sorted(options)
     options = ['Alle'] + options
     # create multiselect widget
-    selected = st.multiselect('Wähle Land', options , default=['Alle'])
+    selected = st.multiselect('Wähle Land', options, default=['Alle'])
 
     if 'Alle' not in selected:
         filtered_df = filtered_df[filtered_df['Länder'].apply(lambda x: any(i in x for i in selected))]
@@ -99,27 +98,24 @@ with left_col:
     st.subheader("Ländernennung")
     st.plotly_chart(world_map_chart, config={'scrollZoom': False, 'displayModeBar': False}, use_container_width=True)
 
-# TOP 10LÄNDER
+# TOP 10 LÄNDER
 with right_col:
     bar_chart = StackedBarPlot(filtered_df, filter='country')
     fig = bar_chart.plot()
-    st.button('ℹ️', help="Das Balkendiagramm zeigt die absolute Häufigketi der genannten Länder,"
-                         " horizontal gestapelt erkennt man die Kategorien der Artikel, in welchem sie gennant wurden. \n\n"
-                         "Die Weltkarte stellt diejenigen Länder dar, die in Artikeln genannt wurden. Bei Filterung "
-                        "nach einem spezifischen Land, werden ausserdem diejenigen Länder angezeigt, die zusammen mit"
-                       "dem gesuchten Land genannt wurden. \n\n"
-                         " Für weitere Informationen besuchen Sie: "
-                         "https://github.com/slinusc/visualization_project/blob/main/README.md")
+    st.button('ℹ️', help="Das Balkendiagramm zeigt die absolute Häufigkeit der genannten Länder,"
+                         "horizontal gestapelt erkennt man die Kategorien der Artikel, in welchem sie gennant wurden. "
+                         "\n\n Die Weltkarte stellt diejenigen Länder dar, die in Artikeln genannt wurden. Bei "
+                         "Filterung nach einem spezifischen Land, werden ausserdem diejenigen Länder angezeigt, "
+                         "die zusammen mit dem gesuchten Land genannt wurden. \n\n Für weitere Informationen besuchen "
+                         "Sie: https://github.com/slinusc/visualization_project/blob/main/README.md")
     st.plotly_chart(fig, config=config)
-
 
 # CHORD RELATION DIAGRAM
 chord_chart = rcc.ChordCharts(filtered_df['Länder']).country_chord_chart()
 with col4[0]:
     st.subheader("Beziehung zwischen Ländern")
     st.button('ℹ️', help="Es werden die Beziehungen zwischen Ländern visualisiert. Eine Beziehung stell eine "
-                         "gemeinsame Nennung im Artikel dar.\n\n"
-                         " Für weitere Informationen besuchen Sie: "
+                         "gemeinsame Nennung im Artikel dar.\n\n Für weitere Informationen besuchen Sie: "
                          "https://github.com/slinusc/visualization_project/blob/main/README.md")
     st.bokeh_chart(hv.render(chord_chart, backend='bokeh'))
 
@@ -139,19 +135,19 @@ with col4[1]:
     st.markdown("  \n")  # Leerzeile für den Abstand
     st.markdown("  \n")  # Leerzeile für den Abstand
     st.markdown("  \n")  # Leerzeile für den Abstand
-    st.plotly_chart(sentiment_plot.plot(), config = config)
-
+    st.plotly_chart(sentiment_plot.plot(), config=config)
 
 # DATA TABLE
 with full_width_col3[0]:
     filtered_df['Datum'] = filtered_df['Datum'].dt.strftime('%d.%m.%Y')
     st.subheader('Artikeltabelle')
-    st.button('ℹ️', help='Die Tabelle zeigt die Artikel an, nach denen die Filter gesetzt wurden. \n\n'
-                         " Für weitere Informationen besuchen Sie: "
-                         "https://github.com/slinusc/visualization_project/blob/main/README.md"
+    st.button('ℹ️', help="Die Tabelle zeigt die Artikel an, nach denen die Filter gesetzt wurden. \n\n Für weitere "
+                         "Informationen besuchen Sie: https://github.com/slinusc/visualization_project/blob/main"
+                         "/README.md"
               )
     filtered_df['Index'] = filtered_df.index  # Neues DataFrame mit separater Index-Spalte erstellen
-    st.dataframe(filtered_df.loc[:, ['Medium', 'Headline', 'Kategorie', 'Datum', 'Index']].drop('Index', axis=1), width=1100)
+    st.dataframe(filtered_df.loc[:, ['Medium', 'Headline', 'Kategorie', 'Datum', 'Index']].drop('Index', axis=1),
+                 width=1100)
 
 if __name__ == '__main__':
     pass

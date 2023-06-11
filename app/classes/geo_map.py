@@ -4,13 +4,17 @@ import plotly.graph_objects as go
 
 
 class WorldMap:
+    """
+    Die WorldMap Klasse ermöglicht Visualisieren geografischer Daten. Hier wird eine Weltkarte erstellt,
+    auf denen Länder basierend auf bestimmten Daten hervorgehoben werden können.
+    """
 
     def __init__(self, data):
         self.data = data
         self.start_time = time.time()
 
     def erstelle_weltkarte(self):
-        # Flatten the data and count occurrences
+        # Daten glätten und Vorkommen zählen
         flat_list = [item for sublist in self.data for item in sublist]
         df = pd.DataFrame(flat_list, columns=['Country'])
         df = df['Country'].value_counts().reset_index()
@@ -39,7 +43,6 @@ class WorldMap:
             ),
             width=700,
             height=600,
-
         )
 
         # Karte anzeigen

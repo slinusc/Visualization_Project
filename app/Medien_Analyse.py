@@ -9,6 +9,23 @@ st.set_page_config(layout="wide", menu_items={}, )
 
 
 def main():
+    """
+    Die Hauptfunktion der Streamlit-Anwendung zur Medienanalyse. Sie liest den Datensatz ein,
+    ermöglicht die Datenfilterung basierend auf den Benutzereingaben und erzeugt verschiedene Visualisierungen
+    basierend auf den gefilterten Daten.
+
+    Die Visualisierungen umfassen:
+    1. Eine Zeitreihenanalyse der Anzahl von Artikeln nach Kategorien.
+    2. Eine Analyse der Anzahl von Artikeln nach Zeitungen.
+    3. Eine Themenanalyse, die die 20 häufigsten Wörter in den Artikeln anzeigt.
+    4. Eine Tabelle mit Artikeldaten basierend auf den Filtereinstellungen des Benutzers.
+
+    Darüber hinaus enthält die Funktion auch Code zum Stylen und Layouten der Streamlit-App.
+
+    Funktion ist mit dem @st.cache_data Decorator versehen, um die Daten nur einmal zu laden
+    und sie danach im Cache zu speichern. Dies verbessert die Effizienz der Streamlit-App erheblich, indem sie
+    redundantes Laden und Verarbeiten von Daten verhindert.
+    """
     @st.cache_data
     def load_data():
         path = '../data/without_content.tsv.xz'
@@ -52,10 +69,10 @@ def main():
     full_width_col2 = st.columns(1)  # Topic analysis
     full_width_col3 = st.columns(1)  # Dataframe
 
-    # CONFIG FOR ALL PLOTS
+    # KONFIGURATION FÜR ALLE PLOTS
     config = dict({'displayModeBar': False})
 
-    # remove streamlit menu
+    # STREAMLIT-MENÜ AUSBLENDEN & FARBE ANPASSEN (BLAU)
     st.markdown("""
                             <style>
                             #MainMenu {visibility: hidden;}
@@ -64,7 +81,7 @@ def main():
                             </style>
                             """, unsafe_allow_html=True)
 
-    # Filter data by date with streamlit date input
+    # Daten nach Datum filtern mit Streamlit Datumseingabe
     with col1:
         dates = st.date_input(
             "Wähle Datum",
@@ -81,32 +98,32 @@ def main():
 
         filtered_df = df[(df['Datum'] >= start_date) & (df['Datum'] <= end_date)]
 
-    # Filter data by category with streamlit multiselect
+    # Daten nach Kategorie mit streamlit multiselect filtern
     with col2:
         categories = df['Kategorie'].unique()
         categories_options = ['Alle'] + list(categories)
         selected_categories = st.multiselect('Wähle Kategorie', categories_options, default=['Alle'])
         if 'Alle' in selected_categories:
-            # all categories are selected, no filtering needed
+            # alle Kategorien sind ausgewählt, keine Filterung erforderlich
             pass
         else:
             filtered_df = filtered_df[filtered_df['Kategorie'].isin(selected_categories)]
 
-    # Filter data by medium_name with streamlit multiselect
+    # Daten nach Medium_name mit streamlit multiselect filtern
     with col3:
         newspapers = df['Medium'].unique()
         newspapers_options = ['Alle'] + list(newspapers)
         selected_newspapers = st.multiselect('Wähle Zeitung', newspapers_options, default=['Alle'])
 
         if 'Alle' in selected_newspapers:
-            # all newspapers are selected
+            # alle Zeitungen werden ausgewählt
             selected_newspapers = newspapers
         else:
             filtered_df = filtered_df[filtered_df['Medium'].isin(selected_newspapers)]
 
-    # Check if start and end date are the same
+    # Prüfen, ob Anfangs- und Enddatum übereinstimmen
     if start_date != end_date:
-        # Create linechart plot
+        # Liniendiagramm erstellen
         linechart_generator = LinechartCategories()
         linechart_plot = linechart_generator.linechart_categories(filtered_df)
         with full_width_col0[0]:
@@ -116,7 +133,7 @@ def main():
                                  "https://github.com/slinusc/visualization_project/blob/main/README.md")
             st.plotly_chart(linechart_plot, config=config)
 
-        # Create line chart medium
+        # Liniendiagramm Medium erstellen
         line_chart = NewspaperCategoryPlot(filtered_df, selected_categories)
         line_medium = line_chart.plot_newspaper_category()
         with full_width_col1[0]:
@@ -147,7 +164,7 @@ def main():
                                  "https://github.com/slinusc/visualization_project/blob/main/README.md")
             st.plotly_chart(fig, config=config)
 
-    # TOPIC ANALYSIS
+    # THEMENANALYSE
     with full_width_col2[0]:
         bar_chart = TopicAnalysis(filtered_df)
         fig = bar_chart.plot()
@@ -156,7 +173,7 @@ def main():
                              "in den Artikeln an.\n\n"
                              " Für weitere Informationen besuchen Sie: "
                              "https://github.com/slinusc/visualization_project/blob/main/README.md")
-  #      topic_analysis = TopicAnalysis()
+    #    topic_analysis = TopicAnalysis()
     #    st.plotly_chart(topic_analysis.plot_most_common_words(filtered_df['Entitäten Header'], 20), config=config)
         st.plotly_chart(fig, config=config)
 

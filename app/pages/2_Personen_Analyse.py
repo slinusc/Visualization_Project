@@ -9,8 +9,15 @@ import relation_chord_chart as rcc
 from top_pers_coun import StackedBarPlot
 import sentiment_plot as sp
 
+
 @st.cache_data
 def load_data():
+    """
+    Lädt und bereitet den Datensatz für die Datenanalyse vor. Die Funktion verwendet den
+    Streamlit-Daten-Caching-Decorator, um die Effizienz zu verbessern. Nach dem ersten Laden werden die Daten im Cache
+    gespeichert und bei weiteren Aufrufen der Funktion schnell geladen, anstatt die Daten jedes Mal erneut laden zu
+    müssen.
+    """
     path = '../data/without_content.tsv.xz'
     df = pd.read_csv(path, sep='\t', compression='xz')
     df['countries'] = df['countries'].apply(eval)
@@ -19,9 +26,10 @@ def load_data():
     df['date'] = pd.to_datetime(df['date'])
     return df
 
+
 df = load_data()
 df.columns = ['Medium', 'Headline', 'Datum', 'Länder', 'sentiment', 'subjectivity',
-                           'Entitäten Header', 'Kategorie', 'Länder (englisch)', 'Personen']
+              'Entitäten Header', 'Kategorie', 'Länder (englisch)', 'Personen']
 
 # layout streamlit app
 st.header('Personen Analyse')
@@ -38,15 +46,14 @@ st.button('ℹ️', help="Mit den Filteroptionen können Sie die angezeigten Dat
                      "https://github.com/slinusc/visualization_project/blob/main/README.md"
           )
 col1, col2, col3 = st.columns([1, 1, 1])  # Widgets
-full_width_col1 = st.columns(1)
+full_width_col1 = st.columns(1)  # Häufigst vorkommenden Personen
 col4 = st.columns([2, 1])  # Chord chart & Sentiment / Objectivity
-full_width_col2 = st.columns(1)
 full_width_col3 = st.columns(1)  # Topic Analysis
 
-# CONFIG FOR ALL PLOTS
+# KONFIGURATION FÜR ALLE PLOTS
 config = dict({'displayModeBar': False})
 
-# remove streamlit menu
+# STREAMLIT-MENÜ AUSBLENDEN & FARBE ANPASSEN (BLAU)
 st.markdown("""
                                 <style>
                                 #MainMenu {visibility: hidden;}
@@ -55,7 +62,7 @@ st.markdown("""
                                 </style>
                                 """, unsafe_allow_html=True)
 
-# DATE SELECTION
+# DATUMSWAHL
 selected_date = col1.date_input("Wähle Datum",
                                 value=pd.to_datetime('2022-02-24'),
                                 min_value=pd.to_datetime('2022-01-01'),
@@ -63,7 +70,7 @@ selected_date = col1.date_input("Wähle Datum",
 selected_date = pd.to_datetime(selected_date)
 filtered_df = df[df['Datum'] == selected_date]
 
-# CATEGORY SELECTION (FILTER)
+# KATEGORIEAUSWAHL (FILTER)
 with col2:
     categories = df['Kategorie'].unique()
     categories_options = ['Alle'] + list(categories)
@@ -73,7 +80,7 @@ with col2:
     else:
         pass
 
-# COUNTRY SELECTION (FILTER)
+# LÄNDERAUSWAHL (FILTER)
 with col3:
     options = filtered_df['Personen'].explode().astype(str).unique().tolist()
     options = [i for i in options if i != 'nan']
@@ -87,19 +94,16 @@ with col3:
     else:
         pass
 
-
-
 # TOP 10 Personen
 bar_chart = StackedBarPlot(filtered_df, filter='Personen')
 fig = bar_chart.plot()
 with full_width_col1[0]:
     st.subheader("Die häufigst vorkommenden Personen")
     st.button('ℹ️', help="Das Balkendiagramm zeigt die absolute Häufigketi der genannten Personen,"
-                         " vertiakl gestapelt erkennt man die Kategorien der Artikel, in welchem sie gennant wurden. \n\n"
-                         " Für weitere Informationen besuchen Sie: "
+                         "vertiakl gestapelt erkennt man die Kategorien der Artikel, in welchem sie gennant wurden. "
+                         "\n\n Für weitere Informationen besuchen Sie: "
                          "https://github.com/slinusc/visualization_project/blob/main/README.md")
     st.plotly_chart(fig, config=config)
-
 
 # CHORD RELATION DIAGRAM
 chord_chart = rcc.ChordCharts(filtered_df['Personen']).country_chord_chart()

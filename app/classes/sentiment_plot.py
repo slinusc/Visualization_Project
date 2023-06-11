@@ -2,18 +2,28 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
-import plotly.colors
+
 
 class SentimentObjectivityPlots:
+    """
+    Diese Klasse erstellt Visualisierungen für Sentiment- und Objektivitätsdaten. Sie ist speziell dafür ausgelegt,
+    Donut-Diagramme zu erstellen, die die Verteilung des Sentiments und der Objektivität in dem Datensatz darstellen.
+
+    Die Klasse wird mit zwei Listen initialisiert, einer für das Sentiment und eine für die Objektivität.
+    Sie beinhaltet Methoden zum Zählen der Werte in bestimmten Bereichen (count_sentiment und count_subjectivity),
+    sowie eine Methode zum Erstellen der Visualisierung (plot).
+    """
     def __init__(self, sentiment_list, subjectivity_list):
         self.sentiment_list = sentiment_list
         self.subjectivity_list = subjectivity_list
         self.sentiment_labels = ['negativ', 'sehr positiv', 'positiv', 'neutral']
         self.subjectivity_labels = ['subjektiv', 'objektiv', 'eher objektiv', 'eher subjektiv']
-        self.sentiment_colors = ['red','#0068c9', '#83c9ff', '#ffabab']
-        self.subjectivity_colors = ['red','#0068c9', '#83c9ff', '#ffabab']
+        self.sentiment_colors = ['red', '#0068c9', '#83c9ff', '#ffabab']
+        self.subjectivity_colors = ['red', '#0068c9', '#83c9ff', '#ffabab']
 
     def count_subjectivity(self):
+        # Zählt die Anzahl der Werte in den Objektivitätsbereichen und gibt eine Liste der Anzahl zurück.
+        # Returns: Eine Liste der Anzahl der Werte in den Bereichen [<0.1, <0.2, <0.4, >0.4].
         counts = [0, 0, 0, 0]
         for subjectivity in self.subjectivity_list:
             if subjectivity < 0.1:
@@ -27,6 +37,8 @@ class SentimentObjectivityPlots:
         return counts
 
     def count_sentiment(self):
+        # Zählt die Anzahl der Werte in den Sentimentbereichen und gibt eine Liste der Anzahl zurück.
+        # Returns: Eine Liste der Anzahl der Werte in den Bereichen [<0.0, <0.25, <0.5, >0.5].
         counts = [0, 0, 0, 0]
         for sentiment in self.sentiment_list:
             if sentiment < 0.0:
@@ -40,6 +52,7 @@ class SentimentObjectivityPlots:
         return counts
 
     def plot(self):
+        # Erstellt zwei Donut-Diagramme, eines für die Sentimentverteilung und eines für die Objektivitätsverteilung.
         sentiment_counts = self.count_sentiment()
         subjectivity_counts = self.count_subjectivity()
 
@@ -47,7 +60,8 @@ class SentimentObjectivityPlots:
         objectivity_median = 1 - np.median(self.subjectivity_list)
 
         fig = make_subplots(rows=2, cols=1,
-                            specs=[[{'type': 'domain'}], [{'type': 'domain'}]], vertical_spacing=0.05, horizontal_spacing=0.05)
+                            specs=[[{'type': 'domain'}], [{'type': 'domain'}]], vertical_spacing=0.05,
+                            horizontal_spacing=0.05)
 
         fig.add_trace(go.Pie(labels=self.sentiment_labels,
                              values=sentiment_counts,

@@ -4,6 +4,12 @@ import plotly.graph_objects as go
 
 
 class NewspaperCategoryPlot:
+    """
+    Die NewspaperCategoryPlot Klasse erstellt mehrere Liniendiagramme, die die Häufigkeit von Kategorien über die Zeit
+    in verschiedenen Zeitungen darstellen. Wenn 'Alle' in der Liste der Kategorien ausgewählt ist,
+    wird kein Filter auf die Kategorien angewendet. Jedes Liniendiagramm wird in einem separaten Subplot dargestellt,
+    mit maximal acht Subplots.
+    """
     def __init__(self, df, category):
         self.df = df
         self.category = category
@@ -31,10 +37,12 @@ class NewspaperCategoryPlot:
             df_newspaper = df_category[df_category['Medium'] == newspaper]
             df_grouped = df_newspaper.groupby('Datum').size().reset_index(name='Anzahl')
 
+            # 2 Reihen und 4 Spalten von Subplots
             row = i // 4 + 1
             col = i % 4 + 1
 
-            fig.add_trace(go.Scatter(x=df_grouped['Datum'], y=df_grouped['Anzahl'], mode='lines', name=newspaper, line=dict(color='#1f77b4')
+            fig.add_trace(go.Scatter(x=df_grouped['Datum'], y=df_grouped['Anzahl'], mode='lines', name=newspaper,
+                                     line=dict(color='#1f77b4')
                                      ), row=row, col=col)
 
         fig.update_layout(showlegend=False, plot_bgcolor='white')
