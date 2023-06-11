@@ -25,10 +25,14 @@ class ChordCharts:
     def country_chord_chart(self):
         hv.extension('bokeh')
         chord = hv.Chord(self.create_edges()).select(value=(1, None))
+
+        # Define your custom colors
+        custom_colors = ['#0068c9', '#83c9ff', '#ffabab', '#29b09d', '#7defa1', 'red']
+
         return chord.opts(
             opts.Chord(
-                cmap='Category20',
-                edge_cmap='Category20',
+                cmap=custom_colors,  # Use your custom colors
+                edge_cmap=custom_colors,
                 edge_color=dim('source').str(),
                 labels='index',
                 node_color=dim('index').str(),

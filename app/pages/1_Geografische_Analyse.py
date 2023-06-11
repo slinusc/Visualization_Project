@@ -91,27 +91,23 @@ with col3:
         pass
 
 # WORLDMAP
-
 with left_col:
     data_country_series = filtered_df['Länder (englisch)']
     data_country_list = [eval(i) for i in data_country_series.dropna().tolist()]
-
     world_map = gm.WorldMap(data_country_list)
     world_map_chart = world_map.erstelle_weltkarte()
-    #st.subheader("Ländernennung")
-    #st.button('ℹ️', help="Die Weltkarte stellt diejenigen Länder dar, die in Artikeln genannt wurden. Bei Filterung "
-    #                     "nach einem spezifischen Land, werden ausserdem diejenigen Länder angezeigt, die zusammen mit"
-    #                     "dem gesuchten Land genannt wurden. \n")
+    st.subheader("Ländernennung")
     st.plotly_chart(world_map_chart, config={'scrollZoom': False, 'displayModeBar': False}, use_container_width=True)
 
 # TOP 10LÄNDER
-
 with right_col:
     bar_chart = StackedBarPlot(filtered_df, filter='country')
     fig = bar_chart.plot()
-    st.subheader("")
     st.button('ℹ️', help="Das Balkendiagramm zeigt die absolute Häufigketi der genannten Länder,"
                          " horizontal gestapelt erkennt man die Kategorien der Artikel, in welchem sie gennant wurden. \n"
+                         "Die Weltkarte stellt diejenigen Länder dar, die in Artikeln genannt wurden. Bei Filterung "
+                        "nach einem spezifischen Land, werden ausserdem diejenigen Länder angezeigt, die zusammen mit"
+                       "dem gesuchten Land genannt wurden. \n\n"
                          " Für weitere Informationen besuchen Sie: "
                          "https://github.com/slinusc/visualization_project/blob/main/README.md")
     st.plotly_chart(fig, config=config)
@@ -134,8 +130,8 @@ with col4[1]:
     st.subheader("Stimmung & Subjektivität")
     st.button('ℹ️', help="Die Darstellung zeigt in der Mitte den Medianwert der Stimmung bzw. der Subjektivität. "
                          "Die Stimmung variiert in einem Bereich von -1 (sehr negativ) bis 1 (sehr positiv). "
-                         "Die Subjektivität variiert in einem Bereich von 0 (objektiv) bis 1 (subjektiv).\n"
-                         " Für weitere Informationen besuchen Sie: "
+                         "Die Subjektivität variiert in einem Bereich von 0 (objektiv) bis 1 (subjektiv).\n\n"
+                         "Für weitere Informationen besuchen Sie: "
                          "https://github.com/slinusc/visualization_project/blob/main/README.md"
               )
     st.markdown("  \n")  # Leerzeile für den Abstand
@@ -143,13 +139,14 @@ with col4[1]:
     st.markdown("  \n")  # Leerzeile für den Abstand
     st.markdown("  \n")  # Leerzeile für den Abstand
     st.markdown("  \n")  # Leerzeile für den Abstand
-    st.plotly_chart(sentiment_plot.plot(), config=config)
+    st.plotly_chart(sentiment_plot.plot(), config = config)
+
 
 # DATA TABLE
 with full_width_col3[0]:
     filtered_df['Datum'] = filtered_df['Datum'].dt.strftime('%d.%m.%Y')
     st.subheader('Artikeltabelle')
-    st.button('ℹ️', help='Die Tabelle zeigt die Artikel an, nach denen die Filter gesetzt wurden. \n'
+    st.button('ℹ️', help='Die Tabelle zeigt die Artikel an, nach denen die Filter gesetzt wurden. \n\n'
                          " Für weitere Informationen besuchen Sie: "
                          "https://github.com/slinusc/visualization_project/blob/main/README.md"
               )
