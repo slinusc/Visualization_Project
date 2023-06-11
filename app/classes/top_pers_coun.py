@@ -25,8 +25,13 @@ class StackedBarPlot:
         self.preprocess()
         column_name = 'Länder' if self.filter == 'country' else 'Personen'
         sorted_categories = self.df[column_name].unique().tolist()
+
+        color_discrete_map = {'Politik': '#0068c9', 'Regional': '#83c9ff', 'Sport': 'red',
+                              'Wirtschaft': '#ffabab', 'Wissenschaft & Technik': '#29b09d', 'Kultur': '#7defa1'}
+        # 0d47a1', '#2196f3', '#00bcd4', '#4dd0e1
         if self.filter == 'country':
             fig = px.bar(self.df, y=column_name, x='counts', color='Kategorie',
+                         color_discrete_map=color_discrete_map,
                          labels={column_name: '', 'Kategorie': 'Kategorie', 'counts': 'Anzahl'},
                          height=600,
                          width=400,

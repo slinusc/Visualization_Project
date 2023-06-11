@@ -94,6 +94,10 @@ bar_chart = StackedBarPlot(filtered_df, filter='Personen')
 fig = bar_chart.plot()
 with full_width_col1[0]:
     st.subheader("Die häufigst vorkommenden Personen")
+    st.button('ℹ️', help="Das Balkendiagramm zeigt die absolute Häufigketi der genannten Personen,"
+                         " vertiakl gestapelt erkennt man die Kategorien der Artikel, in welchem sie gennant wurden. \n"
+                         " Für weitere Informationen besuchen Sie: "
+                         "https://github.com/slinusc/visualization_project/blob/main/README.md")
     st.plotly_chart(fig, config=config)
 
 
@@ -112,6 +116,7 @@ with col4[1]:
     st.set_option('deprecation.showPyplotGlobalUse', False)
     sentiment_plot = sp.SentimentObjectivityPlots(filtered_df['sentiment'], filtered_df['subjectivity'])
     st.subheader("Stimmung & Subjektivität")
+    fig = sentiment_plot.plot()
     st.button('ℹ️', help="Die Darstellung zeigt in der Mitte den Medianwert der Stimmung bzw. der Subjektivität. "
                          "Die Stimmung variiert in einem Bereich von -1 (sehr negativ) bis 1 (sehr positiv). "
                          "Die Subjektivität variiert in einem Bereich von 0 (objektiv) bis 1 (subjektiv).\n\n"
@@ -123,7 +128,7 @@ with col4[1]:
     st.markdown("  \n")  # Leerzeile für den Abstand
     st.markdown("  \n")  # Leerzeile für den Abstand
     st.markdown("  \n")  # Leerzeile für den Abstand
-    st.plotly_chart(sentiment_plot.plot(), config=config)
+    st.plotly_chart(fig, config=config)
 
 # DATA TABLE
 with full_width_col3[0]:
