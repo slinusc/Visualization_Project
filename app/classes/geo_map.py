@@ -32,10 +32,14 @@ class WorldMap:
         fig.update_layout(
             geo=dict(
                 scope='world',
-                projection_type='natural earth'
+                projection_type='miller',
+                lonaxis_range=[-168, 190],
+                lataxis_range=[-44, 90]
+
             ),
-            width=1000,
+            width=700,
             height=600,
+
         )
 
         # Karte anzeigen

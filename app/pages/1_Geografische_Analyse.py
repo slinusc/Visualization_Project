@@ -88,23 +88,25 @@ with col3:
         pass
 
 # WORLDMAP
-data_country_series = filtered_df['Länder (englisch)']
-data_country_list = [eval(i) for i in data_country_series.dropna().tolist()]
 
-world_map = gm.WorldMap(data_country_list)
-world_map_chart = world_map.erstelle_weltkarte()
 with left_col:
-    st.subheader("Ländernennung")
-#    st.button('ℹ️', help="Die Weltkarte stellt diejenigen Länder dar, die in Artikeln genannt wurden. Bei Filterung "
-#                         "nach einem spezifischen Land, werden ausserdem diejenigen Länder angezeigt, die zusammen mit"
-#                         "dem gesuchten Land genannt wurden. \n")
+    data_country_series = filtered_df['Länder (englisch)']
+    data_country_list = [eval(i) for i in data_country_series.dropna().tolist()]
+
+    world_map = gm.WorldMap(data_country_list)
+    world_map_chart = world_map.erstelle_weltkarte()
+    #st.subheader("Ländernennung")
+    #st.button('ℹ️', help="Die Weltkarte stellt diejenigen Länder dar, die in Artikeln genannt wurden. Bei Filterung "
+    #                     "nach einem spezifischen Land, werden ausserdem diejenigen Länder angezeigt, die zusammen mit"
+    #                     "dem gesuchten Land genannt wurden. \n")
     st.plotly_chart(world_map_chart, config={'scrollZoom': False, 'displayModeBar': False}, use_container_width=True)
 
 # TOP 10LÄNDER
-bar_chart = StackedBarPlot(filtered_df, filter='country')
-fig = bar_chart.plot()
+
 with right_col:
-    st.subheader("Die häufigst genannten Länder")
+    bar_chart = StackedBarPlot(filtered_df, filter='country')
+    fig = bar_chart.plot()
+    st.subheader("")
     st.plotly_chart(fig, config=config)
 
 

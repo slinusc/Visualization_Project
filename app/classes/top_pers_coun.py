@@ -28,7 +28,7 @@ class StackedBarPlot:
         sorted_categories = self.df[column_name].unique().tolist()
         if self.filter == 'country':
             fig = px.bar(self.df, y=column_name, x='counts', color='Kategorie',
-                         labels={column_name: 'Länder', 'Kategorie': 'Kategorie', 'counts': 'Anzahl'},
+                         labels={column_name: '', 'Kategorie': 'Kategorie', 'counts': 'Anzahl'},
                          height=600,
                          width=400,
                          category_orders={column_name: sorted_categories})
