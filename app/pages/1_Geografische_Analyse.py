@@ -104,7 +104,7 @@ with right_col:
     bar_chart = StackedBarPlot(filtered_df, filter='country')
     fig = bar_chart.plot()
     st.button('ℹ️', help="Das Balkendiagramm zeigt die absolute Häufigketi der genannten Länder,"
-                         " horizontal gestapelt erkennt man die Kategorien der Artikel, in welchem sie gennant wurden. \n"
+                         " horizontal gestapelt erkennt man die Kategorien der Artikel, in welchem sie gennant wurden. \n\n"
                          "Die Weltkarte stellt diejenigen Länder dar, die in Artikeln genannt wurden. Bei Filterung "
                         "nach einem spezifischen Land, werden ausserdem diejenigen Länder angezeigt, die zusammen mit"
                        "dem gesuchten Land genannt wurden. \n\n"
