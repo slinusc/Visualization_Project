@@ -139,7 +139,7 @@ with col4[1]:
     st.markdown("  \n")  # Leerzeile für den Abstand
     st.markdown("  \n")  # Leerzeile für den Abstand
     st.markdown("  \n")  # Leerzeile für den Abstand
-    st.plotly_chart(sentiment_plot.plot())
+    st.plotly_chart(sentiment_plot.plot(), config = config)
 
 # DATA TABLE
 with full_width_col3[0]:
