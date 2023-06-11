@@ -27,6 +27,18 @@ df.columns = ['Medium', 'Headline', 'Datum', 'Länder', 'sentiment', 'subjectivi
 
 # layout streamlit app
 st.header('Personen Analyse')
+st.button('ℹ️', help="Mit den Filteroptionen können Sie die angezeigten Daten nach spezifischen "
+                     "Kriterien einschränken. Die verfügbaren Filteroptionen sind: \n"
+                     "1. Datum: Mit dieser Option können Sie ein beliebiges Datum auswählen."
+                     "möglich, Daten für jeden beliebigen Tag im Jahr 2022 zu analysieren. \n\n"
+                     "2. Kategorie: Hier können Sie auswählen, welche Artikelkategorien in den Daten enthalten "
+                     "sein sollen. \n"
+                     "3. Personen:  Mit dieser Option können Sie auswählen, nach welchen Personen die Daten "
+                     " gefiltert werden sollen. Es werden auch Personen angezeigt, die zusammen mit der "
+                     "ausgewählten Person genannt wurden. \n\n"
+                     " Für weitere Informationen besuchen Sie: "
+                     "https://github.com/slinusc/visualization_project/blob/main/README.md"
+          )
 col1, col2, col3 = st.columns([1, 1, 1])  # Widgets
 full_width_col1 = st.columns(1)
 col4 = st.columns([2, 1])  # Chord chart & Sentiment / Objectivity
@@ -65,9 +77,10 @@ with col2:
 
 # COUNTRY SELECTION (FILTER)
 with col3:
-    options = ['Alle'] + filtered_df['Personen'].explode().astype(str).unique().tolist()
+    options = filtered_df['Personen'].explode().astype(str).unique().tolist()
     options = [i for i in options if i != 'nan']
     options = sorted(options)
+    options = ['Alle'] + options
     # create multiselect widget
     selected = st.multiselect('Wähle Persönlichkeit', options, default=['Alle'])
 
@@ -87,10 +100,13 @@ with full_width_col1[0]:
 
 
 # CHORD RELATION DIAGRAM
-chord_chart = rcc.ChordCharts(filtered_df['Länder']).country_chord_chart()
+chord_chart = rcc.ChordCharts(filtered_df['Personen']).country_chord_chart()
 with col4[0]:
-    st.subheader("Beziehung zwischen Ländern")
-    st.button('ℹ️', help="")
+    st.subheader("Beziehung zwischen Personen des öffentlichen Lebens")
+    st.button('ℹ️', help="Es werden die Beziehungen zwischen Personen visualisiert. Eine Beziehung stell eine "
+                         "gemeinsame Nennung im Artikel dar.\n\n"
+                         " Für weitere Informationen besuchen Sie: "
+                         "https://github.com/slinusc/visualization_project/blob/main/README.md")
     st.bokeh_chart(hv.render(chord_chart, backend='bokeh'))
 
 # SENTIMENT PLOT
@@ -98,20 +114,34 @@ with col4[1]:
     st.set_option('deprecation.showPyplotGlobalUse', False)
     sentiment_plot = sp.SentimentObjectivityPlots(filtered_df['sentiment'], filtered_df['subjectivity'])
     st.subheader("Stimmung & Subjektivität")
-    st.button('ℹ️', help="Die Stimmung und Subjektivität der Artikel wird in diesem Plot dargestellt.")
+    st.button('ℹ️', help="Die Darstellung zeigt in der Mitte den Medianwert der Stimmung bzw. der Subjektivität. "
+                         "Die Stimmung variiert in einem Bereich von -1 (sehr negativ) bis 1 (sehr positiv). "
+                         "Die Subjektivität variiert in einem Bereich von 0 (objektiv) bis 1 (subjektiv).\n\n"
+                         " Für weitere Informationen besuchen Sie: "
+                         "https://github.com/slinusc/visualization_project/blob/main/README.md"
+              )
+    st.markdown("  \n")  # Leerzeile für den Abstand
+    st.markdown("  \n")  # Leerzeile für den Abstand
+    st.markdown("  \n")  # Leerzeile für den Abstand
+    st.markdown("  \n")  # Leerzeile für den Abstand
+    st.markdown("  \n")  # Leerzeile für den Abstand
     st.plotly_chart(sentiment_plot.plot(), config=config)
 
 # TOPIC ANALYSIS
+"""
 with full_width_col2[0]:
     st.subheader('Themen Analyse')
     st.button('ℹ️', help='Die Themen Analyse zeigt die am häufigsten vorkommenden Wörter '
                          'in den Artikeln an.')
     topic_analysis = TopicAnalysis()
     st.plotly_chart(topic_analysis.plot_most_common_words(filtered_df['Entitäten Header'], 20), config=config)
-
+"""
 # DATA TABLE
 with full_width_col3[0]:
     filtered_df['Datum'] = filtered_df['Datum'].dt.strftime('%d.%m.%Y')
     st.subheader('Artikeltabelle')
-    st.button('ℹ️', help='Die Tabelle zeigt die Artikel an, nach denen die Filter gesetzt wurden.')
+    st.button('ℹ️', help='Die Tabelle zeigt die Artikel an, nach denen die Filter gesetzt wurden.'
+                         " Für weitere Informationen besuchen Sie: \n\n"
+                         "https://github.com/slinusc/visualization_project/blob/main/README.md"
+              )
     st.dataframe(filtered_df.loc[:, ['Medium', 'Headline', 'Kategorie', 'Datum']], width=1100)

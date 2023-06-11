@@ -36,7 +36,11 @@ st.button('ℹ️', help="Mit den Filteroptionen können Sie die angezeigten Dat
                      "2. Kategorie: Hier können Sie auswählen, welche Artikelkategorien in den Daten enthalten "
                      "sein sollen. \n"
                      "3. Länder: Mit dieser Option können Sie auswählen, nach welchen Ländern die Daten "
-                     "gefiltert gefiltert werden sollen.\n")
+                     "gefiltert werden sollen. Es werden auch Länder angezeigt, die zusammen mit dem "
+                     "ausgewählten Land genannt wurden.\n\n"
+                     " Für weitere Informationen besuchen Sie: "
+                     "https://github.com/slinusc/visualization_project/blob/main/README.md"
+          )
 
 col1, col2, col3 = st.columns([1, 1, 1])  # Widgets
 left_col, right_col = st.columns([2, 1])  # Geo map
@@ -76,9 +80,10 @@ with col2:
 
 # COUNTRY SELECTION (FILTER)
 with col3:
-    options = ['Alle'] + filtered_df['Länder'].explode().astype(str).unique().tolist()
+    options = filtered_df['Länder'].explode().astype(str).unique().tolist()
     options = [i for i in options if i != 'nan']
     options = sorted(options)
+    options = ['Alle'] + options
     # create multiselect widget
     selected = st.multiselect('Wähle Land', options , default=['Alle'])
 
@@ -114,6 +119,7 @@ with right_col:
 chord_chart = rcc.ChordCharts(filtered_df['Länder']).country_chord_chart()
 with col4[0]:
     st.subheader("Beziehung zwischen Ländern")
+    st.button('ℹ️', help="")
     st.bokeh_chart(hv.render(chord_chart, backend='bokeh'))
 
 # SENTIMENT PLOT
@@ -121,23 +127,38 @@ with col4[1]:
     st.set_option('deprecation.showPyplotGlobalUse', False)
     sentiment_plot = sp.SentimentObjectivityPlots(filtered_df['sentiment'], filtered_df['subjectivity'])
     st.subheader("Stimmung & Subjektivität")
-    st.button('ℹ️', help="")
+    st.button('ℹ️', help="Die Darstellung zeigt in der Mitte den Medianwert der Stimmung bzw. der Subjektivität. "
+                         "Die Stimmung variiert in einem Bereich von -1 (sehr negativ) bis 1 (sehr positiv). "
+                         "Die Subjektivität variiert in einem Bereich von 0 (objektiv) bis 1 (subjektiv).\n"
+                         " Für weitere Informationen besuchen Sie: "
+                         "https://github.com/slinusc/visualization_project/blob/main/README.md"
+              )
+    st.markdown("  \n")  # Leerzeile für den Abstand
+    st.markdown("  \n")  # Leerzeile für den Abstand
+    st.markdown("  \n")  # Leerzeile für den Abstand
+    st.markdown("  \n")  # Leerzeile für den Abstand
+    st.markdown("  \n")  # Leerzeile für den Abstand
     st.plotly_chart(sentiment_plot.plot())
 
 # TOPIC ANALYSIS
+"""
 with full_width_col2[0]:
     st.subheader('Themen Analyse')
     st.button('ℹ️', help='Die Themen Analyse zeigt die am häufigsten vorkommenden Wörter '
                          'in den Artikeln an.')
     topic_analysis = TopicAnalysis()
-    st.plotly_chart(topic_analysis.plot_most_common_words(filtered_df['Entitäten Header'], 20),config=config)
+    st.plotly_chart(topic_analysis.plot_most_common_words(filtered_df['Entitäten Header'], 20),config=config)"""
 
 # DATA TABLE
 with full_width_col3[0]:
     filtered_df['Datum'] = filtered_df['Datum'].dt.strftime('%d.%m.%Y')
     st.subheader('Artikeltabelle')
-    st.button('ℹ️', help='Die Tabelle zeigt die Artikel an, nach denen die Filter gesetzt wurden.')
-    st.dataframe(filtered_df.loc[:, ['Medium', 'Headline', 'Kategorie', 'Datum']], width=1100)
+    st.button('ℹ️', help='Die Tabelle zeigt die Artikel an, nach denen die Filter gesetzt wurden. \n'
+                         " Für weitere Informationen besuchen Sie: "
+                         "https://github.com/slinusc/visualization_project/blob/main/README.md"
+              )
+    filtered_df['Index'] = filtered_df.index  # Neues DataFrame mit separater Index-Spalte erstellen
+    st.dataframe(filtered_df.loc[:, ['Medium', 'Headline', 'Kategorie', 'Datum', 'Index']].drop('Index', axis=1), width=1100)
 
 if __name__ == '__main__':
     pass

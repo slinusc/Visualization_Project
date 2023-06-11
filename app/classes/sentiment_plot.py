@@ -9,8 +9,9 @@ class SentimentObjectivityPlots:
         self.subjectivity_list = subjectivity_list
         self.sentiment_labels = ['negativ', 'neutral', 'positiv', 'sehr positiv']
         self.subjectivity_labels = ['objektiv', 'eher objektiv', 'eher subjektiv', 'subjektiv']
-        self.sentiment_colors = ['#d32f2f', '#fbc02d', '#8bc34a', '#4caf50']
-        self.subjectivity_colors = ['#0d47a1', '#2196f3', '#4dd0e1', '#00bcd4']
+        self.sentiment_colors = ['#0d47a1', '#2196f3', '#00bcd4', '#4dd0e1']
+        # self.sentiment_colors = ['#d32f2f', '#fbc02d', '#8bc34a', '#4caf50']
+        self.subjectivity_colors = ['#0d47a1', '#2196f3', '#00bcd4', '#4dd0e1']
 
     def count_subjectivity(self):
         counts = [0, 0, 0, 0]
@@ -67,7 +68,7 @@ class SentimentObjectivityPlots:
         # Add annotations in the center of the donuts
         fig.add_annotation(text='Stimmung: <br> {:.2f}'.format(sentiment_median),
                            xref='paper', yref='paper',
-                           x=0.5, y=.79, showarrow=False)
+                           x=0.5, y=.8, showarrow=False)
         fig.add_annotation(text='Subjektivität: <br> {:.2f}'.format(subjectivity_median),
                            xref='paper', yref='paper',
                            x=0.5, y=.19, showarrow=False)
@@ -75,7 +76,7 @@ class SentimentObjectivityPlots:
         fig.update_layout(
             height=450,
             width=450,
-            margin=dict(l=15, r=0, t=15, b=0),
+            margin=dict(l=0, r=0, t=0, b=15),
             template='plotly_white',
             # Konfiguration für das Entfernen des Plotly-Logos
             showlegend=False

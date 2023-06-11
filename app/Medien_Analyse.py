@@ -162,7 +162,10 @@ def main():
     with full_width_col3[0]:
         filtered_df['Datum'] = filtered_df['Datum'].dt.strftime('%d.%m.%Y')
         st.subheader('Artikeltabelle')
-        st.button('ℹ️', help='Die Tabelle zeigt die Artikel an, nach denen die Filter gesetzt wurden.')
+        st.button('ℹ️', help='Die Tabelle zeigt die Artikel an, nach denen die Filter gesetzt wurden.'
+                             " Für weitere Informationen besuchen Sie: "
+                             "https://github.com/slinusc/visualization_project/blob/main/README.md"
+                  )
         st.dataframe(filtered_df.loc[:, ['Medium', 'Headline', 'Kategorie', 'Datum']], width=1100)
 
 

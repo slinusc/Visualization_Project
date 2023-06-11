@@ -1,7 +1,7 @@
 import itertools
 import pandas as pd
 import holoviews as hv
-from holoviews import opts, dim, Dataset
+from holoviews import opts, dim
 
 class ChordCharts:
 
