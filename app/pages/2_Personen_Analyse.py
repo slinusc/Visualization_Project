@@ -95,7 +95,7 @@ fig = bar_chart.plot()
 with full_width_col1[0]:
     st.subheader("Die häufigst vorkommenden Personen")
     st.button('ℹ️', help="Das Balkendiagramm zeigt die absolute Häufigketi der genannten Personen,"
-                         " vertiakl gestapelt erkennt man die Kategorien der Artikel, in welchem sie gennant wurden. \n"
+                         " vertiakl gestapelt erkennt man die Kategorien der Artikel, in welchem sie gennant wurden. \n\n"
                          " Für weitere Informationen besuchen Sie: "
                          "https://github.com/slinusc/visualization_project/blob/main/README.md")
     st.plotly_chart(fig, config=config)
