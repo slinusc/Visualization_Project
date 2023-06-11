@@ -1,22 +1,19 @@
-from bokeh.io import show
-from bokeh.plotting import figure
-from bokeh.layouts import gridplot
-from bokeh.models import ColumnDataSource, LabelSet
-from bokeh.palettes import Category20c, Category10, Viridis3
-from bokeh.transform import cumsum
-from math import pi
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
 import pandas as pd
-
+import numpy as np
 
 class SentimentObjectivityPlots:
     def __init__(self, sentiment_list, subjectivity_list):
         self.sentiment_list = sentiment_list
         self.subjectivity_list = subjectivity_list
         self.sentiment_labels = ['negativ', 'neutral', 'positiv', 'sehr positiv']
-        self.subjectivity_labels = ['objektiv','eher objektiv', 'eher subjektiv', 'subjektiv']
+        self.subjectivity_labels = ['objektiv', 'eher objektiv', 'eher subjektiv', 'subjektiv']
+        self.sentiment_colors = ['#d32f2f', '#fbc02d', '#8bc34a', '#4caf50']
+        self.subjectivity_colors = ['#0d47a1', '#2196f3', '#4dd0e1', '#00bcd4']
 
     def count_subjectivity(self):
-        counts = [0, 0 ,0, 0]
+        counts = [0, 0, 0, 0]
         for subjectivity in self.subjectivity_list:
             if subjectivity < 0.1:
                 counts[0] += 1
@@ -45,47 +42,46 @@ class SentimentObjectivityPlots:
         sentiment_counts = self.count_sentiment()
         subjectivity_counts = self.count_subjectivity()
 
-        # Process the sentiment data
-        sentiment_data = {
-            'label': self.sentiment_labels,
-            'counts': sentiment_counts,
-            'angle': [count/sum(sentiment_counts)*2*pi for count in sentiment_counts],
-            'color': Category20c[len(sentiment_counts)],
-            'percent': [str(round(count/sum(sentiment_counts)*100, 2)) + "%" for count in sentiment_counts],
-        }
+        sentiment_median = np.median(self.sentiment_list)
+        subjectivity_median = np.median(self.subjectivity_list)
 
-        # Process the subjectivity data
-        subjectivity_data = {
-            'label': self.subjectivity_labels,
-            'counts': subjectivity_counts,
-            'angle': [count / sum(subjectivity_counts) * 2 * pi for count in subjectivity_counts],
-            'color': Category20c[len(subjectivity_counts)],
-            'percent': [str(round(count / sum(subjectivity_counts) * 100, 2)) + "%" for count in subjectivity_counts]
-        }
+        fig = make_subplots(rows=2, cols=1,
+                            specs=[[{'type': 'domain'}], [{'type': 'domain'}]], vertical_spacing=0.05, horizontal_spacing=0.05)
 
-        plots = []
-        for data, title in zip([sentiment_data, subjectivity_data], ['Sentiment', 'Subjectivity']):
-            source = ColumnDataSource(data=data)
+        fig.add_trace(go.Pie(labels=self.sentiment_labels,
+                             values=sentiment_counts,
+                             name='Sentiment',
+                             hole=.5,
+                             marker=dict(colors=self.sentiment_colors),
+                             showlegend=False),
+                      row=1, col=1)
 
-            p = figure(tools="hover", tooltips="@percent: @label", x_range=(-.5, .5))
+        fig.add_trace(go.Pie(labels=self.subjectivity_labels,
+                             values=subjectivity_counts,
+                             name='Subjectivity',
+                             hole=.5,
+                             marker=dict(colors=self.subjectivity_colors),
+                             showlegend=False),
+                      row=2, col=1)
 
-            p.annular_wedge(x=0, y=1, inner_radius=0.2, outer_radius=0.4,
-                            start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
-                            line_color="white", fill_color='color', source=source
-                            )
+        # Add annotations in the center of the donuts
+        fig.add_annotation(text='Stimmung: <br> {:.2f}'.format(sentiment_median),
+                           xref='paper', yref='paper',
+                           x=0.5, y=.79, showarrow=False)
+        fig.add_annotation(text='Subjektivität: <br> {:.2f}'.format(subjectivity_median),
+                           xref='paper', yref='paper',
+                           x=0.5, y=.19, showarrow=False)
 
-            p.axis.axis_label=None
-            p.axis.visible=False
-            p.grid.grid_line_color = None
-            p.border_fill_color = None
-            p.outline_line_color = None
+        fig.update_layout(
+            height=450,
+            width=450,
+            margin=dict(l=15, r=0, t=15, b=0),
+            template='plotly_white',
+            # Konfiguration für das Entfernen des Plotly-Logos
+            showlegend=False
+        )
 
-            plots.append(p)
-
-        grid = gridplot(plots, ncols=1, plot_width=250, plot_height=250, toolbar_location=None)
-
-        # Show the plot
-        return grid
+        return fig
 
 
 if '__main__' == __name__:
@@ -102,4 +98,4 @@ if '__main__' == __name__:
     sentiments = df['sentiment']
     subjectivities = df['subjectivity']
     plotter = SentimentObjectivityPlots(sentiments, subjectivities)
-    plotter.plot()
+    fig = plotter.plot()

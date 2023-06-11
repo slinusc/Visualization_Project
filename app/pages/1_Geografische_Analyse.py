@@ -120,10 +120,9 @@ with col4[0]:
 with col4[1]:
     st.set_option('deprecation.showPyplotGlobalUse', False)
     sentiment_plot = sp.SentimentObjectivityPlots(filtered_df['sentiment'], filtered_df['subjectivity'])
-    sentiment_plot.plot()
     st.subheader("Stimmung & Subjektivität")
     st.button('ℹ️', help="")
-    st.bokeh_chart(sentiment_plot.plot())
+    st.plotly_chart(sentiment_plot.plot())
 
 # TOPIC ANALYSIS
 with full_width_col2[0]:

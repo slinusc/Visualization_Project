@@ -21,33 +21,23 @@ class NewspaperCategoryPlot:
         # Liste der Zeitungen
         newspapers = df_category['Medium'].unique()
 
-        # Begrenzen Sie die Anzahl der Zeitungen auf 8, falls es mehr gibt
+        # Begrenzt die Anzahl der Zeitungen auf 8, falls es mehr gibt
         if len(newspapers) > 8:
             newspapers = newspapers[:8]
 
-        # Erzeugen Sie eine subplot Figur mit 2 Reihen und 4 Spalten (für 8 Zeitungen)
         fig = sp.make_subplots(rows=2, cols=4, subplot_titles=newspapers)
 
-        # Fügen Sie für jede Zeitung ein Diagramm hinzu
         for i, newspaper in enumerate(newspapers):
-            # Filtern Sie den DataFrame nach der spezifischen Zeitung
             df_newspaper = df_category[df_category['Medium'] == newspaper]
-
-            # Gruppieren Sie den DataFrame nach Datum und zählen Sie die Anzahl der Artikel
             df_grouped = df_newspaper.groupby('Datum').size().reset_index(name='Anzahl')
 
-            # Bestimmen Sie die Position des Diagramms auf der subplot Figur
             row = i // 4 + 1
             col = i % 4 + 1
 
-            # Erstellen Sie ein Liniendiagramm für die Zeitung und fügen Sie es der subplot Figur hinzu
             fig.add_trace(go.Scatter(x=df_grouped['Datum'], y=df_grouped['Anzahl'], mode='lines', name=newspaper, line=dict(color='#1f77b4')
                                      ), row=row, col=col)
 
-        # Legen Sie die Titel der subplot Figur fest
         fig.update_layout(showlegend=False, plot_bgcolor='white')
-
-        # Setze die Hintergrundfarbe der Achsen auf weiss und entferne die Gitterlinien
         fig.update_xaxes(showgrid=False, gridcolor='white')
         fig.update_yaxes(showgrid=False, gridcolor='white')
         fig.update_layout(showlegend=False, plot_bgcolor='white', width=1100, )
