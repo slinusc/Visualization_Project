@@ -2,6 +2,15 @@ import csv
 
 
 class CountryExtractor:
+    """
+    Extrahiert Länder aus einem Text und übersetzt diese in die englische Sprache. Dafür vergleicht die Methode
+    get_country() die Wörter des Textes mit der Länderliste. Die Methode country_translation() übersetzt die
+    gefundenen Länder in die englische Sprache. Die Länderliste wurde aus dem Wikipedia-Artikel "Liste der Staaten der
+    Erde" extrahiert und mit der Google Translate übersetzt. Die Übersetzungen wurden manuell korrigiert.
+
+    Attribute:
+        country_en_de_dict: Ein Wörterbuch mit den Ländern als Schlüssel und den englischen Übersetzungen als Werte.
+    """
     def __init__(self):
         self.country_en_de_dict = {}
         with open('../data/countries_en_de.csv', 'r', encoding='UTF-8') as file:

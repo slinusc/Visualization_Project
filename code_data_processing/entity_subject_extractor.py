@@ -3,9 +3,25 @@ import csv
 
 class EntityAndSubjectExtractor:
     """
+
     Die Klasse EntityFinder dient zur Extraktion von Entitäten aus Texten.
-    Personen und Nomen werden als Entitäten betrachtet. Ausschlaggebend ist die POS-Tagging-Annotation von Spacy.
-    Es kommt das deutsche Sprachmodell 'de_core_news_sm' zum Einsatz.
+
+    Die Methode extract_entities extrahiert alle Substantive aus einem Text. Die Extraktion erfolgt durch das deutsche
+    Sprachmodell 'de_core_news_lg'.
+
+    Die Methode get_people() extrahiert alle Personen aus einem Text. Die Extraktion erfolgt durch den Vergleich der
+    Wörter des Textes mit der Liste der Personen des öffentlichen Lebens. Die Liste ist eine Zusammenstellung der 1239
+    relevantesten und einflussreichsten Personen des Jahres 2022 aus den Bereichen Politik, Wirtschaft, Sport, Kultur,
+    Medien, Wissenschaft und Gesellschaft.
+
+    Die Methode SubjectFinder dient zur Extraktion von Subjekten aus Texten.
+    Subjekte sind diejenigen Entitäten, die im Satz das Verb bestimmen. Die Extraktion erfolgt durch die Erkennung der
+    Abhängigkeiten zwischen den Wörtern im Satz. Es kommt das deutsche Sprachmodell 'de_core_news_lg' zum Einsatz.
+
+    Attribute:
+        nlp_de: Das deutsche Sprachmodell 'de_core_news_lg' von spaCy.
+        famous_people: Eine Liste der Personen des öffentlichen Lebens.
+
     """
     def __init__(self):
         self.nlp_de = spacy.load('de_core_news_lg')
@@ -33,7 +49,8 @@ class EntityAndSubjectExtractor:
 
     def get_subjects(self, text):
         """
-        Funktioniert nur mit ganzen Sätzen (kein vorheriges Entfernen von Stoppwörtern),
+        Achtung:
+        Funktioniert nur mit ganzen Sätzen (kein vorheriges Entfernen von Stopwörtern),
         da ansonsten die Abhängigkeiten nicht korrekt erkannt werden.
         """
         if isinstance(text, list):

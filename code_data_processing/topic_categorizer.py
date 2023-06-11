@@ -10,7 +10,11 @@ class TopicCategorizer:
     die von Spacy's Sprachmodell 'de_core_news_lg' bereitgestellt wird. Der Wortvektor ist eine mehrdimensionale
     Darstellung eines Worts, die dessen Bedeutung in Bezug auf andere Wörter im Vokabular repräsentiert.
     Die Idee ist, dass Wörter, die in ähnlichen Kontexten vorkommen, ähnliche Bedeutungen haben und daher
-    ähnliche Vektoren haben sollten.
+    ähnliche Vektoren haben sollten. Die Ähnlichkeit zwischen zwei Wörtern wird als Kosinus-Ähnlichkeit berechnet,
+    die den Kosinus des Winkels zwischen zwei Vektoren darstellt. Je näher der Kosinus dem Wert 1 ist, desto ähnlicher
+    sind die Wörter. Es kommt das deutsche Sprachmodell 'de_core_news_lg' zum Einsatz. Dieses muss vorher mit
+    'python -m spacy download de_core_news_sm heruntergeladen werden. Das Modell ist für die
+    Verwendung mit Python 3.8 optimiert.
 
     Attribute:
     - nlp_de (Language): Spacy-Sprachmodell für Deutsch.
