@@ -6,8 +6,6 @@ import sys
 sys.path.insert(0, 'C:/Users/linus/OneDrive/BSc_Data_Science/Semester_2/Data_Visualisation/'
                    'visualization_project/app/classes')
 import relation_chord_chart as rcc
-import sent_sub_obj as sso
-from topic_analysis import TopicAnalysis
 from top_pers_coun import StackedBarPlot
 import sentiment_plot as sp
 

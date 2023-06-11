@@ -10,7 +10,6 @@ class SentimentObjectivityPlots:
         self.sentiment_labels = ['negativ', 'neutral', 'positiv', 'sehr positiv']
         self.subjectivity_labels = ['objektiv', 'eher objektiv', 'eher subjektiv', 'subjektiv']
         self.sentiment_colors = ['#0d47a1', '#2196f3', '#00bcd4', '#4dd0e1']
-        # self.sentiment_colors = ['#d32f2f', '#fbc02d', '#8bc34a', '#4caf50']
         self.subjectivity_colors = ['#0d47a1', '#2196f3', '#00bcd4', '#4dd0e1']
 
     def count_subjectivity(self):

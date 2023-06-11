@@ -7,7 +7,6 @@ sys.path.insert(0, 'C:/Users/linus/OneDrive/BSc_Data_Science/Semester_2/Data_Vis
                    'visualization_project/app/classes')
 import relation_chord_chart as rcc
 import geo_map as gm
-from topic_analysis import TopicAnalysis
 import sentiment_plot as sp
 from top_pers_coun import StackedBarPlot
 

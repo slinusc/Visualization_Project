@@ -8,7 +8,6 @@ from classes.topic_analysis import TopicAnalysis
 st.set_page_config(layout="wide", menu_items={}, )
 
 
-
 def main():
     @st.cache_data
     def load_data():
@@ -151,7 +150,7 @@ def main():
     # TOPIC ANALYSIS
     with full_width_col2[0]:
         st.subheader('Themen Analyse')
-        st.button('ℹ️', help="Die Themen Analyse zeigt die am häufigsten vorkommenden Wörter "
+        st.button('ℹ️', help="Die Themen Analyse zeigt die 20 häufigsten vorkommenden Wörter "
                              "in den Artikeln an.\n\n"
                              " Für weitere Informationen besuchen Sie: "
                              "https://github.com/slinusc/visualization_project/blob/main/README.md")
