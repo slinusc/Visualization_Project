@@ -156,7 +156,7 @@ def main():
                              " Für weitere Informationen besuchen Sie: "
                              "https://github.com/slinusc/visualization_project/blob/main/README.md")
         topic_analysis = TopicAnalysis()
-        st.plotly_chart(topic_analysis.plot_most_common_words(filtered_df['Entitäten Header'], 20), config=config)
+        st.plotly_chart(topic_analysis.plot_most_common_words(filtered_df, 20), config=config)
 
     # DATAFRAME
     with full_width_col3[0]:

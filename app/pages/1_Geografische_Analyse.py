@@ -112,6 +112,10 @@ with right_col:
     bar_chart = StackedBarPlot(filtered_df, filter='country')
     fig = bar_chart.plot()
     st.subheader("")
+    st.button('ℹ️', help="Das Balkendiagramm zeigt die absolute Häufigketi der genannten Länder,"
+                         " horizontal gestapelt erkennt man die Kategorien der Artikel, in welchem sie gennant wurden. \n"
+                         " Für weitere Informationen besuchen Sie: "
+                         "https://github.com/slinusc/visualization_project/blob/main/README.md")
     st.plotly_chart(fig, config=config)
 
 
@@ -138,7 +142,7 @@ with col4[1]:
     st.markdown("  \n")  # Leerzeile für den Abstand
     st.markdown("  \n")  # Leerzeile für den Abstand
     st.markdown("  \n")  # Leerzeile für den Abstand
-    st.plotly_chart(sentiment_plot.plot())
+    st.plotly_chart(sentiment_plot.plot(), config=config)
 
 # TOPIC ANALYSIS
 """
