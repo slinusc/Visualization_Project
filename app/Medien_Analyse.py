@@ -149,13 +149,16 @@ def main():
 
     # TOPIC ANALYSIS
     with full_width_col2[0]:
+        bar_chart = TopicAnalysis(filtered_df)
+        fig = bar_chart.plot()
         st.subheader('Themen Analyse')
         st.button('ℹ️', help="Die Themen Analyse zeigt die 20 häufigsten vorkommenden Wörter "
                              "in den Artikeln an.\n\n"
                              " Für weitere Informationen besuchen Sie: "
                              "https://github.com/slinusc/visualization_project/blob/main/README.md")
-        topic_analysis = TopicAnalysis()
-        st.plotly_chart(topic_analysis.plot_most_common_words(filtered_df, 20), config=config)
+  #      topic_analysis = TopicAnalysis()
+    #    st.plotly_chart(topic_analysis.plot_most_common_words(filtered_df['Entitäten Header'], 20), config=config)
+        st.plotly_chart(fig, config=config)
 
     # DATAFRAME
     with full_width_col3[0]:
