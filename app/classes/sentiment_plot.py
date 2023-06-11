@@ -44,7 +44,7 @@ class SentimentObjectivityPlots:
         subjectivity_counts = self.count_subjectivity()
 
         sentiment_median = np.median(self.sentiment_list)
-        subjectivity_median = np.median(self.subjectivity_list)
+        objectivity_median = 1 - np.median(self.subjectivity_list)
 
         fig = make_subplots(rows=2, cols=1,
                             specs=[[{'type': 'domain'}], [{'type': 'domain'}]], vertical_spacing=0.05, horizontal_spacing=0.05)
@@ -73,7 +73,7 @@ class SentimentObjectivityPlots:
         fig.add_annotation(text='Stimmung: <br> {:.2f}'.format(sentiment_median),
                            xref='paper', yref='paper',
                            x=0.5, y=.8, showarrow=False)
-        fig.add_annotation(text='Subjektivität: <br> {:.2f}'.format(subjectivity_median),
+        fig.add_annotation(text='Objektivität: <br> {:.2f}'.format(objectivity_median),
                            xref='paper', yref='paper',
                            x=0.5, y=.19, showarrow=False)
 
