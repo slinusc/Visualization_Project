@@ -104,7 +104,7 @@ gewinnen. Die folgenden Analysen wurden durchgeführt:
 - Personenextraktion
 - Länderextraktion
 
-## Kategorisierung der Themenbereiche
+### Kategorisierung der Themenbereiche
 Die Kategorisierung erfolgt durch die Berechnung der Ähnlichkeit zwischen dem gegebenen Text und einer vordefinierten
 Gruppe von Schlüsselwörtern für jede Kategorie. Die Ähnlichkeit wird mittels Wortvektor-Ähnlichkeit berechnet,
 die von Spacy's Sprachmodell 'de_core_news_lg' bereitgestellt wird. Der Wortvektor ist eine mehrdimensionale
@@ -116,7 +116,7 @@ sind die Wörter. Es kommt das deutsche Sprachmodell 'de_core_news_lg' zum Einsa
 'python -m spacy download de_core_news_sm heruntergeladen werden. Das Modell ist für die
 Verwendung mit Python 3.8 optimiert.
 
-## Sentimentätsanalyse
+### Sentimentätsanalyse
 Die Sentiment- und Subjektivitätsanalyse wurde mit der SentimentAnalyser Klasse durchgeführt. Dabei greift die 
 Klasse das Modul TextBlob zurück. Textblob ist ein Python Modul, das Texte analysiert und die Ergebnisse in Form von 
 Sentiment Scores zurückgibt. Das Modul ist in der Lage, die Polarity und die Subjectivity eines Textes zu bestimmen. 
@@ -131,7 +131,7 @@ Subjektivität: TextBlob berechnet die Subjektivität eines Textes, um zu bestim
 subjektive Meinung oder eine objektive Tatsache darstellt. Der Wert für Subjektivität liegt zwischen 0 und 1,
 wobei 0 für eine objektive Aussage steht und 1 für eine stark subjektive Aussage.
 
-## Extraktion von Entitäten und Personen
+### Extraktion von Entitäten und Personen
 Die Klasse EntityFinder dient zur Extraktion von Entitäten aus Texten.
 Die Methode extract_entities extrahiert alle Substantive aus einem Text. Die Extraktion erfolgt durch das deutsche
 Sprachmodell 'de_core_news_lg'.
@@ -141,7 +141,7 @@ Wörter des Textes mit der Liste der Personen des öffentlichen Lebens. Die List
 relevantesten und einflussreichsten Personen des Jahres 2022 aus den Bereichen Politik, Wirtschaft, Sport, Kultur,
 Medien, Wissenschaft und Gesellschaft.
 
-## Extratkion von Ländern
+### Extratkion von Ländern
 Die Extraktion von Ländern wurde mit der Klasse country_extractor durchgeführt. Sie extrahiert Länder aus einem Text und übersetzt diese in die englische Sprache. Dafür vergleicht die Methode
 get_country() die Wörter des Textes mit der Länderliste. Die Methode country_translation() übersetzt die
 gefundenen Länder in die englische Sprache. Die Länderliste wurde aus dem Wikipedia-Artikel "Liste der Staaten der
