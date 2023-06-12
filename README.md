@@ -30,17 +30,17 @@ Durch die Verwendung dieser App können Benutzer die Daten nach ihren spezifisch
 
 Die Hauptvorteile der Medienanalyse-Webanwendung sind:
 
-1. **Datenfilterung**: Benutzer können die Daten nach Datum, Kategorie, Zeitung, Land und Personen filtern. Diese Filteroptionen ermöglichen es ihnen, die relevanten Daten für ihre spezifische Analyse auszuwählen und irrelevante Informationen auszublenden.
+- **Datenfilterung**: Benutzer können die Daten nach Datum, Kategorie, Zeitung, Land und Personen filtern. Diese Filteroptionen ermöglichen es ihnen, die relevanten Daten für ihre spezifische Analyse auszuwählen und irrelevante Informationen auszublenden.
 
-2. **Zeitreihenanalyse**: Die App bietet interaktive Liniendiagramme, die es Benutzern ermöglichen, die Entwicklung von Artikeln über die Zeit zu verfolgen. Dies ermöglicht es ihnen, Trends und saisonale Muster in den Medienberichten zu erkennen.
+- **Zeitreihenanalyse**: Die App bietet interaktive Liniendiagramme, die es Benutzern ermöglichen, die Entwicklung von Artikeln über die Zeit zu verfolgen. Dies ermöglicht es ihnen, Trends und saisonale Muster in den Medienberichten zu erkennen.
 
-3. **Kategorienanalyse**: Benutzer können die Anzahl der Artikel nach Kategorien analysieren und verstehen, welche Themen in den Medien dominant sind. Dies kann bei der Beobachtung von Nachrichtentrends und der Identifizierung von Schwerpunkten in der Medienberichterstattung helfen.
+- **Kategorienanalyse**: Benutzer können die Anzahl der Artikel nach Kategorien analysieren und verstehen, welche Themen in den Medien dominant sind. Dies kann bei der Beobachtung von Nachrichtentrends und der Identifizierung von Schwerpunkten in der Medienberichterstattung helfen.
 
-4. **Themenanalyse**: Die App bietet eine detaillierte Themenanalyse, bei der die häufigsten Wörter in den Artikeln identifiziert werden. Dies ermöglicht es Benutzern, die Hauptthemen und Schlagwörter in den Medien zu erkennen und ihr Verständnis für aktuelle Ereignisse zu vertiefen.
+- **Themenanalyse**: Die App bietet eine detaillierte Themenanalyse, bei der die häufigsten Wörter in den Artikeln identifiziert werden. Dies ermöglicht es Benutzern, die Hauptthemen und Schlagwörter in den Medien zu erkennen und ihr Verständnis für aktuelle Ereignisse zu vertiefen.
 
-5. **Geografische Analyse**: Die App ermöglicht es Benutzern, die Nennungen von Ländern in den Medienartikeln zu visualisieren. Dies kann bei der Analyse internationaler Beziehungen und geopolitischer Trends von Bedeutung sein.
+- **Geografische Analyse**: Die App ermöglicht es Benutzern, die Nennungen von Ländern in den Medienartikeln zu visualisieren. Dies kann bei der Analyse internationaler Beziehungen und geopolitischer Trends von Bedeutung sein.
 
-6. **Personenanalyse**: Benutzer können auch die Nennungen von Personen des öffentlichen Lebens in den Medienartikeln analysieren. Dies kann bei der Beobachtung von Trends in der Berichterstattung über bestimmte Personen und deren Einfluss in den Medien hilfreich sein.
+- **Personenanalyse**: Benutzer können auch die Nennungen von Personen des öffentlichen Lebens in den Medienartikeln analysieren. Dies kann bei der Beobachtung von Trends in der Berichterstattung über bestimmte Personen und deren Einfluss in den Medien hilfreich sein.
 
 Die Medienanalyse-Webanwendung bietet somit eine umfassende Plattform zur Untersuchung von Medienartikeln und ermöglicht es Benutzern, datengesteuerte Erkenntnisse zu gewinnen. Sie kann von Forschern, Journalisten, Medienexperten und allen interessierten Personen genutzt werden, um ein besseres Verständnis der Medienlandschaft zu erlangen und fundierte Entscheidungen zu treffen.
 
@@ -75,9 +75,9 @@ annten Personen zeigt. Die Balken sind vertikal gestapelt, um die Kategorien der
 
 12. **Beziehung zwischen Personen des öffentlichen Lebens**: Hier wird ein Chord-Diagramm angezeigt, das die Beziehungen zwischen den ausgewählten Personen des öffentlichen Lebens visualisiert. Eine Beziehung besteht, wenn zwei Personen in einem Artikel gemeinsam erwähnt werden. Die Stärke der Beziehung wird durch die Breite der Bänder im Diagramm dargestellt.
  
-13. **Sentimentanalyse**
+13. **Sentimentanalyse**: Die Visualisierung zeigt die Anzahl der positiven, neutralen und negativen Artikel an. Die Sentimentanalyse wird mit Hilfe des Natural Language Processing (NLP) Modells von TextBlob durchgeführt. Zusätzlich ist der Median der Stimmung des Zeitraumes als Kennzahl im Diagramm angegeben. Die Stimmung variiert in einem Bereich von -1 (sehr negativ) bis 1 (sehr positiv).
 
-14. **Subjektivitätsanalyse**
+14. **Subjektivitätsanalyse**: Die Visualisierung zeigt die Tendenzen der Subjektivität bzw. Objektivität in den gefilterten Artikeln an. Die Subjektivitätsanalyse wird mit Hilfe des Natural Language Processing (NLP) Modells von TextBlob durchgeführt. Zusätzlich ist der Median der Subjektivität des Zeitraumes als Kennzahl im Diagramm angegeben. Die Subjektivität variiert in einem Bereich von 0 (objektiv) bis 1 (subjektiv).
 
 Zusätzlich zu den Funktionen gibt es einen Hilfsbutton mit dem ℹ️ Symbol, der weitere Informationen und Anleitungen zu den einzelnen Funktionen bietet. Der Benutzer kann darauf klicken, um detaillierte Informationen zur Verwendung der Funktionen zu erhalten.
 
