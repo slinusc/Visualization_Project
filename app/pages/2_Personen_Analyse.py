@@ -1,13 +1,10 @@
 import streamlit as st
 import pandas as pd
 import holoviews as hv
-import sys
 
-sys.path.insert(0, 'C:/Users/linus/OneDrive/BSc_Data_Science/Semester_2/Data_Visualisation/'
-                   'visualization_project/app/classes')
-import relation_chord_chart as rcc
-from top_pers_coun import StackedBarPlot
-import sentiment_plot as sp
+import classes.relation_chord_chart as rcc
+from classes.top_pers_coun import StackedBarPlot
+import classes.sentiment_plot as sp
 
 
 @st.cache_data

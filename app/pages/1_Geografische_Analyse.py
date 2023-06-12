@@ -1,13 +1,11 @@
 import streamlit as st
 import pandas as pd
 import holoviews as hv
-import sys
 
-sys.path.insert(0, 'C:/Users/andre/Git_ripository/visualization_project/app/classes')
-import relation_chord_chart as rcc
-import geo_map as gm
-import sentiment_plot as sp
-from top_pers_coun import StackedBarPlot
+import classes.relation_chord_chart as rcc
+import classes.geo_map as gm
+import classes.sentiment_plot as sp
+import classes.top_pers_coun as tpc
 
 
 @st.cache_data
@@ -100,7 +98,7 @@ with left_col:
 
 # TOP 10 LÄNDER
 with right_col:
-    bar_chart = StackedBarPlot(filtered_df, filter='country')
+    bar_chart = tpc.StackedBarPlot(filtered_df, filter='country')
     fig = bar_chart.plot()
     st.button('ℹ️', help="Das Balkendiagramm zeigt die absolute Häufigkeit der genannten Länder,"
                          "horizontal gestapelt erkennt man die Kategorien der Artikel, in welchem sie gennant wurden. "
