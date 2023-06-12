@@ -18,6 +18,8 @@ Dieses Projekt erfordert Python 3.6+ und die folgenden Python-Bibliotheken müss
 - matplotlib
 - numpy
 
+Die Versionen der jeweiligen Module finden Sie: https://github.com/slinusc/new_dashboard_project/blob/main/app/requirements.txt
+
 ## Einführung
 Das News Dashboard Projekt ist eine Streamlit Web-App, die Nachrichtendaten visualisiert. Es ermöglicht eine umfassende Analyse verschiedener Aspekte wie Themenanalyse, Sentimentanalyse, Subjektivität und ein Relation Chord Diagramm.
 Datenquelle
