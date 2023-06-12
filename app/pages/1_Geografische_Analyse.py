@@ -2,10 +2,10 @@ import streamlit as st
 import pandas as pd
 import holoviews as hv
 
-from classes import relation_chord_chart as rcc
-from classes import geo_map as gm
-from classes import sentiment_plot as sp
-from classes import top_pers_coun as tpc
+import classes.relation_chord_chart as rcc
+import classes.geo_map as gm
+import classes.sentiment_plot as sp
+import classes.top_pers_coun as tpc
 
 
 @st.cache_data

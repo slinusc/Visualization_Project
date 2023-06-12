@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import holoviews as hv
-import sys
 
 import classes.relation_chord_chart as rcc
 from classes.top_pers_coun import StackedBarPlot
