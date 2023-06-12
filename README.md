@@ -141,11 +141,12 @@ Wörter des Textes mit der Liste der Personen des öffentlichen Lebens. Die List
 relevantesten und einflussreichsten Personen des Jahres 2022 aus den Bereichen Politik, Wirtschaft, Sport, Kultur,
 Medien, Wissenschaft und Gesellschaft.
 
-### Extratkion von Ländern
+### Extraktion von Ländern
 Die Extraktion von Ländern wurde mit der Klasse country_extractor durchgeführt. Sie extrahiert Länder aus einem Text und übersetzt diese in die englische Sprache. Dafür vergleicht die Methode
 get_country() die Wörter des Textes mit der Länderliste. Die Methode country_translation() übersetzt die
 gefundenen Länder in die englische Sprache. Die Länderliste wurde aus dem Wikipedia-Artikel "Liste der Staaten der
 Erde" extrahiert und mit der Google Translate übersetzt. Die Übersetzungen wurden manuell korrigiert.
 
+### Weiteres
 Wenn Sie mehr über die Datenaufbereitung erfahren möchten, werfen Sie bitte einen Blick auf das Jupyter Notebook mit dem Namen "data_processing_pipeline.ipynb".
 https://github.com/slinusc/new_dashboard_project/blob/main/code_data_processing/data_processing_pipeline.ipynb
