@@ -60,7 +60,7 @@ Die Medienanalyse-Webanwendung umfasst folgende Funktionalitäten:
 
 5. **Personenfilter**: Der Benutzer kann eine oder mehrere Personen des öffentlichen Lebens auswählen, um die Daten auf der Seite entsprechend zu filtern. Es werden auch Personen angezeigt, die zusammen mit der ausgewählten Person in den Daten vorkommen.
 
-6. **Anzahl Artikel nach Kategorien**: In diesem Abschnitt wird ein interaktives Liniendiagramm angezeigt, das die Anzahl der Artikel nach Kategorien an verschiedenen ausgewählten Daten darstellt.
+6. **Anzahl Artikel nach Kategorien**: In diesem Abschnitt wird ein interaktives Liniendiagramm angezeigt, das die Anzahl der Artikel nach Kategorien an verschiedenen ausgewählten Daten als Zeitreihe darstellt.
 
 7. **Anzahl Artikel nach Zeitung**: Hier wird ein interaktives Liniendiagramm angezeigt, das die Anzahl der Artikel nach Zeitungen aufschlüsselt. Der Benutzer kann die genaue Anzahl der Artikel für jede Zeitung an einem bestimmten Datum sehen.
 
