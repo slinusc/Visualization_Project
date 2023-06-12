@@ -44,6 +44,13 @@ Der erste Schritt bestand darin, die Daten zu laden und einige Vorverarbeitungss
 
 ## Datenaufbereitung
 
+Die etwa 150'000 Zeitungsartikel wurden in einem ersten Schritt von redundanten Spalten befreit und Sonderzeichen und
+Stopwörter entfernt. Anschliessend wurden diverse Analysen durchgeführt, um Informationen über die Artikel zu
+gewinnen. Die folgenden Analysen wurden durchgeführt:
+- Kategorisierung der Themenbereiche
+- Sentiment- /Subjektivitätsanalyse
+- Entitätenextraktion
+- Länderextraktion
 
 ## Kategorisierung der Themenbereiche
 Die Kategorisierung erfolgt durch die Berechnung der Ähnlichkeit zwischen dem gegebenen Text und einer vordefinierten
@@ -93,3 +100,4 @@ gefundenen Länder in die englische Sprache. Die Länderliste wurde aus dem Wiki
 Erde" extrahiert und mit der Google Translate übersetzt. Die Übersetzungen wurden manuell korrigiert.
 
 Wenn Sie mehr über die Datenaufbereitung erfahren möchten, werfen Sie bitte einen Blick auf das Jupyter Notebook mit dem Namen "data_processing_pipeline.ipynb".
+https://github.com/slinusc/new_dashboard_project/blob/main/code_data_processing/data_processing_pipeline.ipynb
