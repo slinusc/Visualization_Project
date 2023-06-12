@@ -89,8 +89,9 @@ Die Datenbeschaffung erfolgt durch eine Kooperation zwischen LiRI und SMD (Schwe
 
 ## Nutzungsbedingungen
 Die Nutzung der Daten ist strikt auf Forschungs- und akademische Zwecke beschränkt. Eine kommerzielle Nutzung der Daten sowie jegliche Derivate sind nicht erlaubt. Zudem dürfen die Daten nur für das angegebene Forschungsprojekt verwendet und nicht mit Dritten geteilt werden. Die Daten dürfen nur lokal auf Geräten der Forscher und Studierenden oder auf der Infrastruktur des Vertragspartners (akademische Institution) gespeichert werden. Insbesondere ist die Speicherung auf Cloud-Plattformen Dritter nicht gestattet.
-Datenverarbeitung
 
+
+## Datenverarbeitung
 Der erste Schritt bestand darin, die Daten zu laden und einige Vorverarbeitungsschritte durchzuführen, um unerwünschte Spalten zu entfernen. Danach wurde eine Textvorverarbeitung auf den Inhalt der Artikel angewendet, und anschließend wurde eine Länderextraktion durchgeführt, um zu erkennen, welche Länder in den Artikeln erwähnt werden. Es folgte eine Sentiment-Analyse, um die Polarität und Subjektivität der Artikel zu bestimmen. Als nächstes wurde eine Kategorisierung der Themen der Artikel durchgeführt und Entitäten wurden aus den Artikeltiteln extrahiert. Zuletzt wurden die Ländernamen übersetzt und Personen aus dem verarbeiteten Inhalt extrahiert. Die Daten wurden während der Analyse mehrmals gespeichert, um die Ergebnisse zu sichern und die Reproduzierbarkeit zu gewährleisten.
 
 ## Datenaufbereitung
