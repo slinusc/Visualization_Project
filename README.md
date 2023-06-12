@@ -23,20 +23,30 @@ Dieses Projekt erfordert Python 3.6+ und die folgenden Python-Bibliotheken müss
 Die Versionen der jeweiligen Module finden Sie: https://github.com/slinusc/new_dashboard_project/blob/main/app/requirements.txt
 
 ## Einführung
-Das News Dashboard Projekt ist eine Streamlit Web-App, die Nachrichtendaten visualisiert. Es ermöglicht eine umfassende Analyse verschiedener Aspekte wie Themenanalyse, Sentimentanalyse, Subjektivität und ein Relation Chord Diagramm.
-Datenquelle
 
-Die Daten für dieses Projekt stammen aus der Swissdox@LiRI-Datenbank, die etwa 23 Millionen veröffentlichte Medienartikel aus einer Vielzahl von Schweizer Medienquellen enthält. Die Quellen umfassen sowohl Print- als auch Digitalmedien und decken viele Jahrzehnte ab. Täglich werden etwa 5000 bis 6000 neue Artikel hinzugefügt. Die Daten werden von CH Media, NZZ Mediengruppe, Ringier, Ringier Axel Springer Schweiz und TX Group (Tamedia), SRF/SRG und Wochenzeitung bereitgestellt, insgesamt 250 Quellen mit geplanter weiterer Expansion.
+Die Medienanalyse-Webanwendung ist ein Tool zur Untersuchung und Visualisierung von Medienartikeln. Sie ermöglicht es Benutzern, umfassende Analysen durchzuführen und wertvolle Einblicke in die Welt der Medien zu gewinnen.
 
-Die Datenbeschaffung erfolgt durch eine Kooperation zwischen LiRI und SMD (Schweizer Mediendatenbank AG). Die Initiative wurde von Prof. Dr. Noah Bubenhofer, Prof. Dr. Fabrizio Gilardi (UZH) und Roberto Nespeca (SMD) ins Leben gerufen und wird von der Universität Zürich UZH (Technologieplattform-Kommission) und den folgenden Unterstützern finanziert: Zürcher Hochschule für Angewandte Wissenschaften (Abteilung für Angewandte Linguistik), Universität Basel/Universitätsbibliothek Basel, ETHZ Bibliothek, Universitätsbibliothek Bern.
+Durch die Verwendung dieser App können Benutzer die Daten nach ihren spezifischen Anforderungen filtern und verschiedene Visualisierungen und Diagramme nutzen, um Trends, Muster und Zusammenhänge in den Medienartikeln zu erkennen. Die App bietet eine benutzerfreundliche Oberfläche, die es auch unerfahrenen Benutzern ermöglicht, die Analyse von Medienartikeln durchzuführen und aussagekräftige Ergebnisse zu erzielen.
 
-## Nutzungsbedingungen
-Die Nutzung der Daten ist strikt auf Forschungs- und akademische Zwecke beschränkt. Eine kommerzielle Nutzung der Daten sowie jegliche Derivate sind nicht erlaubt. Zudem dürfen die Daten nur für das angegebene Forschungsprojekt verwendet und nicht mit Dritten geteilt werden. Die Daten dürfen nur lokal auf Geräten der Forscher und Studierenden oder auf der Infrastruktur des Vertragspartners (akademische Institution) gespeichert werden. Insbesondere ist die Speicherung auf Cloud-Plattformen Dritter nicht gestattet.
-Datenverarbeitung
+Die Hauptvorteile der Medienanalyse-Webanwendung sind:
 
-Der erste Schritt bestand darin, die Daten zu laden und einige Vorverarbeitungsschritte durchzuführen, um unerwünschte Spalten zu entfernen. Danach wurde eine Textvorverarbeitung auf den Inhalt der Artikel angewendet, und anschließend wurde eine Länderextraktion durchgeführt, um zu erkennen, welche Länder in den Artikeln erwähnt werden. Es folgte eine Sentiment-Analyse, um die Polarität und Subjektivität der Artikel zu bestimmen. Als nächstes wurde eine Kategorisierung der Themen der Artikel durchgeführt und Entitäten wurden aus den Artikeltiteln extrahiert. Zuletzt wurden die Ländernamen übersetzt und Personen aus dem verarbeiteten Inhalt extrahiert. Die Daten wurden während der Analyse mehrmals gespeichert, um die Ergebnisse zu sichern und die Reproduzierbarkeit zu gewährleisten.
+1. **Datenfilterung**: Benutzer können die Daten nach Datum, Kategorie, Zeitung, Land und Personen filtern. Diese Filteroptionen ermöglichen es ihnen, die relevanten Daten für ihre spezifische Analyse auszuwählen und irrelevante Informationen auszublenden.
 
-## Funktionalitäten
+2. **Zeitreihenanalyse**: Die App bietet interaktive Liniendiagramme, die es Benutzern ermöglichen, die Entwicklung von Artikeln über die Zeit zu verfolgen. Dies ermöglicht es ihnen, Trends und saisonale Muster in den Medienberichten zu erkennen.
+
+3. **Kategorienanalyse**: Benutzer können die Anzahl der Artikel nach Kategorien analysieren und verstehen, welche Themen in den Medien dominant sind. Dies kann bei der Beobachtung von Nachrichtentrends und der Identifizierung von Schwerpunkten in der Medienberichterstattung helfen.
+
+4. **Themenanalyse**: Die App bietet eine detaillierte Themenanalyse, bei der die häufigsten Wörter in den Artikeln identifiziert werden. Dies ermöglicht es Benutzern, die Hauptthemen und Schlagwörter in den Medien zu erkennen und ihr Verständnis für aktuelle Ereignisse zu vertiefen.
+
+5. **Geografische Analyse**: Die App ermöglicht es Benutzern, die Nennungen von Ländern in den Medienartikeln zu visualisieren. Dies kann bei der Analyse internationaler Beziehungen und geopolitischer Trends von Bedeutung sein.
+
+6. **Personenanalyse**: Benutzer können auch die Nennungen von Personen des öffentlichen Lebens in den Medienartikeln analysieren. Dies kann bei der Beobachtung von Trends in der Berichterstattung über bestimmte Personen und deren Einfluss in den Medien hilfreich sein.
+
+Die Medienanalyse-Webanwendung bietet somit eine umfassende Plattform zur Untersuchung von Medienartikeln und ermöglicht es Benutzern, datengesteuerte Erkenntnisse zu gewinnen. Sie kann von Forschern, Journalisten, Medienexperten und allen interessierten Personen genutzt werden, um ein besseres Verständnis der Medienlandschaft zu erlangen und fundierte Entscheidungen zu treffen.
+
+Starten Sie jetzt die Medienanalyse-Webanwendung und tauchen Sie ein in die faszinierende Welt der Medienanalyse!
+
+## Erklärung der Funktionalitäten
 
 Die Medienanalyse-Webanwendung umfasst folgende Funktionalitäten:
 
@@ -64,8 +74,24 @@ Die Medienanalyse-Webanwendung umfasst folgende Funktionalitäten:
 annten Personen zeigt. Die Balken sind vertikal gestapelt, um die Kategorien der Artikel zu zeigen, in denen die Personen erwähnt wurden.
 
 12. **Beziehung zwischen Personen des öffentlichen Lebens**: Hier wird ein Chord-Diagramm angezeigt, das die Beziehungen zwischen den ausgewählten Personen des öffentlichen Lebens visualisiert. Eine Beziehung besteht, wenn zwei Personen in einem Artikel gemeinsam erwähnt werden. Die Stärke der Beziehung wird durch die Breite der Bänder im Diagramm dargestellt.
+ 
+13. **Sentimentanalyse**
+
+14. **Subjektivitätsanalyse**
 
 Zusätzlich zu den Funktionen gibt es einen Hilfsbutton mit dem ℹ️ Symbol, der weitere Informationen und Anleitungen zu den einzelnen Funktionen bietet. Der Benutzer kann darauf klicken, um detaillierte Informationen zur Verwendung der Funktionen zu erhalten.
+
+## Daten
+
+Die Daten für dieses Projekt stammen aus der Swissdox@LiRI-Datenbank, die etwa 23 Millionen veröffentlichte Medienartikel aus einer Vielzahl von Schweizer Medienquellen enthält. Die Quellen umfassen sowohl Print- als auch Digitalmedien und decken viele Jahrzehnte ab. Täglich werden etwa 5000 bis 6000 neue Artikel hinzugefügt. Die Daten werden von CH Media, NZZ Mediengruppe, Ringier, Ringier Axel Springer Schweiz und TX Group (Tamedia), SRF/SRG und Wochenzeitung bereitgestellt, insgesamt 250 Quellen mit geplanter weiterer Expansion.
+
+Die Datenbeschaffung erfolgt durch eine Kooperation zwischen LiRI und SMD (Schweizer Mediendatenbank AG). Die Initiative wurde von Prof. Dr. Noah Bubenhofer, Prof. Dr. Fabrizio Gilardi (UZH) und Roberto Nespeca (SMD) ins Leben gerufen und wird von der Universität Zürich UZH (Technologieplattform-Kommission) und den folgenden Unterstützern finanziert: Zürcher Hochschule für Angewandte Wissenschaften (Abteilung für Angewandte Linguistik), Universität Basel/Universitätsbibliothek Basel, ETHZ Bibliothek, Universitätsbibliothek Bern.
+
+## Nutzungsbedingungen
+Die Nutzung der Daten ist strikt auf Forschungs- und akademische Zwecke beschränkt. Eine kommerzielle Nutzung der Daten sowie jegliche Derivate sind nicht erlaubt. Zudem dürfen die Daten nur für das angegebene Forschungsprojekt verwendet und nicht mit Dritten geteilt werden. Die Daten dürfen nur lokal auf Geräten der Forscher und Studierenden oder auf der Infrastruktur des Vertragspartners (akademische Institution) gespeichert werden. Insbesondere ist die Speicherung auf Cloud-Plattformen Dritter nicht gestattet.
+Datenverarbeitung
+
+Der erste Schritt bestand darin, die Daten zu laden und einige Vorverarbeitungsschritte durchzuführen, um unerwünschte Spalten zu entfernen. Danach wurde eine Textvorverarbeitung auf den Inhalt der Artikel angewendet, und anschließend wurde eine Länderextraktion durchgeführt, um zu erkennen, welche Länder in den Artikeln erwähnt werden. Es folgte eine Sentiment-Analyse, um die Polarität und Subjektivität der Artikel zu bestimmen. Als nächstes wurde eine Kategorisierung der Themen der Artikel durchgeführt und Entitäten wurden aus den Artikeltiteln extrahiert. Zuletzt wurden die Ländernamen übersetzt und Personen aus dem verarbeiteten Inhalt extrahiert. Die Daten wurden während der Analyse mehrmals gespeichert, um die Ergebnisse zu sichern und die Reproduzierbarkeit zu gewährleisten.
 
 ## Datenaufbereitung
 
