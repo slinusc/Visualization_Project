@@ -42,6 +42,16 @@ Der erste Schritt bestand darin, die Daten zu laden und einige Vorverarbeitungss
  - Subjektivitätsanalyse: Visualisiert die Objektivität der Artikel. Der Wert reicht von 0 (sehr objektiv) bis 1 (sehr subjektiv).
  - Themenanalyse: Zeigt die am häufigsten vorkommenden Wörter in den Artikeln.
 
+## Datenaufbereitung
+
+Die etwa 150'000 Zeitungsartikel wurden in einem ersten Schritt von redundanten Spalten befreit und Sonderzeichen und
+Stopwörter entfernt. Anschliessend wurden diverse Analysen durchgeführt, um Informationen über die Artikel zu
+gewinnen. Die folgenden Analysen wurden durchgeführt:
+- Kategorisierung der Themenbereiche
+- Sentiment- /Subjektivitätsanalyse
+- Entitätenextraktion
+- Länderextraktion
+
 ## Kategorisierung der Themenbereiche
 Die Kategorisierung erfolgt durch die Berechnung der Ähnlichkeit zwischen dem gegebenen Text und einer vordefinierten
 Gruppe von Schlüsselwörtern für jede Kategorie. Die Ähnlichkeit wird mittels Wortvektor-Ähnlichkeit berechnet,
@@ -54,11 +64,13 @@ sind die Wörter. Es kommt das deutsche Sprachmodell 'de_core_news_lg' zum Einsa
 'python -m spacy download de_core_news_sm heruntergeladen werden. Das Modell ist für die
 Verwendung mit Python 3.8 optimiert.
 
-Attribute:
-    - nlp_de (Language): Spacy-Sprachmodell für Deutsch.
-    - topics (dict): Ein Dictionary, das jede Kategorie ihren Schlüsselwörtern zuordnet.
-
 ## Sentimentätsanalyse
+Die Sentiment- und Subjektivitätsanalyse wurde mit der SentimentAnalyser Klasse durchgeführt. Dabei greift die 
+Klasse das Modul TextBlob zurück. Textblob ist ein Python Modul, das Texte analysiert und die Ergebnisse in Form von 
+Sentiment Scores zurückgibt. Das Modul ist in der Lage, die Polarity und die Subjectivity eines Textes zu bestimmen. 
+Die Polarity gibt an, ob ein Text positiv oder negativ ist. Die Subjectivity gibt an, ob ein Text subjektiv oder 
+objektiv ist. Das macht es, mithilfe eines Naive Bayes Classifiers, der auf einem vortrainierten Modell basiert.
+
 Polarität: TextBlob berechnet die Polarität eines Textes, um zu bestimmen, ob der Text positiv, negativ
 oder neutral ist. Der Polaritätswert liegt zwischen -1 und 1, wobei -1 für eine stark negative Aussage steht,
 1 für eine stark positive Aussage und 0 für eine neutrale Aussage.
@@ -82,12 +94,10 @@ Subjekte sind diejenigen Entitäten, die im Satz das Verb bestimmen. Die Extrakt
 Abhängigkeiten zwischen den Wörtern im Satz. Es kommt das deutsche Sprachmodell 'de_core_news_lg' zum Einsatz.
 
 ## Extratkion von Ländern
-Extrahiert Länder aus einem Text und übersetzt diese in die englische Sprache. Dafür vergleicht die Methode
+Die Extraktion von Ländern wurde mit der Klasse country_extractor durchgeführt. Sie extrahiert Länder aus einem Text und übersetzt diese in die englische Sprache. Dafür vergleicht die Methode
 get_country() die Wörter des Textes mit der Länderliste. Die Methode country_translation() übersetzt die
 gefundenen Länder in die englische Sprache. Die Länderliste wurde aus dem Wikipedia-Artikel "Liste der Staaten der
 Erde" extrahiert und mit der Google Translate übersetzt. Die Übersetzungen wurden manuell korrigiert.
 
-Attribute: country_en_de_dict: Ein Wörterbuch mit den Ländern als Schlüssel und den englischen Übersetzungen als Werte.
-
-## Datenaufbereitung
 Wenn Sie mehr über die Datenaufbereitung erfahren möchten, werfen Sie bitte einen Blick auf das Jupyter Notebook mit dem Namen "data_processing_pipeline.ipynb".
+https://github.com/slinusc/new_dashboard_project/blob/main/code_data_processing/data_processing_pipeline.ipynb
