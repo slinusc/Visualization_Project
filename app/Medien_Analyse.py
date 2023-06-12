@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
-from classes.linechart_categories import LinechartCategories
-from classes.multiple_line_chart_medium import NewspaperCategoryPlot
-from classes.topic_analysis import TopicAnalysis
+from pages.classes.linechart_categories import LinechartCategories
+from pages.classes.multiple_line_chart_medium import NewspaperCategoryPlot
+from pages.classes.topic_analysis import TopicAnalysis
 
 st.set_page_config(layout="wide", menu_items={}, )
 
