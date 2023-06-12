@@ -1,4 +1,20 @@
 # News Dashboard Projekt
+
+## Installation und Ausführung
+1. Klonen Sie das Repository auf Ihren lokalen Computer.
+2. Installieren Sie die benötigten Python-Bibliotheken, indem Sie pip install -r requirements.txt in Ihrem Terminal ausführen.
+3. Navigieren Sie zu dem Verzeichnis, in dem sich die Datei Medien_Analyse.py befindet.
+4. Führen Sie streamlit run Medien_Analyse.py in Ihrem Terminal aus, um die Web-App zu starten.
+5. Öffnen Sie Ihren Webbrowser und navigieren Sie zu der angegebenen URL (normalerweise http://localhost:8501).
+6. Wir empfehlen die Verwendung des 'Light modes' im Browser.
+
+## Anforderungen
+Dieses Projekt erfordert Python 3.6+ und die folgenden Python-Bibliotheken müssen installiert sein:
+- pandas
+- streamlit
+- holoviews
+- plotly
+
 ## Einführung
 Das News Dashboard Projekt ist eine Streamlit Web-App, die Nachrichtendaten visualisiert. Es ermöglicht eine umfassende Analyse verschiedener Aspekte wie Themenanalyse, Sentimentanalyse, Subjektivität und ein Relation Chord Diagramm.
 Datenquelle
@@ -67,20 +83,6 @@ gefundenen Länder in die englische Sprache. Die Länderliste wurde aus dem Wiki
 Erde" extrahiert und mit der Google Translate übersetzt. Die Übersetzungen wurden manuell korrigiert.
 
 Attribute: country_en_de_dict: Ein Wörterbuch mit den Ländern als Schlüssel und den englischen Übersetzungen als Werte.
-
-## Installation und Ausführung
-1. Klonen Sie das Repository auf Ihren lokalen Computer.
-2. Installieren Sie die benötigten Python-Bibliotheken, indem Sie pip install -r requirements.txt in Ihrem Terminal ausführen.
-3. Navigieren Sie zu dem Verzeichnis, in dem sich die Datei main.py befindet.
-4. Führen Sie streamlit run main.py in Ihrem Terminal aus, um die Web-App zu starten.
-5. Öffnen Sie Ihren Webbrowser und navigieren Sie zu der angegebenen URL (normalerweise http://localhost:8501).
-
-## Anforderungen
-Dieses Projekt erfordert Python 3.6+ und die folgenden Python-Bibliotheken müssen installiert sein:
-- pandas
-- streamlit
-- holoviews
-- plotly
 
 ## Datenaufbereitung
 Wenn Sie mehr über die Datenaufbereitung erfahren möchten, werfen Sie bitte einen Blick auf das Jupyter Notebook mit dem Namen "data_processing_pipeline.ipynb".
