@@ -1,4 +1,6 @@
-# News Dashboard Projekt
+# Medienanalyse-Webanwendung
+
+Die Medienanalyse-Webanwendung ermöglicht es Benutzern, eine umfangreiche Analyse von Medienartikeln durchzuführen. Die Anwendung bietet verschiedene Funktionen zur Datenvisualisierung und Filterung, um den Benutzern einen detaillierten Einblick in die Daten zu ermöglichen.
 
 ## Installation und Ausführung
 1. Klonen Sie das Repository auf Ihren lokalen Computer.
@@ -34,13 +36,36 @@ Datenverarbeitung
 
 Der erste Schritt bestand darin, die Daten zu laden und einige Vorverarbeitungsschritte durchzuführen, um unerwünschte Spalten zu entfernen. Danach wurde eine Textvorverarbeitung auf den Inhalt der Artikel angewendet, und anschließend wurde eine Länderextraktion durchgeführt, um zu erkennen, welche Länder in den Artikeln erwähnt werden. Es folgte eine Sentiment-Analyse, um die Polarität und Subjektivität der Artikel zu bestimmen. Als nächstes wurde eine Kategorisierung der Themen der Artikel durchgeführt und Entitäten wurden aus den Artikeltiteln extrahiert. Zuletzt wurden die Ländernamen übersetzt und Personen aus dem verarbeiteten Inhalt extrahiert. Die Daten wurden während der Analyse mehrmals gespeichert, um die Ergebnisse zu sichern und die Reproduzierbarkeit zu gewährleisten.
 
-## Funktionen
- - Datumauswahl: Wählen Sie ein bestimmtes Datum, um Nachrichtendaten von diesem Datum zu visualisieren.
- - Kategorieauswahl: Filtern Sie die Nachrichtenartikel nach ihrer Kategorie.
- - Chord-Diagramm: Dies visualisiert die Beziehungen zwischen den in den Artikeln erwähnten Personen.
- - Sentiment-Analyse: Zeigt den Sentiment-Wert der Artikel. Der Wert reicht von -1 (sehr negativ) bis 1 (sehr positiv).
- - Subjektivitätsanalyse: Visualisiert die Objektivität der Artikel. Der Wert reicht von 0 (sehr objektiv) bis 1 (sehr subjektiv).
- - Themenanalyse: Zeigt die am häufigsten vorkommenden Wörter in den Artikeln.
+## Funktionalitäten
+
+Die Medienanalyse-Webanwendung umfasst folgende Funktionalitäten:
+
+1. **Datumswahl**: Der Benutzer kann ein beliebiges Datum auswählen, um die Daten auf der Seite entsprechend einzuschränken. Die verfügbaren Daten reichen von Januar 2022 bis Dezember 2022.
+
+2. **Kategorieauswahl**: Der Benutzer kann eine oder mehrere Kategorien auswählen, um die Daten auf der Seite nach bestimmten Artikelkategorien zu filtern. Es stehen verschiedene Kategorien zur Auswahl, und der Benutzer kann "Alle" auswählen, um alle Kategorien anzuzeigen.
+
+3. **Zeitungsfilter**: Der Benutzer kann eine oder mehrere Zeitungen auswählen, um die angezeigten Daten auf der Seite entsprechend zu filtern. Es stehen acht verschiedene Zeitungen zur Auswahl, und der Benutzer kann "Alle" auswählen, um alle Zeitungen anzuzeigen.
+
+4. **Länderfilter**: Der Benutzer kann eine oder mehrere Länder auswählen, um die Daten auf der Seite entsprechend zu filtern. Es werden auch Länder angezeigt, die zusammen mit dem ausgewählten Land in den Daten vorkommen.
+
+5. **Personenfilter**: Der Benutzer kann eine oder mehrere Personen des öffentlichen Lebens auswählen, um die Daten auf der Seite entsprechend zu filtern. Es werden auch Personen angezeigt, die zusammen mit der ausgewählten Person in den Daten vorkommen.
+
+6. **Anzahl Artikel nach Kategorien**: In diesem Abschnitt wird ein interaktives Liniendiagramm angezeigt, das die Anzahl der Artikel nach Kategorien an verschiedenen ausgewählten Daten darstellt.
+
+7. **Anzahl Artikel nach Zeitung**: Hier wird ein interaktives Liniendiagramm angezeigt, das die Anzahl der Artikel nach Zeitungen aufschlüsselt. Der Benutzer kann die genaue Anzahl der Artikel für jede Zeitung an einem bestimmten Datum sehen.
+
+8. **Themenanalyse**: In diesem Abschnitt wird eine Themenanalyse durchgeführt, bei der die 20 häufigsten Wörter in den Artikeln angezeigt werden. Die Wörter werden in einem Balkendiagramm dargestellt, wobei die Höhe der Balken die Häufigkeit der Wörter repräsentiert.
+
+9. **Die häufigst vorkommenden Länder**: In diesem Abschnitt wird ein gestapeltes Balkendiagramm angezeigt, das die absolute Häufigkeit der genannten Länder zeigt. Die Balken sind vertikal gestapelt, um die Kategorien der Artikel zu zeigen, in denen die Länder erwähnt wurden.
+
+10. **Beziehung zwischen Ländern**: Hier wird ein Chord-Diagramm angezeigt, das die Beziehungen zwischen den ausgewählten Ländern visualisiert. Eine Beziehung besteht, wenn zwei Länder in einem Artikel gemeinsam erwähnt werden. Die Stärke der Beziehung wird durch die Breite der Bänder im Diagramm dargestellt.
+
+11. **Die häufigst vorkommenden Personen**: In diesem Abschnitt wird ein gestapeltes Balkendiagramm angezeigt, das die absolute Häufigkeit der gen
+annten Personen zeigt. Die Balken sind vertikal gestapelt, um die Kategorien der Artikel zu zeigen, in denen die Personen erwähnt wurden.
+
+12. **Beziehung zwischen Personen des öffentlichen Lebens**: Hier wird ein Chord-Diagramm angezeigt, das die Beziehungen zwischen den ausgewählten Personen des öffentlichen Lebens visualisiert. Eine Beziehung besteht, wenn zwei Personen in einem Artikel gemeinsam erwähnt werden. Die Stärke der Beziehung wird durch die Breite der Bänder im Diagramm dargestellt.
+
+Zusätzlich zu den Funktionen gibt es einen Hilfsbutton mit dem ℹ️ Symbol, der weitere Informationen und Anleitungen zu den einzelnen Funktionen bietet. Der Benutzer kann darauf klicken, um detaillierte Informationen zur Verwendung der Funktionen zu erhalten.
 
 ## Datenaufbereitung
 
