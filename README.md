@@ -50,6 +50,7 @@ gewinnen. Die folgenden Analysen wurden durchgeführt:
 - Kategorisierung der Themenbereiche
 - Sentiment- /Subjektivitätsanalyse
 - Entitätenextraktion
+- Personenextraktion
 - Länderextraktion
 
 ## Kategorisierung der Themenbereiche
@@ -79,7 +80,7 @@ Subjektivität: TextBlob berechnet die Subjektivität eines Textes, um zu bestim
 subjektive Meinung oder eine objektive Tatsache darstellt. Der Wert für Subjektivität liegt zwischen 0 und 1,
 wobei 0 für eine objektive Aussage steht und 1 für eine stark subjektive Aussage.
 
-## Extraktion von Entitäten und Subjekten
+## Extraktion von Entitäten und Personen
 Die Klasse EntityFinder dient zur Extraktion von Entitäten aus Texten.
 Die Methode extract_entities extrahiert alle Substantive aus einem Text. Die Extraktion erfolgt durch das deutsche
 Sprachmodell 'de_core_news_lg'.
@@ -88,10 +89,6 @@ Die Methode get_people() extrahiert alle Personen aus einem Text. Die Extraktion
 Wörter des Textes mit der Liste der Personen des öffentlichen Lebens. Die Liste ist eine Zusammenstellung der 1239
 relevantesten und einflussreichsten Personen des Jahres 2022 aus den Bereichen Politik, Wirtschaft, Sport, Kultur,
 Medien, Wissenschaft und Gesellschaft.
-
-Die Methode SubjectFinder dient zur Extraktion von Subjekten aus Texten.
-Subjekte sind diejenigen Entitäten, die im Satz das Verb bestimmen. Die Extraktion erfolgt durch die Erkennung der
-Abhängigkeiten zwischen den Wörtern im Satz. Es kommt das deutsche Sprachmodell 'de_core_news_lg' zum Einsatz.
 
 ## Extratkion von Ländern
 Die Extraktion von Ländern wurde mit der Klasse country_extractor durchgeführt. Sie extrahiert Länder aus einem Text und übersetzt diese in die englische Sprache. Dafür vergleicht die Methode
