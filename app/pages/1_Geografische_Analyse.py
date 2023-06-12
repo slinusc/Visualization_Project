@@ -124,7 +124,9 @@ with col4[1]:
     st.subheader("Stimmung & Subjektivität")
     st.button('ℹ️', help="Die Darstellung zeigt in der Mitte den Medianwert der Stimmung bzw. der Subjektivität. "
                          "Die Stimmung variiert in einem Bereich von -1 (sehr negativ) bis 1 (sehr positiv). "
-                         "Die Subjektivität variiert in einem Bereich von 0 (objektiv) bis 1 (subjektiv).\n\n"
+                         "Die Subjektivität variiert in einem Bereich von 0 (objektiv) bis 1 (subjektiv). Für eine"
+                         "Vereinfachung der Visualisierung wurden die die numerischen Werte jeweils in vier Kategorien"
+                         "unterteil.\n\n"
                          "Für weitere Informationen besuchen Sie: "
                          "https://github.com/slinusc/visualization_project/blob/main/README.md"
               )
