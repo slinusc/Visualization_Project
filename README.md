@@ -53,7 +53,7 @@ annten Personen zeigt. Die Balken sind vertikal gestapelt, um die Kategorien der
 
 15. **Tabellarische Darstellung gefilterter Zeitungsartikel**: Die Tabelle am unteren Ende jeder Seite, dient der Suche nach spezifischen Zeitungsartikeln, für weitergehende Recherchen. Die Tabelle bietet eine Suchfunktion, die durch anklicken der Tabelle und dem Drücken von Ctrl-F ausgelöst wird. 
 
-Zusätzlich zu den Funktionen gibt es einen Hilfsbutton mit dem ℹ️ Symbol, der weitere Informationen und Anleitungen zu den einzelnen Funktionen bietet. Der Benutzer kann darauf klicken, um detaillierte Informationen zur Verwendung der Funktionen zu erhalten.
+Zusätzlich zu den Funktionen gibt es einen Hilfsbutton mit dem ℹ Symbol, der weitere Informationen und Anleitungen zu den einzelnen Funktionen bietet. Der Benutzer kann darauf klicken, um detaillierte Informationen zur Verwendung der Funktionen zu erhalten.
 
 ## Daten
 
