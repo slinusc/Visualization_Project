@@ -1,14 +1,15 @@
 # Medienanalyse-Webanwendung
 
-Die Medienanalyse-Webanwendung ermöglicht es Benutzern, eine umfangreiche Analyse von Medienartikeln durchzuführen. Die Anwendung bietet verschiedene Funktionen zur Datenvisualisierung und Filterung, um den Benutzern einen detaillierten Einblick in die Daten zu ermöglichen.
+Die Medienanalyse-Webanwendung ermöglicht es Benutzern, eine umfangreiche Analyse von Medienartikeln durchzuführen. Die Anwendung bietet verschiedene Funktionen zur Datenvisualisierung und Filterung, um den Benutzern einen detaillierten Einblick in die Daten zu ermöglichen. https://slinusc-app-medien-analyse-ueuc8s.streamlit.app
 
-## Installation und Ausführung
-1. Klonen Sie das Repository auf Ihren lokalen Computer.
+## Lokale Installation und Ausführung
+1. Entpacken Sie den Ordner mit den benötigten Files auf ihrem Gerät.
 2. Installieren Sie die benötigten Python-Bibliotheken, indem Sie pip install -r requirements.txt in Ihrem Terminal ausführen.
 3. Navigieren Sie zu dem Verzeichnis, in dem sich die Datei Medien_Analyse.py befindet.
 4. Führen Sie streamlit run Medien_Analyse.py in Ihrem Terminal aus, um die Web-App zu starten.
 5. Öffnen Sie Ihren Webbrowser und navigieren Sie zu der angegebenen URL (normalerweise http://localhost:8501).
 6. Wir empfehlen die Verwendung des 'Light modes' im Browser.
+7. Andwendung ist für Geräte im Wide-Format ausgelegt.
 
 ## Anforderungen
 Dieses Projekt erfordert Python 3.6+ und die folgenden Python-Bibliotheken müssen installiert sein:
