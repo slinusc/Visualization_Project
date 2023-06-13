@@ -126,7 +126,7 @@ Erde" extrahiert und mit der Google Translate übersetzt. Die Übersetzungen wur
 Wenn Sie mehr über die Datenaufbereitung erfahren möchten, werfen Sie bitte einen Blick auf das Jupyter Notebook "data_processing_pipeline.ipynb".
 https://github.com/slinusc/new_dashboard_project/blob/main/code_data_processing/data_processing_pipeline.ipynb
 
-## Lokale Installation und Ausführung
+## Installation für lokale Ausführung
 1. Entpacken Sie den Ordner mit den benötigten Files auf ihrem Gerät.
 2. Installieren Sie die benötigten Python-Bibliotheken, indem Sie pip install -r requirements.txt in Ihrem Terminal ausführen.
 3. Navigieren Sie zu dem Verzeichnis, in dem sich die Datei Medien_Analyse.py befindet.
@@ -135,7 +135,7 @@ https://github.com/slinusc/new_dashboard_project/blob/main/code_data_processing/
 6. Wir empfehlen die Verwendung des 'Light modes' im Browser.
 7. Andwendung ist für Geräte im Wide-Format ausgelegt.
 
-## Anforderungen
+### Anforderungen
 Dieses Projekt erfordert Python 3.6+ und die folgenden Python-Bibliotheken müssen installiert sein:
 
 - pandas
