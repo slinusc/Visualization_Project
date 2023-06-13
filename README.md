@@ -130,7 +130,7 @@ https://github.com/slinusc/new_dashboard_project/blob/main/code_data_processing/
 1. Entpacken Sie den Ordner mit den benötigten Files auf ihrem Gerät.
 2. Installieren Sie die benötigten Python-Bibliotheken, indem Sie pip install -r requirements.txt in Ihrem Terminal ausführen.
 3. Navigieren Sie zu dem Verzeichnis, in dem sich die Datei Medien_Analyse.py befindet.
-4. Führen Sie streamlit run Medien_Analyse.py in Ihrem Terminal aus, um die Web-App zu starten.
+4. Führen Sie streamlit run Medien_Analyse.py in Ihrem Terminal aus, um die Applikation zu starten.
 5. Öffnen Sie Ihren Webbrowser und navigieren Sie zu der angegebenen URL (normalerweise http://localhost:8501).
 6. Wir empfehlen die Verwendung des 'Light modes' im Browser.
 7. Andwendung ist für Geräte im Wide-Format ausgelegt.
