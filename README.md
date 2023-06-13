@@ -2,46 +2,15 @@
 
 Die Medienanalyse-Webanwendung ermöglicht es Benutzern, eine umfangreiche Analyse von Medienartikeln durchzuführen. Die Anwendung bietet verschiedene Funktionen zur Datenvisualisierung und Filterung, um den Benutzern einen detaillierten Einblick in die Daten zu ermöglichen. https://slinusc-app-medien-analyse-ueuc8s.streamlit.app
 
-## Lokale Installation und Ausführung
-1. Entpacken Sie den Ordner mit den benötigten Files auf ihrem Gerät.
-2. Installieren Sie die benötigten Python-Bibliotheken, indem Sie pip install -r requirements.txt in Ihrem Terminal ausführen.
-3. Navigieren Sie zu dem Verzeichnis, in dem sich die Datei Medien_Analyse.py befindet.
-4. Führen Sie streamlit run Medien_Analyse.py in Ihrem Terminal aus, um die Web-App zu starten.
-5. Öffnen Sie Ihren Webbrowser und navigieren Sie zu der angegebenen URL (normalerweise http://localhost:8501).
-6. Wir empfehlen die Verwendung des 'Light modes' im Browser.
-7. Andwendung ist für Geräte im Wide-Format ausgelegt.
-
-## Anforderungen
-Dieses Projekt erfordert Python 3.6+ und die folgenden Python-Bibliotheken müssen installiert sein:
-- pandas
-- streamlit
-- holoviews
-- plotly
-- bokeh
-- matplotlib
-- numpy
-
-Die Versionen der jeweiligen Module finden Sie: https://github.com/slinusc/new_dashboard_project/blob/main/app/requirements.txt
-
 ## Einführung
 
 Die Medienanalyse-Webanwendung ist ein Tool zur Untersuchung und Visualisierung von Medienartikeln. Sie ermöglicht es Benutzern, umfassende Analysen durchzuführen und wertvolle Einblicke in die Welt der Medien zu gewinnen.
 
-Durch die Verwendung dieser App können Benutzer die Daten nach ihren spezifischen Anforderungen filtern und verschiedene Visualisierungen und Diagramme nutzen, um Trends, Muster und Zusammenhänge in den Medienartikeln zu erkennen. Die App bietet eine benutzerfreundliche Oberfläche, die es auch unerfahrenen Benutzern ermöglicht, die Analyse von Medienartikeln durchzuführen und aussagekräftige Ergebnisse zu erzielen.
+Durch die Verwendung dieser App können Benutzer die Daten nach ihren spezifischen Anforderungen filtern und verschiedene Visualisierungen und Diagramme nutzen, um Trends, Muster und Zusammenhänge in den Medienartikeln zu erkennen. Die App bietet eine benutzerfreundliche Oberfläche, die es auch unerfahrenen Benutzern ermöglicht, die Analyse von Medienartikeln durchzuführen und aussagekräftige Ergebnisse zu erzielen. Die Applikation ist in drei Bereiche unterteilt. Die erste Seite umfasst ein umfangreiches Analyse-Tool zur Analyse der verschiedenen Zeitungen und deren Publikationen. Die zweite Seite dient der Analyse geografischer Zusammenhänge. Auf der letzten Seite bietet die Applikation dem Nutzer die Möglichkeit, Zusammenhänge im Bezug auf Personen des öffentlichen Lebens zu untersuchen. 
 
 Die Hauptvorteile der Medienanalyse-Webanwendung sind:
 
-- **Datenfilterung**: Benutzer können die Daten nach Datum, Kategorie, Zeitung, Land und Personen filtern. Diese Filteroptionen ermöglichen es ihnen, die relevanten Daten für ihre spezifische Analyse auszuwählen und irrelevante Informationen auszublenden.
-
-- **Zeitreihenanalyse**: Die App bietet interaktive Liniendiagramme, die es Benutzern ermöglichen, die Entwicklung von Artikeln über die Zeit zu verfolgen. Dies ermöglicht es ihnen, Trends und saisonale Muster in den Medienberichten zu erkennen.
-
-- **Kategorienanalyse**: Benutzer können die Anzahl der Artikel nach Kategorien analysieren und verstehen, welche Themen in den Medien dominant sind. Dies kann bei der Beobachtung von Nachrichtentrends und der Identifizierung von Schwerpunkten in der Medienberichterstattung helfen.
-
-- **Themenanalyse**: Die App bietet eine detaillierte Themenanalyse, bei der die häufigsten Wörter in den Artikeln identifiziert werden. Dies ermöglicht es Benutzern, die Hauptthemen und Schlagwörter in den Medien zu erkennen und ihr Verständnis für aktuelle Ereignisse zu vertiefen.
-
-- **Geografische Analyse**: Die App ermöglicht es Benutzern, die Nennungen von Ländern in den Medienartikeln zu visualisieren. Dies kann bei der Analyse internationaler Beziehungen und geopolitischer Trends von Bedeutung sein.
-
-- **Personenanalyse**: Benutzer können auch die Nennungen von Personen des öffentlichen Lebens in den Medienartikeln analysieren. Dies kann bei der Beobachtung von Trends in der Berichterstattung über bestimmte Personen und deren Einfluss in den Medien hilfreich sein.
+Die Datenfilterungsfunktion ermöglicht es den Benutzern, die gewünschten Informationen aus den Medienberichten gezielt herauszufiltern. Mit Filteroptionen wie Datum, Kategorie, Zeitung, Land und Personen können sie die relevanten Daten für ihre spezifische Analyse auswählen und unwichtige Informationen ausblenden. Für eine detaillierte Analyse der Medienlandschaft bietet die App eine Vielzahl von interaktiven Diagrammen und Analysetools. Benutzer können den Verlauf von Artikeln über die Zeit verfolgen und dadurch Trends und saisonale Muster in der Medienberichterstattung erkennen. Die Kategorienanalyse ermöglicht es den Benutzern, die Anzahl der Artikel nach verschiedenen Kategorien zu analysieren. Dadurch können sie verstehen, welche Kategorien und Themen in den Medien dominieren und einen Einblick in aktuelle Nachrichtentrends erhalten. Durch die Themenanalyse identifiziert die App die häufigsten Wörter in den Artikeln. Benutzer können so die Hauptthemen und Schlagwörter in den Medien erkennen und ihr Verständnis für aktuelle Ereignisse vertiefen. Mit der geografischen Analyse können Benutzer die Nennungen von Ländern in den Medienartikeln visualisieren. Dies ist besonders nützlich bei der Analyse internationaler Beziehungen und geopolitischer Trends. Die Personenanalyse ermöglicht es den Benutzern, die Nennungen von Personen des öffentlichen Lebens in den Medienartikeln, sowie deren Beziehungen zu analysieren. Dadurch können sie Trends in der Berichterstattung über bestimmte Personen beobachten und ihren Einfluss im Weltgeschehen besser verstehen. Zusätzlich zur quantitativen Analyse bietet die App auch eine Sentimentanalyse, um herauszufinden, ob die Artikel positiv, negativ oder neutral sind. Dies hilft den Benutzern, die Stimmung und öffentliche Meinung zu bestimmten Themen oder Personen zu verstehen. Durch die Möglichkeit, die Daten nach verschiedenen Zeitungen oder Nachrichtenquellen zu analysieren, können Benutzer die Berichterstattung verschiedener Quellen vergleichen und potenzielle Unterschiede oder Bias erkennen.
 
 Die Medienanalyse-Webanwendung bietet somit eine umfassende Plattform zur Untersuchung von Medienartikeln und ermöglicht es Benutzern, datengesteuerte Erkenntnisse zu gewinnen. Sie kann von Forschern, Journalisten, Medienexperten und allen interessierten Personen genutzt werden, um ein besseres Verständnis der Medienlandschaft zu erlangen und fundierte Entscheidungen zu treffen.
 
@@ -61,24 +30,26 @@ Die Medienanalyse-Webanwendung umfasst folgende Funktionalitäten:
 
 5. **Personenfilter**: Der Benutzer kann eine oder mehrere Personen des öffentlichen Lebens auswählen, um die Daten auf der Seite entsprechend zu filtern. Es werden auch Personen angezeigt, die zusammen mit der ausgewählten Person in den Daten vorkommen.
 
-6. **Anzahl Artikel nach Kategorien**: In diesem Abschnitt wird ein interaktives Liniendiagramm angezeigt, das die Anzahl der Artikel nach Kategorien an verschiedenen ausgewählten Daten als Zeitreihe darstellt.
+6. **Anzahl Artikel nach Kategorien**: In diesem Abschnitt wird ein interaktives Liniendiagramm angezeigt, das die Anzahl der Artikel nach Kategorien an verschiedenen ausgewählten Daten als Zeitreihe darstellt. Wenn ein spezifischer Tag ausgewählt wurde, wechselt die Ansicht auf ein gestapeltes Balkendiagramm. Durch Klicken auf die Kategorie in der Legende, können Kategorien entfernt oder hinzugefügt werden.
 
 7. **Anzahl Artikel nach Zeitung**: Hier wird ein interaktives Liniendiagramm angezeigt, das die Anzahl der Artikel nach Zeitungen aufschlüsselt. Der Benutzer kann die genaue Anzahl der Artikel für jede Zeitung an einem bestimmten Datum sehen.
 
 8. **Themenanalyse**: In diesem Abschnitt wird eine Themenanalyse durchgeführt, bei der die 20 häufigsten Wörter in den Artikeln angezeigt werden. Die Wörter werden in einem Balkendiagramm dargestellt, wobei die Höhe der Balken die Häufigkeit der Wörter repräsentiert.
 
-9. **Die häufigst vorkommenden Länder**: In diesem Abschnitt wird ein gestapeltes Balkendiagramm angezeigt, das die absolute Häufigkeit der genannten Länder zeigt. Die Balken sind vertikal gestapelt, um die Kategorien der Artikel zu zeigen, in denen die Länder erwähnt wurden.
+9. **Die häufigst vorkommenden Länder**: In diesem Abschnitt wird ein gestapeltes Balkendiagramm angezeigt, das die absolute Häufigkeit der genannten Länder zeigt. Die Balken sind vertikal gestapelt, um die Kategorien der Artikel zu zeigen, in denen die Länder erwähnt wurden. Durch Klicken auf die Kategorie in der Legende, können Kategorien entfernt oder hinzugefügt werden.
 
-10. **Beziehung zwischen Ländern**: Hier wird ein Chord-Diagramm angezeigt, das die Beziehungen zwischen den ausgewählten Ländern visualisiert. Eine Beziehung besteht, wenn zwei Länder in einem Artikel gemeinsam erwähnt werden. Die Stärke der Beziehung wird durch die Breite der Bänder im Diagramm dargestellt.
+10. **Beziehung zwischen Ländern**: Hier wird ein Chord-Diagramm angezeigt, das die Beziehungen zwischen den ausgewählten Ländern visualisiert. Eine Beziehung besteht, wenn zwei Länder in einem Artikel gemeinsam erwähnt werden. Die Stärke der Beziehung wird durch die Breite der Bänder im Diagramm dargestellt. Durch Klicken auf das jeweilige Land, werden die anderen Beziehungen die nicht in Verbindung mit dem ausgewählten Land stehen, ausgeblendet.
 
 11. **Die häufigst vorkommenden Personen**: In diesem Abschnitt wird ein gestapeltes Balkendiagramm angezeigt, das die absolute Häufigkeit der gen
-annten Personen zeigt. Die Balken sind vertikal gestapelt, um die Kategorien der Artikel zu zeigen, in denen die Personen erwähnt wurden.
+annten Personen zeigt. Die Balken sind vertikal gestapelt, um die Kategorien der Artikel zu zeigen, in denen die Personen erwähnt wurden. Durch Klicken auf die Kategorie in der Legende, können Kategorien entfernt oder hinzugefügt werden.
 
-12. **Beziehung zwischen Personen des öffentlichen Lebens**: Hier wird ein Chord-Diagramm angezeigt, das die Beziehungen zwischen den ausgewählten Personen des öffentlichen Lebens visualisiert. Eine Beziehung besteht, wenn zwei Personen in einem Artikel gemeinsam erwähnt werden. Die Stärke der Beziehung wird durch die Breite der Bänder im Diagramm dargestellt.
+12. **Beziehung zwischen Personen des öffentlichen Lebens**: Hier wird ein Chord-Diagramm angezeigt, das die Beziehungen zwischen den ausgewählten Personen des öffentlichen Lebens visualisiert. Eine Beziehung besteht, wenn zwei Personen in einem Artikel gemeinsam erwähnt werden. Die Stärke der Beziehung wird durch die Breite der Bänder im Diagramm dargestellt. Durch Klicken auf die jeweilige Person, werden die anderen Beziehungen die nicht in Verbindung mit der ausgewählten Person stehen, ausgeblendet.
  
 13. **Sentimentanalyse**: Die Visualisierung zeigt die Anzahl der positiven, neutralen und negativen Artikel an. Die Sentimentanalyse wird mit Hilfe des Natural Language Processing (NLP) Modells von TextBlob durchgeführt. Zusätzlich ist der Median der Stimmung des Zeitraumes als Kennzahl im Diagramm angegeben. Die Stimmung variiert in einem Bereich von -1 (sehr negativ) bis 1 (sehr positiv).
 
 14. **Subjektivitätsanalyse**: Die Visualisierung zeigt die Tendenzen der Subjektivität bzw. Objektivität in den gefilterten Artikeln an. Die Subjektivitätsanalyse wird mit Hilfe des Natural Language Processing (NLP) Modells von TextBlob durchgeführt. Zusätzlich ist der Median der Subjektivität des Zeitraumes als Kennzahl im Diagramm angegeben. Die Subjektivität variiert in einem Bereich von 0 (objektiv) bis 1 (subjektiv).
+
+15. **Tabellarische Darstellung gefilterter Zeitungsartikel**: Die Tabelle am unteren Ende jeder Seite, dient der Suche nach spezifischen Zeitungsartikeln, für weitergehende Recherchen. Die Tabelle bietet eine Suchfunktion, die durch anklicken der Tabelle und dem Drücken von Ctrl-F ausgelöst wird. 
 
 Zusätzlich zu den Funktionen gibt es einen Hilfsbutton mit dem ℹ️ Symbol, der weitere Informationen und Anleitungen zu den einzelnen Funktionen bietet. Der Benutzer kann darauf klicken, um detaillierte Informationen zur Verwendung der Funktionen zu erhalten.
 
@@ -152,3 +123,25 @@ Erde" extrahiert und mit der Google Translate übersetzt. Die Übersetzungen wur
 ### Weiteres
 Wenn Sie mehr über die Datenaufbereitung erfahren möchten, werfen Sie bitte einen Blick auf das Jupyter Notebook "data_processing_pipeline.ipynb".
 https://github.com/slinusc/new_dashboard_project/blob/main/code_data_processing/data_processing_pipeline.ipynb
+
+## Lokale Installation und Ausführung
+1. Entpacken Sie den Ordner mit den benötigten Files auf ihrem Gerät.
+2. Installieren Sie die benötigten Python-Bibliotheken, indem Sie pip install -r requirements.txt in Ihrem Terminal ausführen.
+3. Navigieren Sie zu dem Verzeichnis, in dem sich die Datei Medien_Analyse.py befindet.
+4. Führen Sie streamlit run Medien_Analyse.py in Ihrem Terminal aus, um die Web-App zu starten.
+5. Öffnen Sie Ihren Webbrowser und navigieren Sie zu der angegebenen URL (normalerweise http://localhost:8501).
+6. Wir empfehlen die Verwendung des 'Light modes' im Browser.
+7. Andwendung ist für Geräte im Wide-Format ausgelegt.
+
+## Anforderungen
+Dieses Projekt erfordert Python 3.6+ und die folgenden Python-Bibliotheken müssen installiert sein:
+
+- pandas
+- streamlit
+- holoviews
+- plotly
+- bokeh
+- matplotlib
+- numpy
+
+Die Versionen der jeweiligen Module finden Sie: https://github.com/slinusc/new_dashboard_project/blob/main/app/requirements.txt
