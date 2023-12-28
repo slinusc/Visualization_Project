@@ -4,11 +4,12 @@ Die Medienanalyse-Webanwendung ermöglicht es Benutzern, eine umfangreiche Analy
 
 https://slinusc-app-medien-analyse-ueuc8s.streamlit.app
 
-![image](https://github.com/slinusc/medien_analyse_dashboard/assets/94235012/00faae28-6200-4e3d-94cb-1d75f4205c72)
-
 ![image](https://github.com/slinusc/medien_analyse_dashboard/assets/94235012/e80877d4-1ee0-489b-895e-32ec14086f3d)
 
+![image](https://github.com/slinusc/medien_analyse_dashboard/assets/94235012/99089592-2bbb-466a-825d-b69403866517)
+
 ![image](https://github.com/slinusc/medien_analyse_dashboard/assets/94235012/00faae28-6200-4e3d-94cb-1d75f4205c72)
+
 
 ## Einführung
 
