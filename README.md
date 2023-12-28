@@ -2,6 +2,13 @@
 
 Die Medienanalyse-Webanwendung ermöglicht es Benutzern, eine umfangreiche Analyse von Medienartikeln durchzuführen. Die Anwendung bietet verschiedene Funktionen zur Datenvisualisierung und Filterung, um den Benutzern einen detaillierten Einblick in die Daten zu ermöglichen. 
 
+![image](https://github.com/slinusc/medien_analyse_dashboard/assets/94235012/d38693af-bc8f-4529-bd92-53e57ca81396)
+
+![image](https://github.com/slinusc/medien_analyse_dashboard/assets/94235012/e80877d4-1ee0-489b-895e-32ec14086f3d)
+
+![image](https://github.com/slinusc/medien_analyse_dashboard/assets/94235012/00faae28-6200-4e3d-94cb-1d75f4205c72)
+
+
 https://slinusc-app-medien-analyse-ueuc8s.streamlit.app
 
 ## Einführung
